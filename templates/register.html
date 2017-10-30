@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/userdata/register/">
+    姓名<input type="text" name="username"><br>
+    <!--<input type="text" name="sex"><br>
+    <input type="text" name="telnum"><br>
+
+
+    <input type="text" name="hospital"><br>
+    <input type="text" name="department"><br>
+    <input type="text" name="title"><br>
+
+    <input type="text" name="identity"><br>-->
+    邮箱<input type="text" name="email"><br>
+    手机号<input type="text" name="telnum"><br>
+    <button><a href="/userdata/send_num?telnum=18991298637">发送</a></button>
+    验证码<input type="text" name="checknum"><br>
+    密码<input type="password" name="password"><br>
+    <input type="hidden" name="identity" value='2' />
+    <!--图片<input type="file" name="certificate"><br>-->
+
+
+      <button class="btn btn-success" type="submit" style="width: 315px;margin-left: 275px;" id="btnreg">注册</button>
+      </form>
+{{ info }}
+</body>
+</html>

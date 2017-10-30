@@ -15,10 +15,12 @@ class Migration(migrations.Migration):
             name='Artiarticle',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=256, verbose_name='\u6807\u9898')),
-                ('source', models.CharField(max_length=256, verbose_name='\u6765\u6e90')),
-                ('author', models.CharField(max_length=256, verbose_name='\u4f5c\u8005')),
-                ('browser', models.IntegerField(verbose_name='\u6d4f\u89c8\u91cf')),
+                ('title', models.CharField(max_length=40, verbose_name='\u6807\u9898')),
+                ('source', models.CharField(max_length=20, verbose_name='\u6765\u6e90')),
+                ('author', models.CharField(max_length=20, verbose_name='\u4f5c\u8005')),
+                ('browser', models.IntegerField(default=0, verbose_name='\u6d4f\u89c8\u91cf', editable=False)),
+                ('keyword', models.CharField(max_length=30, verbose_name='\u5173\u952e\u8bcd', blank=True)),
+                ('tag', models.CharField(max_length=30, verbose_name='\u6807\u7b7e', blank=True)),
                 ('content', DjangoUeditor.models.UEditorField(default='', verbose_name='\u5185\u5bb9', blank=True)),
                 ('pub_date', models.DateTimeField(auto_now_add=True, verbose_name='\u53d1\u8868\u65f6\u95f4')),
                 ('update_time', models.DateTimeField(auto_now=True, verbose_name='\u66f4\u65b0\u65f6\u95f4', null=True)),
@@ -32,8 +34,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Articleclass',
             fields=[
-                ('name', models.CharField(max_length=256, serialize=False, verbose_name='\u680f\u76ee\u540d\u79f0', primary_key=True, db_index=True)),
-                ('slug', models.CharField(max_length=256, verbose_name='\u680f\u76ee\u7f51\u5740')),
+                ('name', models.CharField(max_length=20, verbose_name='\u680f\u76ee\u540d\u79f0')),
+                ('slug', models.CharField(max_length=30, serialize=False, verbose_name='\u680f\u76ee\u7f51\u5740', primary_key=True, db_index=True)),
             ],
             options={
                 'ordering': ['name'],

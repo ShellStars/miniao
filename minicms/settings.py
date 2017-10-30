@@ -52,13 +52,20 @@ INSTALLED_APPS = (
     'other',
     'universal',
     'nursing',
+    'sruco',
+    'recommend',
+    'subject',
+    'association',
+    'magazine',
+    'video',
     'DjangoUeditor',
 )
-
+COMMENTS_APP = 'column'
+SITE_ID = 1
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -71,7 +78,9 @@ ROOT_URLCONF = 'minicms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'news.nav_processor.nav_column',
+                # 'news.nav_processor.nav_column',
             ],
         },
     },
@@ -92,10 +101,18 @@ WSGI_APPLICATION = 'minicms.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'miniao',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        }
 }
 
 
@@ -137,13 +154,17 @@ SUIT_CONFIG = {
               'app': 'article',
               'models': ('Artiarticle',)
               },
+             {'label': '视频',
+              'app': 'video',
+              'models': ('Videoarticle',)
+              },
              {'label': '指南速递',
               'app': 'guide',
               'models': ('Guidearticle',)
               },
              {'label': '专家风采',
               'app': 'expert',
-              'models': ('Interviewarticle', 'Doctorarticle',)
+              'models': ('Interviewarticle', 'Doctorarticle', 'Expertarticle', 'Comment',)
               },
              {'label': '其它',
               'app': 'other',
@@ -157,6 +178,26 @@ SUIT_CONFIG = {
               'app': 'nursing',
               'models': ('Nursingarticle',)
               },
+             {'label': 'SRUCO',
+              'app': 'sruco',
+              'models': ('Srucoarticle',)
+              },
+             {'label': '泌尿学会',
+              'app': 'association',
+              'models': ('Peoplearticle', 'Assocarticle')
+              },
+             {'label': '药械推荐',
+              'app': 'recommend',
+              'models': ('Recommendarticle',)
+              },
+             {'label': '优势学科',
+              'app': 'subject',
+              'models': ('Subjectarticle',)
+              },
+             {'label': '杂志',
+              'app': 'magazine',
+              'models': ('Magearticle',)
+              },
              ),
 
 }
@@ -166,9 +207,21 @@ SUIT_CONFIG = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, "common_static"),
+#)
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "common_static"),
+    #os.path.join(BASE_DIR, "common_static"),
+    ("admin", os.path.join(STATIC_ROOT, 'admin')),
+    ("cms", os.path.join(STATIC_ROOT, 'cms')),
+    ("suit", os.path.join(STATIC_ROOT, 'suit')),
+    ("ueditor", os.path.join(STATIC_ROOT, 'ueditor')),
 )
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
+
 
 # upload folder
 MEDIA_URL = '/media/'

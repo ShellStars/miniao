@@ -8,8 +8,8 @@ class NursingclassAdmin(admin.ModelAdmin):
 
 
 class NursingarticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'pub_date', 'update_time', 'published')
-    search_fields = ('title', 'author')
+    list_display = ('title', 'column', 'author', 'browser', 'pub_date', 'published')
+    search_fields = ('title',)
 
 
 admin.site.register(Nursingclass, NursingclassAdmin)

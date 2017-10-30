@@ -48,7 +48,7 @@ UEditorUploadSettings={
     "videoActionName": "uploadvideo", #执行上传视频的action名称 */
     "videoPathFormat":"",
     "videoFieldName": "upfile", # 提交的视频表单名称 */
-    "videoMaxSize": 102400000, #上传大小限制，单位B，默认100MB */
+    "videoMaxSize": 204800000, #上传大小限制，单位B，默认100MB */
     "videoUrlPrefix":"",
     "videoAllowFiles": [
         ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",

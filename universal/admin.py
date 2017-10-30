@@ -8,7 +8,7 @@ class UniversalclassAdmin(admin.ModelAdmin):
 
 
 class UniversalarticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'pub_date', 'update_time', 'published')
+    list_display = ('title', 'column', 'author', 'pub_date', 'update_time', 'published')
     search_fields = ('title', 'author')
 
 

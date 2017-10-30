@@ -4,8 +4,7 @@ from .models import Userinfo
 
 
 class UserinfoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'sex', 'telnum', 'email', 'hospital', 'department', 'title', 'identity', 'certificate',
-                    'isfgpwd')
+    list_display = ('username', 'sex', 'telnum', 'identity', 'integralnum', 'addtime', 'ispass', 'isfgpwd')
 
 
 admin.site.register(Userinfo, UserinfoAdmin)

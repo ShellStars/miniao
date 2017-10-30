@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/userdata/login/">
+    <input type="text" name="telnum"><br>
+    <input type="password" name="password"><br>
+
+
+      <button class="btn btn-success" type="submit" style="width: 315px;margin-left: 275px;" id="btnreg">注册</button>
+      </form>
+{{ errors }}
+ <!--PC版-->
+<div id="SOHUCS" ></div>
+<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cytgwoeSU',
+conf: 'prod_c8dac1089f2e74f05a01b6bb035c473e'
+});
+</script>
+</body>
+</html>
