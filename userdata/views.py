@@ -193,9 +193,13 @@ def login(request):
             password = af.cleaned_data['password']
             user = Userinfo.objects.filter(telnum=telnum, password=password, ispass=True)
             if user:
-                request.session['userid'] = user[0].id
-                request.session['identity'] = user[0].identity
-                return HttpResponseRedirect('/')
+                if user[0].ispass == True:
+                    request.session['userid'] = user[0].id
+                    request.session['identity'] = user[0].identity
+                    return HttpResponseRedirect('/')
+                else:
+                    dic = {'info': '正在审核'}
+                    return render_to_response('login.html', dic)
             else:
                 dic = {'info': '您输入的密码有误'}
                 return render_to_response('login.html', dic)
