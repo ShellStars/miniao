@@ -27,10 +27,8 @@
     </form>
     
     <ul>
-      <li><a href="#">医学考试</a></li>
-      <li><a href="#">临床进修</a></li>
-      <li><a href="#">疾病诊治</a></li>
-      <li><a href="#">骨科手术</a></li>
+      <li><a href="/">泌尿肿瘤</a></li>
+      <li><a href="/">尿石症</a></li>
     </ul>
     
   </div>
@@ -54,7 +52,7 @@
     </a>
     <ul class="navbar-list clearfix">
       <li>
-        <a href="#"><span>咨询</span><i class="iconfont icon-add"></i></a>
+        <a href="#"><span>资讯</span><i class="iconfont icon-add"></i></a>
       </li>
       <li>
         <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
@@ -93,7 +91,7 @@
   <br>
   <br>
 
-  <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/sendpwdnum/">
+  <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/resetpwd/">
     <div class="group clearfix group-password">
       <label>设置密码</label>
       <input type="password" name="password" required>
@@ -102,6 +100,7 @@
       <label>确认密码</label>
       <input type="password" required>
     </div>
+    <div class="error">{{ info }}</div>
     <button type="submit">提交</button>
   </form>
 </div>
@@ -110,7 +109,7 @@
 <footer class="footer-wrap">
   <div class="inner">
     <div class="footer-header">
-      <img src="/static/images/home_footer_logo.png" alt="logo">
+      CUG 大家泌尿
     </div>
     <div class="box-wrap clearfix">
       <div class="box box-1">
@@ -197,11 +196,11 @@
       </div>
     </div>
     <div class="copyright">
-      <p>Copyright © 2017y  Proudly powered by </p>
+      <p>Copyright © 2017y</p>
       <p>
-        本站所刊载的所有内容版权归中国妇产科网所有，未经授权不得转载。除非特别声明，本站刊出的所
+        本站所刊载的所有内容版权归大家泌尿网所有，未经授权不得转载。除非特别声明，本站刊出的所
         <br>
-        有文章、视频等内容系中国妇产科网据原作者相关内容生成，不代表中国妇产科网的观点和立场。
+        有文章、视频等内容系大家泌尿网据原作者相关内容生成，不代表大家泌尿网的观点和立场。
       </p>
     </div>
   </div>
@@ -236,14 +235,31 @@
 <script type="text/javascript">
 $(function () {
   $('.register-form button').click(function (e) {
+    e.preventDefault();
     $('.register-form .error').text('');
     var passwordValue = $('.group-password input').val();
     var passwordAgainValue = $('.group-password-again input').val();
     if (passwordValue !== passwordAgainValue) {
       $('.register-form .error').text('两次密码不一致');
-      e.preventDefault();
       return false;
     }
+    $.ajax({
+      url: '/userdata/resetpwd/',
+      type : "POST",
+      data: $('.register-form').serialize(),
+      success: function (res) {
+        if (res.info == 'success') {
+          alert('重设密码成功, 请登录');
+          $('.modal-login').show(300);
+          return false;
+        }
+        $('.register-form .error').text(res.info);
+      },
+      error: function () {
+        $('.register-form .error').text(系统错误);
+      }
+    });
+    return false;
   });
 });
 </script>

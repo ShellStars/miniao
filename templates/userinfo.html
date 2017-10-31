@@ -67,7 +67,7 @@
       <li class="clearfix detail-avatar">
         <label>用户头像：</label>
         <div class="item">
-          <img src="/static/images/home_p.png" alt="AVATAR">
+          <img src="{{ userinfo.headimg }}" alt="AVATAR">
         </div>
         <div class="option">
           修改头像
@@ -75,7 +75,7 @@
       </li>
       <li class="clearfix">
         <label>真实姓名：</label>
-        <div class="item">张朝阳</div>
+        <div class="item">{{ userinfo.username }}</div>
       </li>
       <li class="clearfix">
         <label>性别：</label>

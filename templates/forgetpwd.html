@@ -27,10 +27,8 @@
     </form>
     
     <ul>
-      <li><a href="#">医学考试</a></li>
-      <li><a href="#">临床进修</a></li>
-      <li><a href="#">疾病诊治</a></li>
-      <li><a href="#">骨科手术</a></li>
+      <li><a href="/">泌尿肿瘤</a></li>
+      <li><a href="/">尿石症</a></li>
     </ul>
     
   </div>
@@ -54,7 +52,7 @@
     </a>
     <ul class="navbar-list clearfix">
       <li>
-        <a href="#"><span>咨询</span><i class="iconfont icon-add"></i></a>
+        <a href="#"><span>资讯</span><i class="iconfont icon-add"></i></a>
       </li>
       <li>
         <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
@@ -96,13 +94,14 @@
   <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/sendpwdnum/">
     <div class="group clearfix group-telnum">
       <label>手机号</label>
-      <input type="number" name="telnum" required>
+      <input class='ipt-telnum' type="number" name="telnum" required>
       <span>发送验证码</span>
     </div>
     <div class="group clearfix group-checknum">
       <label>短信验证码</label>
-      <input type="text" name="checknum" required>
+      <input class='ipt-checknum' type="text" name="checknum" required>
     </div>
+    <div class="error">{{ info }}</div>
     <button type="submit">提交</button>
   </form>
 </div>
@@ -111,7 +110,7 @@
 <footer class="footer-wrap">
   <div class="inner">
     <div class="footer-header">
-      <img src="/static/images/home_footer_logo.png" alt="logo">
+      CUG 大家泌尿
     </div>
     <div class="box-wrap clearfix">
       <div class="box box-1">
@@ -198,11 +197,11 @@
       </div>
     </div>
     <div class="copyright">
-      <p>Copyright © 2017y  Proudly powered by </p>
+      <p>Copyright © 2017y</p>
       <p>
-        本站所刊载的所有内容版权归中国妇产科网所有，未经授权不得转载。除非特别声明，本站刊出的所
+        本站所刊载的所有内容版权归大家泌尿网所有，未经授权不得转载。除非特别声明，本站刊出的所
         <br>
-        有文章、视频等内容系中国妇产科网据原作者相关内容生成，不代表中国妇产科网的观点和立场。
+        有文章、视频等内容系大家泌尿网据原作者相关内容生成，不代表大家泌尿网的观点和立场。
       </p>
     </div>
   </div>
@@ -250,6 +249,37 @@ $(function () {
         alert(res.info);
       }
     });
+  });
+
+  $('.register-form button').click(function (e) {
+    e.preventDefault();
+    $('.register-form .error').text('');
+    var telnum = $('.group-telnum input').val();
+    var checknum = $('.group-checknum input').val();
+    if (!telnum) {
+      $('.register-form .error').text('输入手机号');
+      return false;
+    }
+    if (!checknum) {
+      $('.register-form .error').text('输入验证码');
+      return false;
+    }
+    $.ajax({
+      url: '/userdata/sendpwdnum/',
+      type : "POST",
+      data: $('.register-form').serialize(),
+      success: function (res) {
+        if (res.info == 'success') {
+          window.location.href = "/userdata/resetpwd/";
+          return false;
+        }
+        $('.register-form .error').text(res.info);
+      },
+      error: function () {
+        $('.register-form .error').text(系统错误);
+      }
+    });
+    return false;
   });
 });
 </script>
