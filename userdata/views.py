@@ -295,7 +295,7 @@ def resetpwd(request):
                 Userinfo.objects.filter(id=a).update(password=password)
                 #dic = {'info': '密码已重置，请重新登录'}
                 #response = render_to_response('login.html', dic)
-                response = HttpResponse(json.dumps({'info': '密码已重置，请重新登录'}), content_type="application/json")
+                response = HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                 response.delete_cookie('userid')
                 return response
             else:
@@ -374,7 +374,7 @@ def modifypassword(request):
                     except:
                         pass
                     #response = render_to_response('login.html', dic)
-                    return HttpResponse(json.dumps({'info': '密码已重置，请重新登录'}), content_type="application/json")
+                    return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                     # return response
                 else:
                     #dic = {'info': '原密码输入错误！'}
@@ -418,9 +418,10 @@ def modifytelnum(request):
                         return HttpResponse(json.dumps({'info': '手机号已存在'}), content_type="application/json")
                     else:
                         user.update(telnum=newnum)
-                        userinfo1 = Userinfo.objects.filter(id=a)
-                        response = render_to_response('userinfo.html', {'userinfo': userinfo1})
-                        return response
+                        #userinfo1 = Userinfo.objects.filter(id=a)
+                        #response = render_to_response('userinfo.html', {'userinfo': userinfo1})
+                        #return response
+                        return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                 else:
                     #dic = {'errors': '原手机号码错误'}
                     #response = render_to_response('modify.html', dic)
