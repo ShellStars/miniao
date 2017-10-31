@@ -53,9 +53,10 @@ class PwdForm(forms.Form):
 
 #用户详细信息
 class Modify(forms.Form):
-    hospital = forms.CharField()
-    department = forms.CharField()
-    title = forms.CharField()
+    headimg = forms.FileField()
+    #hospital = forms.CharField()
+    #department = forms.CharField()
+    #title = forms.CharField()
 
 
 # 修改密码
@@ -311,11 +312,16 @@ def modify(request):
         if request.method == "POST":
             bf = Modify(request.POST)
             if bf.is_valid():
-                hospital = bf.cleaned_data['hospital']
-                department = bf.cleaned_data['department']
-                title = bf.cleaned_data['title']
+                headimg = request.FILES["headimg"]
+                img = Image.open(headimg)
+                url = BASE_DIR + '/media/uploads/images/userdata/' + headimg.name
+                img.save(url, "jpeg")
+                url1 = '/media/uploads/images/userdata/' + headimg.name
+                #hospital = bf.cleaned_data['hospital']
+                #department = bf.cleaned_data['department']
+                #title = bf.cleaned_data['title']
                 b = request.session.get("userid")
-                Userinfo.objects.filter(id=b).update(hospital=hospital, department=department, title=title)
+                Userinfo.objects.filter(id=b).update(headimg=url1)
                 userinfo1 = Userinfo.objects.filter(id=b)
                 return render_to_response('userinfo.html', {'userinfo': userinfo1})
             else:
