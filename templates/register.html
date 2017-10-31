@@ -95,8 +95,8 @@
     <li class="btn-3" data-type='2'>学生</li>
   </ul>
 
-  <form class="register-form" action="/userdata/register/" method="post">
-    <input type="text" name="identity" value="0" hidden="true">
+  <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/register/">
+    <input id="ipt-identity" type="text" name="identity" value="0" hidden="true">
     <div class="group clearfix group-username">
       <label>真实姓名</label>
       <input type="text" name="username" required>
@@ -142,7 +142,7 @@
       <label>执业证</label>
       <input type="file" name="certificate" placeholder="选择文件">
     </div>
-    <div class="error">{{info}}</div>
+    <div class="error">{{ info }}</div>
     <label class="agree" for="agree-input">
       <input type="checkbox" id="agree-input" checked="true">
       同意<a href="#">《服务协议》</a>
@@ -300,6 +300,7 @@ $(function () {
     } else {
       $('.group-hospital, .group-department, .group-title, .group-certificate').show();
     }
+    $('#ipt-identity').val($(this).attr('data-type'));
     $('.register-tab li').removeClass('active');
     $(this).addClass('active');
   });
