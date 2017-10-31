@@ -45,12 +45,11 @@ password：密码
 
 查看个人信息：site:userinfo.html
 userid和identity在session中
-返回userinfo，根据身份代码，展示不同信息，字段如上（包含积分字段，integralnum）
+返回userinfo，根据身份代码，展示不同信息，字段如上（包含积分字段，integralnum，头像, headimg）
 
 修改个人信息：
-分为3栏，均在modify.html
-①修改个人信息，身份为学生和其它不具有次功能
-为医生或护士时，可修改信息包括，医院，科室，职称（字段名称同上，不修改的部分也要传入） post form 表单 action:/userdata/modify/
+①修改头像
+post form 表单 action:/userdata/modify/
 ②修改密码
 oldpwd：原密码
 newpwd：新密码

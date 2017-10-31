@@ -325,9 +325,9 @@ def modify(request):
                 userinfo1 = Userinfo.objects.filter(id=b)
                 return render_to_response('userinfo.html', {'userinfo': userinfo1})
             else:
-                return render_to_response('login.html')
+                return HttpResponseRedirect('/')
         else:
-            return render_to_response('modify.html')
+            return render_to_response('userinfo.html')
     else:
         return HttpResponseRedirect('/')
 
@@ -361,7 +361,7 @@ def modifypassword(request):
                     except:
                         pass
                     #response = render_to_response('login.html', dic)
-                    return HttpResponse(json.dumps({'info': '您输入的信息错误'}), content_type="application/json")
+                    return HttpResponse(json.dumps({'info': '密码已重置，请重新登录'}), content_type="application/json")
                     # return response
                 else:
                     #dic = {'info': '原密码输入错误！'}
@@ -371,7 +371,7 @@ def modifypassword(request):
             else:
                 return HttpResponseRedirect('/')
         else:
-            return render_to_response('modify.html')
+            return render_to_response('userinfo.html')
     else:
         return HttpResponseRedirect('/')
 
