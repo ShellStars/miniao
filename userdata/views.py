@@ -272,7 +272,7 @@ def sendpwdnum(request):
                 # return render_to_response('forgetpwd.html', dic)
                 return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
             else:
-                response = HttpResponseRedirect('/userdata/resetpwd/')
+                response = HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                 # response = render_to_response('resetpwd.html')
                 response.set_cookie('userid', telnum1[0].id)
                 Checknum.objects.filter(telnum=telnum).delete()
