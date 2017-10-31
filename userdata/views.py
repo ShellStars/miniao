@@ -251,19 +251,22 @@ def sendpwdnum(request):
             except:
                 checknum1 = ''
             if len(telnum1) == 0:
-                dic = {'info': '未注册'}
-                return render_to_response('forgetpwd.html', dic)
+                # dic = {'info': '未注册'}
+                # return render_to_response('forgetpwd.html', dic)
+                return HttpResponse(json.dumps({'info': '未注册'}), content_type="application/json")
             elif checknum1 == '' or str(checknum) != checknum1:
-                dic = {'info': '验证码错误'}
-                return render_to_response('forgetpwd.html', dic)
+                # dic = {'info': '验证码错误'}
+                # return render_to_response('forgetpwd.html', dic)
+                return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
             else:
                 response = render_to_response('resetpwd.html')
                 response.set_cookie('userid', telnum1[0].id)
                 Checknum.objects.filter(telnum=telnum).delete()
                 return response
         else:
-            dic = {'info': "您输入的信息错误"}
-            return render_to_response('forgetpwd.html', dic)
+            # dic = {'info': "您输入的信息错误"}
+            # return render_to_response('forgetpwd.html', dic)
+            return HttpResponse(json.dumps({'info': '您输入的信息错误'}), content_type="application/json")
     else:
         return render_to_response('forgetpwd.html')
 
@@ -276,8 +279,9 @@ def resetpwd(request):
                 password = bf.cleaned_data['password']
                 a = request.COOKIES["userid"]
                 Userinfo.objects.filter(id=a).update(password=password)
-                dic = {'info': '密码已重置，请重新登录'}
-                response = render_to_response('login.html', dic)
+                #dic = {'info': '密码已重置，请重新登录'}
+                #response = render_to_response('login.html', dic)
+                response = HttpResponse(json.dumps({'info': '密码已重置，请重新登录'}), content_type="application/json")
                 response.delete_cookie('userid')
                 return response
             else:
@@ -344,18 +348,20 @@ def modifypassword(request):
                 user = Userinfo.objects.filter(id=a, password=oldpwd)
                 if user:
                     user.update(password=newpwd)
-                    dic = {'info': '密码已重置，请重新登录'}
+                    #dic = {'info': '密码已重置，请重新登录'}
                     try:
                         del request.session['userid']
                         del request.session['identity']
                     except:
                         pass
-                    response = render_to_response('login.html', dic)
-                    return response
+                    #response = render_to_response('login.html', dic)
+                    return HttpResponse(json.dumps({'info': '您输入的信息错误'}), content_type="application/json")
+                    # return response
                 else:
-                    dic = {'info': '原密码输入错误！'}
-                    response = render_to_response('modify.html', dic)
-                    return response
+                    #dic = {'info': '原密码输入错误！'}
+                    #response = render_to_response('modify.html', dic)
+                    #return response
+                    return HttpResponse(json.dumps({'info': '原密码输入错误！'}), content_type="application/json")
             else:
                 return HttpResponseRedirect('/')
         else:
@@ -382,22 +388,25 @@ def modifytelnum(request):
                     except:
                         checknum1 = ''
                     if checknum1 == '' or str(checknum) != checknum1:
-                        dic = {'info': '验证码错误'}
-                        response = render_to_response('modify.html', dic)
-                        return response
+                        # dic = {'info': '验证码错误'}
+                        # response = render_to_response('modify.html', dic)
+                        # return response
+                        return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                     elif user1:
-                        dic = {'info': '手机号已存在'}
-                        response = render_to_response('modify.html', dic)
-                        return response
+                        # dic = {'info': '手机号已存在'}
+                        # response = render_to_response('modify.html', dic)
+                        # return response
+                        return HttpResponse(json.dumps({'info': '手机号已存在'}), content_type="application/json")
                     else:
                         user.update(telnum=newnum)
                         userinfo1 = Userinfo.objects.filter(id=a)
                         response = render_to_response('userinfo.html', {'userinfo': userinfo1})
                         return response
                 else:
-                    dic = {'errors': '原手机号码错误'}
-                    response = render_to_response('modify.html', dic)
-                    return response
+                    #dic = {'errors': '原手机号码错误'}
+                    #response = render_to_response('modify.html', dic)
+                    #return response
+                    return HttpResponse(json.dumps({'info': '原手机号码错误'}), content_type="application/json")
             else:
                 return HttpResponseRedirect('/')
         else:
