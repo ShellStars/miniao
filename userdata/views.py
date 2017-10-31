@@ -175,8 +175,9 @@ def register(request):
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                             identity=identity)
                     Checknum.objects.filter(telnum=telnum).delete()
-                    dic = {'info': '注册成功，请重新登录'}
-                    return render_to_response('login.html', dic)
+                    # dic = {'info': '注册成功，请重新登录'}
+                    # return render_to_response('login.html', dic)
+                    return HttpResponse(json.dumps({'info': '注册成功，请登录'}), content_type="application/json")
             else:
                 return HttpResponseRedirect('/')
         else:
@@ -199,11 +200,13 @@ def login(request):
                     request.session['identity'] = user[0].identity
                     return HttpResponseRedirect('/')
                 else:
-                    dic = {'info': '正在审核'}
-                    return render_to_response('login.html', dic)
+                    # dic = {'info': '正在审核'}
+                    # return render_to_response('login.html', dic)
+                    return HttpResponse(json.dumps({'info': '正在审核'}), content_type="application/json")
             else:
-                dic = {'info': '您输入的密码有误'}
-                return render_to_response('login.html', dic)
+                # dic = {'info': '您输入的密码有误'}
+                # return render_to_response('login.html', dic)
+                return HttpResponse(json.dumps({'info': '您输入的密码有误'}), content_type="application/json")
         else:
             return render_to_response('login.html')
     else:
