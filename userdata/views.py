@@ -194,7 +194,7 @@ def login(request):
         if af.is_valid():
             telnum = af.cleaned_data['telnum']
             password = af.cleaned_data['password']
-            user = Userinfo.objects.filter(telnum=telnum, password=password, ispass=True)
+            user = Userinfo.objects.filter(telnum=telnum, password=password)
             if user:
                 if user[0].ispass == True:
                     request.session['userid'] = user[0].id
