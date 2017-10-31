@@ -15,9 +15,9 @@
 <body>
 
 <header class="header-wrap">
-  <div class="logo">
+  <a class="logo" href="/">
     <img src="/static/images/logo.png" alt="LOGO">
-  </div>
+  </a>
   <div class="search">
     <form>
       <input type="text">
@@ -38,7 +38,7 @@
   <div class="profile">
     <button class="btn-login" id="btn_login">请登录</button>
     <button>
-      <a href="#">免费注册</a>
+      <a href="/userdata/register/">免费注册</a>
     </button>
   </div>
   
@@ -705,11 +705,13 @@
   <div class="inner" style="background-image: url('/static/images/modal_logo_bg.png')">
     <form action="/userdata/login/" method="post">
       <img src="/static/images/logo.png" alt="LOGO">
-      <input type="text" name="telnum" placeholder="输入手机号" required>
-      <input type="password" name="password" placeholder="输入密码" required>
+      <input class="ipt-telnum" type="text" name="telnum" placeholder="输入手机号" required>
+      <input class="ipt-password" type="password" name="password" placeholder="输入密码" required>
+      <div class="error"></div>
       <button type="submit">登录</button>
       <div class="login-links">
-        <a href="#">立即注册</a>
+        <a href="/userdata/register/">立即注册</a>
+        <a href="/userdata/register/">忘记密码</a>
       </div>
     </form>
     <div class="login-close">
