@@ -151,8 +151,12 @@ def register(request):
                                                 hospital=hospital, department=department, title=title,
                                                 identity=identity, certificate=url1)
                         Checknum.objects.filter(telnum=telnum).delete()
-                        dic = {'info': '注册成功，请登录'}
-                        return render_to_response('login.html', dic)
+                        user1 = Userinfo.objects.filter(telnum=telnum)
+                        request.session['userid'] = user1[0].id
+                        request.session['identity'] = user1[0].identity
+                        return HttpResponseRedirect('/userdata/show/')
+                        #dic = {'info': '注册成功，请登录'}
+                        #return render_to_response('login.html', dic)
                 else:
                     return render_to_response('register.html')
             elif identity == '2' or identity == '3':
@@ -176,9 +180,13 @@ def register(request):
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                             identity=identity)
                     Checknum.objects.filter(telnum=telnum).delete()
+                    user = Userinfo.objects.filter(telnum=telnum)
+                    request.session['userid'] = user[0].id
+                    request.session['identity'] = user[0].identity
+                    return HttpResponseRedirect('/userdata/show/')
                     # dic = {'info': '注册成功，请重新登录'}
                     # return render_to_response('login.html', dic)
-                    return HttpResponse(json.dumps({'info': '注册成功，请登录'}), content_type="application/json")
+                    # return HttpResponse(json.dumps({'info': '注册成功，请登录'}), content_type="application/json")
             else:
                 return HttpResponseRedirect('/')
         else:
@@ -194,7 +202,7 @@ def login(request):
         if af.is_valid():
             telnum = af.cleaned_data['telnum']
             password = af.cleaned_data['password']
-            user = Userinfo.objects.filter(telnum=telnum, password=password, ispass=True)
+            user = Userinfo.objects.filter(telnum=telnum, password=password)
             if user:
                 if user[0].ispass == True:
                     request.session['userid'] = user[0].id
