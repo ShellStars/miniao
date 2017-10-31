@@ -144,10 +144,11 @@ def register(request):
                         user.department = department
                         user.title = title
                         user.identity = identity
+						url1 = '/media/uploads/images/certificate/' + certificate.name
                         #Userinfo.objects.create(username=username, password=password, telnum=telnum, email=email, identity=identity, certificate=url)
                         Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                                 hospital=hospital, department=department, title=title,
-                                                identity=identity, certificate=url)
+                                                identity=identity, certificate=url1)
                         Checknum.objects.filter(telnum=telnum).delete()
                         dic = {'info': '注册成功，请登录'}
                         return render_to_response('login.html', dic)
