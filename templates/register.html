@@ -1,32 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>注册</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_aq0blagn259g4x6r.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  
+  <link rel="stylesheet" href="/static/css/register.css">
+
 </head>
 <body>
-<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/userdata/register/">
-    姓名<input type="text" name="username"><br>
-    <!--<input type="text" name="sex"><br>
-    <input type="text" name="telnum"><br>
+
+<header class="header-wrap">
+  <div class="logo">
+    <img src="/static/images/logo.png" alt="LOGO">
+  </div>
+  <div class="search">
+    <form>
+      <input type="text">
+      <button>
+        <i class="iconfont icon-search"></i>
+      </button>
+    </form>
+    
+    <ul>
+      <li><a href="#">医学考试</a></li>
+      <li><a href="#">临床进修</a></li>
+      <li><a href="#">疾病诊治</a></li>
+      <li><a href="#">骨科手术</a></li>
+    </ul>
+    
+  </div>
+  
+  <div class="profile">
+    <button class="btn-login" id="btn_login">请登录</button>
+    <button>
+      <a href="#">免费注册</a>
+    </button>
+  </div>
+  
+</header>
 
 
-    <input type="text" name="hospital"><br>
-    <input type="text" name="department"><br>
-    <input type="text" name="title"><br>
+<div class="register-wrap">
 
-    <input type="text" name="identity"><br>-->
-    邮箱<input type="text" name="email"><br>
-    手机号<input type="text" name="telnum"><br>
-    <button><a href="/userdata/send_num?telnum=18991298637">发送</a></button>
-    验证码<input type="text" name="checknum"><br>
-    密码<input type="password" name="password"><br>
-    <input type="hidden" name="identity" value='2' />
-    <!--图片<input type="file" name="certificate"><br>-->
+  <div class="register-navbar clearfix">
+    <a class="title" href="#">
+      <i class="iconfont icon-list-ul"></i>
+      <span>学术园地</span>
+    </a>
+    <ul class="navbar-list clearfix">
+      <li>
+        <a href="#"><span>咨询</span><i class="iconfont icon-add"></i></a>
+      </li>
+      <li>
+        <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
+      </li>
+      <li>
+        <a href="#"><span>专家</span><i class="iconfont icon-add"></i></a>
+      </li>
+      <li>
+        <a href="#"><span>学科</span></a>
+      </li>
+      <li>
+        <a href="#"><span>会议</span></a>
+      </li>
+      <li>
+        <a href="#"><span>期刊</span></a>
+      </li>
+      <li>
+        <a href="#"><span>护理园地</span></a>
+      </li>
+      <li>
+        <a href="#"><span>SRUCO</span></a>
+      </li>
+      <li>
+        <a href="#"><span>指南</span></a>
+      </li>
+      <li>
+        <a href="#"><span>科普园地</span></a>
+      </li>
+      <li>
+        <a href="#"><span>药械推荐</span></a>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="register-tab">
+    <li class="active btn-1" data-type='0'>医生</li>
+    <li class="btn-2" data-type='1'>护士</li>
+    <li class="btn-3" data-type='2'>学生</li>
+  </ul>
+
+  <form class="register-form" action="/userdata/register/" method="post">
+    <input type="text" name="identity" value="0" hidden="true">
+    <div class="group clearfix group-username">
+      <label>真实姓名</label>
+      <input type="text" name="username" required>
+    </div>
+    <div class="group clearfix group-sex">
+      <label>性别</label>
+      <span>男</span>
+      <input value="1" type="radio" name="sex" checked="true" required>
+      <i></i>
+      <span>女</span>
+      <input value="0" type="radio" name="sex" required>
+    </div>
+    <div class="group clearfix group-telnum">
+      <label>手机号</label>
+      <input type="number" name="telnum" required>
+      <span>发送验证码</span>
+    </div>
+    <div class="group clearfix group-checknum">
+      <label>短信验证码</label>
+      <input type="text" name="checknum" required>
+    </div>
+    <div class="group clearfix group-hospital">
+      <label>所在医院</label>
+      <input type="text" name="hospital">
+    </div>
+    <div class="group clearfix group-department">
+      <label>所在科室</label>
+      <input type="text" name="department">
+    </div>
+    <div class="group clearfix group-title">
+      <label>医生职称</label>
+      <input type="text" name="title">
+    </div>
+    <div class="group clearfix group-password">
+      <label>设置密码</label>
+      <input type="password" name="password" required>
+    </div>
+    <div class="group clearfix group-password-again">
+      <label>确认密码</label>
+      <input type="password" required>
+    </div>
+    <div class="group clearfix group-certificate">
+      <label>执业证</label>
+      <input type="file" name="certificate" placeholder="选择文件">
+    </div>
+    <div class="error">{{info}}</div>
+    <label class="agree" for="agree-input">
+      <input type="checkbox" id="agree-input" checked="true">
+      同意<a href="#">《服务协议》</a>
+    </label>
+    <button type="submit">提交</button>
+  </form>
+</div>
 
 
-      <button class="btn btn-success" type="submit" style="width: 315px;margin-left: 275px;" id="btnreg">注册</button>
-      </form>
-{{ info }}
+<footer class="footer-wrap">
+  <div class="inner">
+    <div class="footer-header">
+      <img src="/static/images/home_footer_logo.png" alt="logo">
+    </div>
+    <div class="box-wrap clearfix">
+      <div class="box box-1">
+        <h3>
+          友情链接
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">杏树林</a></li>
+            <li><a href="#">生育健康网</a></li>
+            <li><a href="#">爱维医学网</a></li>
+            <li><a href="#">寻医问药网</a></li>
+            <li><a href="#">华夏病理网</a></li>
+            <li><a href="#">白衣天使基金</a></li>
+            <li><a href="#">互联网医院</a></li>
+            <li><a href="#">丁香园医生网</a></li>
+            <li><a href="#">梅斯MedSci</a></li>
+            <li><a href="#">中华康网</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-2">
+        <h3>
+          合作单位
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">北京协和医院</a></li>
+            <li><a href="#">中华泌尿杂志</a></li>
+            <li><a href="#">中国医师协会</a></li>
+            <li><a href="#">健康报网</a></li>
+            <li><a href="#">OBGYN.net</a></li>
+            <li><a href="#">中华杂志</a></li>
+            <li><a href="#">搜狐健康频道</a></li>
+            <li><a href="#">丁香园妇</a></li>
+            <li><a href="#">现代进展健康报</a></li>
+            <li><a href="#">中国健康杂志</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-3">
+        <h3>
+          其他
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">设为首页</a></li>
+            <li><a href="#">加入收藏</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">广告合作</a></li>
+            <li><a href="#">求职招聘</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-4">
+        <h3>
+          联系我们
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>编辑部电话：010-86468855</li>
+            <li>企业合作电话：010-86468855</li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-5">
+        <h3>
+          投稿邮箱
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>邮箱地址：zgfckw@yapot.cn</li>
+            <li>公司地址：北京市朝阳区东四环中路远洋国际C座2001室 100025</li>
+            <li>
+              <form>
+                <input type="email" placeholder="输入您的邮箱地址......">
+                <button>
+                  <i class="iconfont icon-email"></i>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2017y  Proudly powered by </p>
+      <p>
+        本站所刊载的所有内容版权归中国妇产科网所有，未经授权不得转载。除非特别声明，本站刊出的所
+        <br>
+        有文章、视频等内容系中国妇产科网据原作者相关内容生成，不代表中国妇产科网的观点和立场。
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-login">
+  <div class="mask"></div>
+  <div class="inner" style="background-image: url('/static/images/modal_logo_bg.png')">
+    <form action="/userdata/login/" method="post">
+      <img src="/static/images/logo.png" alt="LOGO">
+      <input type="text" name="telnum" placeholder="输入手机号" required>
+      <input type="password" name="password" placeholder="输入密码" required>
+      <button type="submit">登录</button>
+      <div class="login-links">
+        <a href="#">立即注册</a>
+      </div>
+    </form>
+    <div class="login-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>
+
+<script src='/static/js/modernizr.js'></script>
+<script src='/static/js/jquery.min.js'></script>
+<script src='/static/js/jquery.jcarousel.min.js'></script>
+<script src='/static/js/index.js'></script>
+
+<script type="text/javascript">
+$(function () {
+  var sendFlag = false;
+  $('.group-telnum span').click(function () {
+    if (sendFlag) {
+      return false;
+    }
+    var telnumValue = $('.group-telnum input').val();
+    $.get('/userdata/send_num?telnum=' + telnumValue, function (res) {
+      if (res.info == 'success') {
+        $('.group-telnum span').text('已发送验证码');
+        sendFlag = true;
+      } else {
+        alert(res.info);
+      }
+    });
+  });
+
+  $('.register-tab li').click(function () {
+    if ($(this).attr('data-type') == 2) {
+      $('.group-hospital, .group-department, .group-title, .group-certificate').hide();
+    } else {
+      $('.group-hospital, .group-department, .group-title, .group-certificate').show();
+    }
+    $('.register-tab li').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  $('.register-form button').click(function (e) {
+    $('.register-form .error').text('');
+    var passwordValue = $('.group-password input').val();
+    var passwordAgainValue = $('.group-password-again input').val();
+    if (passwordValue !== passwordAgainValue) {
+      $('.register-form .error').text('两次密码不一致');
+      e.preventDefault();
+      return false;
+    }
+    var agreeValue = $('.agree input').is(':checked');
+    if (!agreeValue) {
+      $('.register-form .error').text('请勾选同意服务协议');
+      e.preventDefault();
+      return false;
+    }
+
+  });
+});
+</script>
+
+
 </body>
 </html>

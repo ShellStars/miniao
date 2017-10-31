@@ -216,6 +216,9 @@ STATICFILES_DIRS = (
     ("cms", os.path.join(STATIC_ROOT, 'cms')),
     ("suit", os.path.join(STATIC_ROOT, 'suit')),
     ("ueditor", os.path.join(STATIC_ROOT, 'ueditor')),
+    ("css", os.path.join(STATIC_ROOT, 'css')),
+    ("images", os.path.join(STATIC_ROOT, 'images')),
+    ("js", os.path.join(STATIC_ROOT, 'js'))
 )
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
