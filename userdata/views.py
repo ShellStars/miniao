@@ -119,11 +119,13 @@ def register(request):
                     except:
                         checknum1 = ''
                     if len(telnum1) > 0 :
-                        dic = {'info': '用户已存在'}
-                        return render_to_response('register.html', dic)
+                        # dic = {'info': '用户已存在'}
+                        # return render_to_response('register.html', dic)
+                        return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                     elif checknum1 == '' or str(checknum) != checknum1:
-                        dic = {'info': '验证码错误'}
-                        return render_to_response('register.html', dic)
+                        # dic = {'info': '验证码错误'}
+                        # return render_to_response('register.html', dic)
+                        return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                     else:
                         username = uf.cleaned_data['username']
                         password = uf.cleaned_data['password']
@@ -168,11 +170,13 @@ def register(request):
                 except:
                     checknum1 = ''
                 if len(telnum1) > 0:
-                    dic = {'info': '用户已存在'}
-                    return render_to_response('register.html', dic)
+                    # dic = {'info': '用户已存在'}
+                    # return render_to_response('register.html', dic)
+                    return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                 elif checknum1 == '' or str(checknum) != checknum1:
-                    dic = {'info': '验证码错误'}
-                    return render_to_response('register.html', dic)
+                    # dic = {'info': '验证码错误'}
+                    # return render_to_response('register.html', dic)
+                    return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                 else:
                     username = request.POST['username']
                     password = request.POST['password']
@@ -207,7 +211,7 @@ def login(request):
                 if user[0].ispass == True:
                     request.session['userid'] = user[0].id
                     request.session['identity'] = user[0].identity
-                    return HttpResponseRedirect('/')
+                    return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                 else:
                     # dic = {'info': '正在审核'}
                     # return render_to_response('login.html', dic)
@@ -268,7 +272,8 @@ def sendpwdnum(request):
                 # return render_to_response('forgetpwd.html', dic)
                 return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
             else:
-                response = render_to_response('resetpwd.html')
+                response = HttpResponseRedirect('/userdata/resetpwd/')
+                # response = render_to_response('resetpwd.html')
                 response.set_cookie('userid', telnum1[0].id)
                 Checknum.objects.filter(telnum=telnum).delete()
                 return response

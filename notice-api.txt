@@ -68,3 +68,8 @@ post form 表单 action:/userdata/modifytelnum/
 混合排版url /column/
 site: article_index.html
 返回字段：objects：数据对象 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接
+
+二级列表 url /column/###(不确定现在有哪些，eg：gonggao)
+site: article_column.html
+返回字段：objects：数据对象 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接
+
