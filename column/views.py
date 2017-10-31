@@ -39,10 +39,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article.html', {'article': article[0], 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'article': article[0], 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article.html', {'article': article[0]})
+            return render(request, 'article_detail.html', {'article': article[0]})
     else:
         return HttpResponseRedirect('/')
 
@@ -50,18 +50,21 @@ def article_detail(request, column, pk):
 def article(request, column):
     tmpurl = str(request.path).strip('/')
     article = Infoarticle.objects.filter(column=column, published=True)
-    if article:
-        objects, page_range = my_pagination(request, article, 2)
-        return render_to_response('article1.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect('/')
+    objects, page_range = my_pagination(request, article, 2)
+    return render_to_response('article_column.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+    #if article:
+    #    objects, page_range = my_pagination(request, article, 2)
+    #    return render_to_response('article1.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+    #else:
+    #    return HttpResponseRedirect('/')
 
 def index(request):
-    article = Infoarticle.objects.filter(column='gonggao', published=True)[0:3]
-    if article:
-        return render(request, 'article2.html', {'article': article})
-    else:
-        return HttpResponseRedirect('/')
+    tmpurl = str(request.path).strip('/')
+    article = Infoarticle.objects.filter(published=True)
+    objects, page_range = my_pagination(request, article, 9)
+    return render_to_response('article_index.html', {'objects': objects, 'page_range': page_range, 'tmpurl': tmpurl},
+                              context_instance=RequestContext(request))
+
 
 def my_pagination(request, queryset, display_amount, after_range_num=3, bevor_range_num=2):
     paginator = Paginator(queryset,display_amount)
