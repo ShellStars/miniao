@@ -1,0 +1,2 @@
+1.settings.py文件下51行修改视频限制大小，53行修改支持哪些视频
+2./static/ueditor/ueditor.all.min.js 359行修改视频封面图片

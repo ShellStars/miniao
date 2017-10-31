@@ -1,0 +1,70 @@
+注册：post form 表单 action:/userdata/register/   site:register.html
+传入字段信息：
+identity：（身份），可取值0（医生），1（护士），2（学生），3（其它）
+验证码发送链接：/userdata/send_num?telnum=####
+提示消息{{info}}
+当注册时为医生和护士身份时，传入表单字段包括：
+username：真实姓名
+sex：性别（0为女，1为男）
+telnum：手机号
+checknum：验证码
+hospital：所在医院
+department：所在科室
+title：职称
+identity：身份（如上述）
+password：密码
+certificate：证书（文件）
+
+当注册时为学生和其他身份时，传入表单字段包括：
+username：真实姓名
+sex：性别（0为女，1为男）
+telnum：手机号
+checknum：验证码
+identity：身份（如上述）
+password：密码
+
+登录：post form 表单 action:/userdata/login/   site:login.html
+登陆后保存用户id（userid）和身份代码（identity）在session中
+提示消息{{info}}
+传入字段信息：
+telnum：手机号
+password：密码
+
+退出：/userdata/logout
+为了同时退出评论系统，同时调用http://changyan.sohu.com/api/2/logout
+
+
+忘记密码：post form 表单 action:/userdata/sendpwdnum/   site:forgetpwd.html
+提示消息{{info}}
+telnum：手机号
+checknum：验证码
+
+填写新密码：post form 表单 action:/userdata/resetpwd/    site:resetpwd.html
+提示消息{{info}}
+password：密码
+
+查看个人信息：site:userinfo.html
+userid和identity在session中
+返回userinfo，根据身份代码，展示不同信息，字段如上（包含积分字段，integralnum，头像, headimg）
+
+修改个人信息：
+①修改头像
+post form 表单 action:/userdata/modify/
+②修改密码
+oldpwd：原密码
+newpwd：新密码
+post form 表单 action:/userdata/modifypassword/
+③修改手机号码
+oldnum：原手机号
+newnum：新手机号
+checknum：验证码
+post form 表单 action:/userdata/modifytelnum/
+
+
+
+
+
+# 资讯 column
+混合排版url /column/
+site: article_index.html
+返回字段：objects：数据对象 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接

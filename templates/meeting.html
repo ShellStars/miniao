@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% for i in objects %}
+<a href="http://127.0.0.1:8000/meeting/{{i.column_id}}/{{i.id}}">{{ i.title}}</a>
+{{i.picurl}}
+<br>
+{% endfor %}
+<div style="text-align: center">
+   <ul class="pagination" style="margin-top: 10px">
+       {% if objects.has_previous %}
+       <li><a href="?page={{ objects.previous_page_number }}">&laquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&laquo;</a></li>
+       {% endif %}
+
+       {% for i in page_range %}
+            {% ifequal i objects.number %}
+            <li class="active"><a>{{ i }}</a></li>
+            {% else %}
+            <li><a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a></li>
+            {% endifequal %}
+       {% endfor %}
+
+       {% if objects.has_next %}
+       <li><a href="?page={{ objects.next_page_number }}">&raquo;</a></li>
+       {% else %}
+       <li class="hidden"><a>&raquo;</a></li>
+       {% endif %}
+   </ul>
+   </div>
+</body>
+</html>

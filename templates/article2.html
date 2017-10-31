@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for i in article %}
+<a href="http://127.0.0.1:8000/column/gonggao/{{i.id}}">{{ i.title}}</a>
+<br>
+{% endfor %}
+</body>
+</html>
