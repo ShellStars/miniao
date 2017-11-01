@@ -446,6 +446,7 @@ def collect(request):
             except:
                 return HttpResponseRedirect('/')
             Favourite.objects.create(userid=a, title=title, url=url)
+            return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
         else:
             return HttpResponseRedirect('/')
 
@@ -460,7 +461,7 @@ def showcollect(request):
         if a:
             result = Favourite.objects.filter(userid=a).order_by("addtime")
             objects, page_range = my_pagination(request, result, 20)
-            return render_to_response('showcollect.html', {'objects': objects, 'page_range': page_range},
+            return render_to_response('collection.html', {'objects': objects, 'page_range': page_range},
                                       context_instance=RequestContext(request))
         else:
             return HttpResponseRedirect('/')
@@ -480,11 +481,13 @@ def cancel(request):
             res = Favourite.objects.filter(userid=a, url=url)
             if res:
                 res[0].delete()
-                response = HttpResponseRedirect('/userdata/showcollect')
-                return response
+                return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
+                # response = HttpResponseRedirect('/userdata/showcollect')
+                # return response
             else:
-                response = HttpResponseRedirect('/userdata/showcollect')
-                return response
+                return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
+                # response = HttpResponseRedirect('/userdata/showcollect')
+                # return response
         else:
             return HttpResponseRedirect('/')
     else:
