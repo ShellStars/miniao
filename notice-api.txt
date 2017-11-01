@@ -73,3 +73,7 @@ site: article_index.html
 site: article_column.html
 返回字段：objects：数据对象 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接
 
+详情页  url /column/###(gonggao)/id(1)/
+site: article_detail.html
+返回字段：article：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False)
+评论：使用畅言
