@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>注册</title>
+  <title>资讯列表</title>
   <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_aq0blagn259g4x6r.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
-  <link rel="stylesheet" href="/static/css/register.css">
+<link rel="stylesheet" href="/static/css/article.css">
 
 </head>
 <body>
@@ -26,11 +26,6 @@
       </button>
     </form>
     
-    <ul>
-      <li><a href="/">泌尿肿瘤</a></li>
-      <li><a href="/">尿石症</a></li>
-    </ul>
-    
   </div>
   <div class="profile">
     <button class="btn-login" id="btn_login">请登录</button>
@@ -41,111 +36,67 @@
 </header>
 
 
-<div class="register-wrap">
-
-  <div class="register-navbar clearfix">
-    <a class="title" href="#">
-      <i class="iconfont icon-list-ul"></i>
-      <span>学术园地</span>
-    </a>
-    <ul class="navbar-list clearfix">
-  <li>
-    <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
-  </li>
-  <li>
-    <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
-  </li>
-  <li>
-    <a href="#"><span>专家</span><i class="iconfont icon-add"></i></a>
-  </li>
-  <li>
-    <a href="#"><span>学科</span></a>
-  </li>
-  <li>
-    <a href="#"><span>会议</span></a>
-  </li>
-  <li>
-    <a href="#"><span>期刊</span></a>
-  </li>
-  <li>
-    <a href="#"><span>护理园地</span></a>
-  </li>
-  <li>
-    <a href="#"><span>SRUCO</span></a>
-  </li>
-  <li>
-    <a href="#"><span>指南</span></a>
-  </li>
-  <li>
-    <a href="#"><span>科普园地</span></a>
-  </li>
-  <li>
-    <a href="#"><span>药械推荐</span></a>
-  </li>
-</ul>
-
-  </div>
-
-  <ul class="register-tab">
-    <li class="active btn-1" data-type='0'>医生</li>
-    <li class="btn-2" data-type='1'>护士</li>
-    <li class="btn-3" data-type='2'>学生</li>
+<div class="article-container">
+  <ul class="article-navbar clearfix">
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+    <li><a href="#">哈哈哈哈</a></li>
+  </ul>
+  <h1 class="title">
+    <span>文章专区</span>
+  </h1>
+  <ul class="article-list clearfix">
+    
+    {% for i in objects %}
+    
+    <li>
+      <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
+        <img src="{{ i.picurl }}" />
+        <div class="content">
+          <h2>{{ i.title|slice:"20" }}</h2>
+          <div class="meta">
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            <span>阅读：{{ i.browser }}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    
+    {% endfor %}
+    
   </ul>
 
-  <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/register/">
-    <input id="ipt-identity" type="text" name="identity" value="0" hidden="true">
-    <div class="group clearfix group-username">
-      <label>真实姓名</label>
-      <input type="text" name="username" required>
-    </div>
-    <div class="group clearfix group-sex">
-      <label>性别</label>
-      <span>男</span>
-      <input value="1" type="radio" name="sex" checked="true" required>
-      <i></i>
-      <span>女</span>
-      <input value="0" type="radio" name="sex" required>
-    </div>
-    <div class="group clearfix group-telnum">
-      <label>手机号</label>
-      <input type="number" name="telnum" required>
-      <span>发送验证码</span>
-    </div>
-    <div class="group clearfix group-checknum">
-      <label>短信验证码</label>
-      <input type="text" name="checknum" required>
-    </div>
-    <div class="group clearfix group-hospital">
-      <label>所在医院</label>
-      <input type="text" name="hospital">
-    </div>
-    <div class="group clearfix group-department">
-      <label>所在科室</label>
-      <input type="text" name="department">
-    </div>
-    <div class="group clearfix group-title">
-      <label>医生职称</label>
-      <input type="text" name="title">
-    </div>
-    <div class="group clearfix group-password">
-      <label>设置密码</label>
-      <input type="password" name="password" required>
-    </div>
-    <div class="group clearfix group-password-again">
-      <label>确认密码</label>
-      <input type="password" required>
-    </div>
-    <div class="group clearfix group-certificate">
-      <label>执业证</label>
-      <input type="file" name="certificate" placeholder="选择文件">
-    </div>
-    <div class="error">{{ info }}</div>
-    <label class="agree" for="agree-input">
-      <input type="checkbox" id="agree-input" checked="true">
-      同意<a href="#">《服务协议》</a>
-    </label>
-    <button type="submit">提交</button>
-  </form>
+  <ul class="article-pagination clearfix">
+    
+      {% if page_range.has_previous %}
+      <li class="pagination-control"><a href="?page={{ page_range.previous_page_number }}">&larr;上一页</a></li>
+      {% else %}
+      <li class="pagination-control pagination-control-disabled">&larr;上一页</li>
+      {% endif %}
+
+      <li class="pagination-list">
+      {% for i in page_range %}
+        {% ifequal i page_range.number %}
+        <span>{{ i }}</span>
+        {% else %}
+        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+        {% endifequal %}
+      {% endfor %}
+      </li>
+
+      {% if page_range.has_next %}
+      <li class="pagination-control"><a href="?page={{ page_range.next_page_number }}">下一页&rarr;</a></li>
+      {% else %}
+      <li class="pagination-control pagination-control-disabled">下一页&rarr;</li>
+      {% endif %}
+      
+  </ul>
 </div>
 
 
@@ -278,53 +229,6 @@
 <script src='/static/js/jquery.jcarousel.min.js'></script>
 <script src='/static/js/index.js'></script>
 
-<script type="text/javascript">
-$(function () {
-  var sendFlag = false;
-  $('.group-telnum span').click(function () {
-    if (sendFlag) {
-      return false;
-    }
-    var telnumValue = $('.group-telnum input').val();
-    $.get('/userdata/send_num?telnum=' + telnumValue, function (res) {
-      if (res.info == 'success') {
-        $('.group-telnum span').text('已发送验证码');
-        sendFlag = true;
-      } else {
-        alert(res.info);
-      }
-    });
-  });
-
-  $('.register-tab li').click(function () {
-    if ($(this).attr('data-type') == 2) {
-      $('.group-hospital, .group-department, .group-title, .group-certificate').hide();
-    } else {
-      $('.group-hospital, .group-department, .group-title, .group-certificate').show();
-    }
-    $('#ipt-identity').val($(this).attr('data-type'));
-    $('.register-tab li').removeClass('active');
-    $(this).addClass('active');
-  });
-
-  $('.register-form button').click(function (e) {
-    $('.register-form .error').text('');
-    var passwordValue = $('.group-password input').val();
-    var passwordAgainValue = $('.group-password-again input').val();
-    if (passwordValue !== passwordAgainValue) {
-      $('.register-form .error').text('两次密码不一致');
-      e.preventDefault();
-      return false;
-    }
-    var agreeValue = $('.agree input').is(':checked');
-    if (!agreeValue) {
-      $('.register-form .error').text('请勾选同意服务协议');
-      e.preventDefault();
-      return false;
-    }
-  });
-});
-</script>
 
 
 </body>
