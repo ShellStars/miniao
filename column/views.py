@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render, render_to_response
-from .models import Infoarticle
+from .models import Infoarticle, Information
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
@@ -14,6 +14,9 @@ import pymysql
 def article_detail(request, column, pk):
     url = 'http://127.0.0.1:8000' + request.path
     article = Infoarticle.objects.filter(pk=pk, column=column, published=True)
+    classes = Information.objects.all()
+    belong = 'column'
+    column1 = Information.objects.filter(slug=column)[0].name
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -39,10 +42,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'article': article[0], 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'article': article[0]})
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0]})
     else:
         return HttpResponseRedirect('/')
 
@@ -50,8 +53,11 @@ def article_detail(request, column, pk):
 def article(request, column):
     tmpurl = str(request.path).strip('/')
     article = Infoarticle.objects.filter(column=column, published=True)
+    classes = Information.objects.all()
+    belong = 'column'
+    column1 = Information.objects.filter(slug=column)[0].name
     objects, page_range = my_pagination(request, article, 2)
-    return render_to_response('article_column.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+    return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
     #if article:
     #    objects, page_range = my_pagination(request, article, 2)
     #    return render_to_response('article1.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
@@ -61,8 +67,10 @@ def article(request, column):
 def index(request):
     tmpurl = str(request.path).strip('/')
     article = Infoarticle.objects.filter(published=True)
+    classes = Information.objects.all()
+    belong = 'column'
     objects, page_range = my_pagination(request, article, 9)
-    return render_to_response('article_index.html', {'objects': objects, 'page_range': page_range, 'tmpurl': tmpurl},
+    return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': classes,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 
 
