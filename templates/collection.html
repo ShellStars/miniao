@@ -40,18 +40,18 @@
   <div class="inner clearfix">
     <div class="box-profile clearfix">
       <div class="avatar">
-        <img src="/static/images/home_p.png" alt="AVATAR">
+        <img src="{{ userinfo.headimg }}" alt="AVATAR">
       </div>
       <div class="detail">
-        <div class="name">张朝阳</div>
+        <div class="name">{{ userinfo.username }}</div>
         <div class="title">
-          <div class="main">西安交大第一附属医院 主治医生</div>
+          <div class="main">{{ userinfo.hospital }} {{ userinfo.title }}</div>
         </div>
       </div>
     </div>
     <div class="box-integral">
       <i class="iconfont icon-jifen"></i>
-      <span>3789积分</span>
+      <span>{{ userinfo.integralnum }}积分</span>
     </div>
   </div>
 </div>
