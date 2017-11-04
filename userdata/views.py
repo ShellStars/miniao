@@ -324,7 +324,7 @@ def navigationinfo(request):
         a = request.session.get("userid")
         userinfo = Userinfo.objects.filter(id=a)
         username = userinfo[0].username
-        headimg = userinfo[0].headimg
+        headimg = userinfo[0].headimg.name
         return HttpResponse(json.dumps({'state': 'success', 'username': username, 'headimg': headimg}), content_type="application/json")
     else:
         return HttpResponse(json.dumps({'state': 'fail'}), content_type="application/json")

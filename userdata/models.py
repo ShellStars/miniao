@@ -17,7 +17,7 @@ class Userinfo(models.Model):
     )
     username = models.CharField('真实姓名', max_length=30)
     sex = models.IntegerField('性别')
-    headimg = models.FileField('头像', upload_to='/uploads/images/userdata/', default='defaultuser.png')
+    headimg = models.FileField('头像', upload_to='/uploads/images/userdata/', default='/media/uploads/images/userdata/defaultuser.png')
     telnum = models.CharField('手机号', null=False, db_index=True, max_length=15)
     hospital = models.CharField('所在医院', max_length=70, blank=True)
     department = models.CharField('所在科室', max_length=30, blank=True)
