@@ -313,11 +313,21 @@ def show(request):
         a = request.session.get("userid")
         userinfo = Userinfo.objects.filter(id=a)
         #cc = userinfo[0].username
-        dic = {'userinfo':userinfo}
+        dic = {'userinfo':userinfo[0]}
         return render_to_response('userinfo.html', dic)
     else:
         return HttpResponseRedirect('/userdata/login')
 
+# 验证用户是否登录head
+def navigationinfo(request):
+    if "userid" in request.session and "identity" in request.session:
+        a = request.session.get("userid")
+        userinfo = Userinfo.objects.filter(id=a)
+        username = userinfo[0].username
+        headimg = userinfo[0].headimg
+        return HttpResponse(json.dumps({'state': 'success', 'username': username, 'headimg': headimg}), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps({'state': 'fail'}), content_type="application/json")
 
 # 修改个人信息
 def modify(request):
@@ -335,8 +345,9 @@ def modify(request):
                 #title = bf.cleaned_data['title']
                 b = request.session.get("userid")
                 Userinfo.objects.filter(id=b).update(headimg=url1)
-                userinfo1 = Userinfo.objects.filter(id=b)
-                return render_to_response('userinfo.html', {'userinfo': userinfo1})
+                return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
+                #userinfo1 = Userinfo.objects.filter(id=b)
+                #return render_to_response('userinfo.html', {'userinfo': userinfo1[0]})
             else:
                 return HttpResponseRedirect('/')
         else:
