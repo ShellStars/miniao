@@ -13,8 +13,10 @@ import pymysql
 
 def article_detail(request, column, pk):
     url = 'http://127.0.0.1:8000' + request.path
+    tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Infoarticle.objects.filter(pk=pk, column=column, published=True)
     classes = Information.objects.all()
+    relate = Infoarticle.objects.filter(column=column, published=True)[0:6]
     belong = 'column'
     column1 = Information.objects.filter(slug=column)[0].name
     if article:
@@ -42,10 +44,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0]})
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
     else:
         return HttpResponseRedirect('/')
 
