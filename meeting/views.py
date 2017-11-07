@@ -3,14 +3,14 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render, render_to_response
-from .models import Meetarticle
+from .models import Meetarticle, Meetname
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
 import pymysql
 # Create your views here.
 
-
+"""
 def article_detail(request, column, pk):
     url = 'http://127.0.0.1:8000' + request.path
     article = Meetarticle.objects.filter(pk=pk, column=column, published=True)
@@ -45,18 +45,61 @@ def article_detail(request, column, pk):
             return render(request, 'article.html', {'article': article[0]})
     else:
         return HttpResponseRedirect('/')
+"""
+
+
+def article_detail(request, column, pk):
+    url = 'http://127.0.0.1:8000' + request.path
+    tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
+    article = Meetarticle.objects.filter(pk=pk, column=column, published=True)
+    classes = Meetname.objects.all()
+    relate = Meetarticle.objects.filter(column=column, published=True)[0:6]
+    belong = 'meeting'
+    column1 = Meetname.objects.filter(slug=column)[0].name
+    if article:
+        num = article[0].browser + 1
+        article.update(browser=num)
+        if "userid" in request.session and "identity" in request.session:
+            conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
+            cursor = conn.cursor()
+            userid = request.session.get("userid")
+            cursor.execute("select * from userdata_favourite where userid=%s and url='%s'" % (userid, url))
+            row = cursor.fetchone()
+            if row:
+                collect = True
+            else:
+                collect = False
+            cursor.execute("select avg(scorenum) from userdata_score where url='%s'" % url)
+            row1 = cursor.fetchone()
+            if row1[0]:
+                avgnum = row1[0]
+            else:
+                avgnum = 0
+            cursor.execute("select scorenum from userdata_score where userid=%s and url='%s'" % (userid, url))
+            row2 = cursor.fetchone()
+            if row2:
+                scorenum = '%.1f' % float(row2[0])
+            else:
+                scorenum = False
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
+                                                    'scorenum': scorenum})
+        else:
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
+    else:
+        return HttpResponseRedirect('/')
 
 
 def article(request, column):
     tmpurl = str(request.path).strip('/')
     article = Meetarticle.objects.filter(column=column, published=True)
-    if article:
-        objects, page_range = my_pagination(request, article, 2)
-        return render_to_response('article1.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect('/')
+    classes = Meetname.objects.all()
+    belong = 'meeting'
+    column1 = Meetname.objects.filter(slug=column)[0].name
+    objects, page_range = my_pagination(request, article, 2)
+    return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 
 
+"""
 def special(request):
     article = Meetarticle.objects.filter(published=True)
     if article:
@@ -65,14 +108,17 @@ def special(request):
                                   context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/')
+"""
 
 
 def index(request):
-    article = Meetarticle.objects.filter(column='yugao', published=True)[0:3]
-    if article:
-        return render(request, 'article2.html', {'article': article})
-    else:
-        return HttpResponseRedirect('/')
+    tmpurl = str(request.path).strip('/')
+    article = Meetarticle.objects.filter(published=True)
+    classes = Meetname.objects.all()
+    belong = 'meeting'
+    objects, page_range = my_pagination(request, article, 9)
+    return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': classes,  'page_range': page_range, 'tmpurl': tmpurl},
+                              context_instance=RequestContext(request))
 
 def my_pagination(request, queryset, display_amount, after_range_num=3, bevor_range_num=2):
     paginator = Paginator(queryset,display_amount)

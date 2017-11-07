@@ -77,7 +77,7 @@ class Dynamicarticle(models.Model):
         try:
             picurl = soup.img["src"]
         except:
-            picurl = "/media/123.jpg"
+            picurl = "/media/defaultpic.jpg"
         return picurl
     picurl = property(fengmian)
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)

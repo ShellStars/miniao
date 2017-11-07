@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url, include
 from .views import *
 from minicms import settings
 urlpatterns = patterns('',
-    url(r'^special/$', special, name='special'),
+    url(r'^$', index, name='index1'),
+    url(r'^(?P<column>[^/]+)/$', article, name='article'),
     url(r'^(?P<column>[^/]+)/(?P<pk>\d+)/$', article_detail, name='article_detail'),
 )

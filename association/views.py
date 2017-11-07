@@ -24,7 +24,12 @@ def showdetail(request):
 
 def article_detail(request, column, pk):
     url = 'http://127.0.0.1:8000' + request.path
+    tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Dynamicarticle.objects.filter(pk=pk, column=column, published=True)
+    classes = [{'column':'动态', 'slug': 'dongtai'}]
+    relate = Dynamicarticle.objects.filter(column=column, published=True)[0:6]
+    belong = 'association'
+    column1 = '动态'
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -50,15 +55,15 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article.html', {'article': article[0], 'collect': collect, 'avgnum': avgnum,
-                                                'scorenum': scorenum})
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
+                                                    'scorenum': scorenum})
         else:
-            return render(request, 'article.html', {'article': article[0]})
+            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
     else:
         return HttpResponseRedirect('/')
 
 
-def special(request):
+"""def special(request):
     article = Dynamicarticle.objects.filter(published=True)
     if article:
         objects, page_range = my_pagination(request, article, 2)
@@ -66,6 +71,28 @@ def special(request):
                                   context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/')
+"""
+def article(request, column):
+    tmpurl = str(request.path).strip('/')
+    article = Dynamicarticle.objects.filter(column=column, published=True)
+    classes = [{'column':'动态', 'slug': 'dongtai'}]
+    belong = 'association'
+    column1 = '动态'
+    objects, page_range = my_pagination(request, article, 2)
+    return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+
+
+def index(request):
+    tmpurl = str(request.path).strip('/')
+    article = Dynamicarticle.objects.filter(published=True)[0:6]
+    associntro = Assocarticle.objects.all()[0]
+    # people = Peoplearticle.objects.all()
+    zhuwei = Peoplearticle.objects.filter(level=0)
+    fuzhuwei = Peoplearticle.objects.filter(level=1)
+    huiyuan = Peoplearticle.objects.filter(level=2)
+    # objects, page_range = my_pagination(request, article, 9)
+    return render_to_response('article_associntro.html', {'dynamic': article, 'tmpurl': tmpurl, 'associntro': associntro, 'zhuwei': zhuwei, 'fuzhuwei': fuzhuwei, 'huiyuan': huiyuan},
+                              context_instance=RequestContext(request))
 
 
 def my_pagination(request, queryset, display_amount, after_range_num=3, bevor_range_num=2):
