@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>资讯列表</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_aq0blagn259g4x6r.css">
+  <title>
+  {% if column %}
+  {{ column }}
+  {% else %}
+  文章专区
+  {% endif %}
+</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_42tn1s2nuwx3l3di.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/article.css">
@@ -38,25 +44,41 @@
 
 <div class="article-container">
   <ul class="article-navbar clearfix">
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
-    <li><a href="#">哈哈哈哈</a></li>
+    
+      {% for i in classes %}
+      <li>
+        {% ifequal i.name column %}
+        <a class="active" href="/{{ belong }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% else %}
+        <a href="/{{ belong }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% endifequal %}
+
+      </li>
+      {% endfor %}
+    
   </ul>
   <h1 class="title">
-    <span>文章专区</span>
+    <span>
+        {% if column %}
+        {{ column }}
+        {% else %}
+        文章专区
+        {% endif %}
+      </span>
   </h1>
   <ul class="article-list clearfix">
     
     {% for i in objects %}
     
     <li>
+      
+      {% if column %}
+      <a href="/{{tmpurl}}/{{i.id}}">
+      {% else %}
       <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
+      {% endif %}
+      
+      
         <img src="{{ i.picurl }}" />
         <div class="content">
           <h2>{{ i.title|slice:"20" }}</h2>
@@ -75,9 +97,9 @@
   <ul class="article-pagination clearfix">
     
       {% if page_range.has_previous %}
-      <li class="pagination-control"><a href="?page={{ page_range.previous_page_number }}">&larr;上一页</a></li>
+      <li class="pagination-control prev"><a href="?page={{ page_range.previous_page_number }}">&larr;上一页</a></li>
       {% else %}
-      <li class="pagination-control pagination-control-disabled">&larr;上一页</li>
+      <li class="pagination-control prev disabled">&larr;上一页</li>
       {% endif %}
 
       <li class="pagination-list">
@@ -91,9 +113,9 @@
       </li>
 
       {% if page_range.has_next %}
-      <li class="pagination-control"><a href="?page={{ page_range.next_page_number }}">下一页&rarr;</a></li>
+      <li class="pagination-control next"><a href="?page={{ page_range.next_page_number }}">下一页&rarr;</a></li>
       {% else %}
-      <li class="pagination-control pagination-control-disabled">下一页&rarr;</li>
+      <li class="pagination-control next disabled">下一页&rarr;</li>
       {% endif %}
       
   </ul>
@@ -233,3 +255,4 @@
 
 </body>
 </html>
+
