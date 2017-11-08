@@ -31,6 +31,8 @@ urlpatterns = [
     url(r'column/', include('column.urls')),
     url(r'meeting/', include('meeting.urls')),
     url(r'association/', include('association.urls')),
+    url(r'expert/', include('expert.urls')),
+    url(r'magazine/', include('magazine.urls')),
     # url(r'$', test, name='test'),
 
 

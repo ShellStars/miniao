@@ -6,6 +6,22 @@ from django.utils.encoding import python_2_unicode_compatible
 from DjangoUeditor.models import UEditorField
 from django.core.urlresolvers import reverse
 
+
+@python_2_unicode_compatible
+class Mageinfo(models.Model):
+    info = models.TextField('杂志简介', default='')
+    pic = models.ImageField('杂志徽章', upload_to='uploads/images/article/')
+
+    #def get_absolute_url(self):
+    #    return reverse('infoarticle', args=(self.pk, self.slug))
+
+    def __str__(self):
+        return self.info
+
+    class Meta:
+        verbose_name = '杂志简介'
+        verbose_name_plural = '杂志简介'
+
 @python_2_unicode_compatible
 class Magearticle(models.Model):
     column = models.CharField('动态', default='dongtai', max_length=10, editable=False)
