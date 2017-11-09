@@ -15,11 +15,24 @@ def interviewarticle_detail(request, pk):
     column = 'zhuanfang'
     url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
+    classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'},
+               {'name': '专访', 'slug': 'zhuanfang'}]
     article = Interviewarticle.objects.filter(pk=pk, column=column, published=True)
     # classes = [{'column': '动态', 'slug': 'dongtai'}]
-    relate = Interviewarticle.objects.filter(column=column, published=True)[0:6]
-    belong = 'expert'
-    column1 = '专访'
+    relate = Interviewarticle.objects.filter(column=column, published=True)[0:2]
+    pre_article = Interviewarticle.objects.filter(id__lt=pk, published=True)
+    if pre_article:
+        pre_article = pre_article.order_by('-id')[0]
+    else:
+        pre_article = Interviewarticle.objects.filter(id=pk, published=True)[0]
+    next_article = Interviewarticle.objects.filter(id__gt=pk, published=True)
+    if next_article:
+        next_article = next_article[0]
+    else:
+        next_article = Interviewarticle.objects.filter(id=pk, published=True)[0]
+    belong = {'name': '专家', 'slug': 'expert'}
+    column_tmp = '专访'
+    column1 = {'name': column_tmp, 'slug': column}
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -45,10 +58,10 @@ def interviewarticle_detail(request, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'tmpurl': tmpurl, 'relate': relate, 'belong': belong, 'column1': column1, 'article': article[0], 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'tmpurl': tmpurl, 'relate': relate, 'belong': belong, 'classes': classes, 'column1': column1, 'article': article[0], 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'tmpurl': tmpurl, 'relate': relate, 'belong': belong, 'column1': column1, 'article': article[0]})
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'tmpurl': tmpurl, 'relate': relate, 'belong': belong, 'classes': classes, 'column1': column1, 'article': article[0]})
     else:
         return HttpResponseRedirect('/')
 
@@ -56,8 +69,8 @@ def interviewarticle_detail(request, pk):
 def interviewarticle(request):
     column = 'zhuanfang'
     tmpurl = str(request.path).strip('/')
-    classes = [{'column': '专家', 'slug': 'zhuanjia'}, {'column': '大家风范', 'slug': 'fengfan'},
-               {'column': '专访', 'slug': 'zhuanfang'}]
+    classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'},
+               {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '专访'
     belong = 'expert'
     article = Interviewarticle.objects.filter(column=column, published=True)
@@ -137,15 +150,20 @@ def doctorarticle_detail(request, pk):
             return render(request, 'article_fengfan_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:"""
-        return render(request, 'article_fengfan_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl})
+        return render(request, 'article_fengfan_detail.html', {'belong': belong, 'column':column1, 'article': article[0], 'tmpurl': tmpurl})
     else:
         return HttpResponseRedirect('/')
+
+
+def expertarticle_tmp(request):
+    return HttpResponseRedirect('/expert/')
+
 
 def doctorarticle(request):
     column = 'fengfan'
     tmpurl = str(request.path).strip('/')
-    classes = [{'column': '专家', 'slug': 'zhuanjia'}, {'column': '大家风范', 'slug': 'fengfan'},
-               {'column': '专访', 'slug': 'zhuanfang'}]
+    classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'},
+               {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '大家风范'
     belong = 'expert'
     article = Doctorarticle.objects.filter(column=column, published=True)
@@ -170,7 +188,7 @@ def expertarticle(request):
     sel_province = ""
     sel_department = ""
     column = 'zhuanjia'
-    classes = [{'column': '专家', 'slug': 'zhuanjia'}, {'column': '大家风范', 'slug': 'fengfan'}, {'column': '专访', 'slug': 'zhuanfang'}]
+    classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'}, {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '专家'
     if "province" in request.GET and "department" in request.GET:
         sel_province = request.POST["province"]
@@ -199,7 +217,7 @@ def expertarticle(request):
     for i in row1:
         province.append(str(i[0]))
     if article:
-        objects, page_range = my_pagination(request, article, 2)
+        objects, page_range = my_pagination(request, article, 3)
         return render_to_response('article_expert.html', {'classes': classes, 'column': column1, 'sel_province': sel_province, 'sel_department': sel_department, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl, 'department': department, 'province': province},context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/')

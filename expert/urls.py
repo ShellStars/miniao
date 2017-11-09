@@ -4,7 +4,7 @@ from .views import *
 from minicms import settings
 urlpatterns = patterns('',
     url(r'^$', expertarticle, name='expertarticle'),
-    url(r'^zhuanjia/$', expertarticle, name='expertarticle'),
+    url(r'^zhuanjia/$', expertarticle_tmp, name='expertarticle_tmp'),
     url(r'^zhuanjia/(?P<pk>\d+)/$', expertarticle_detail, name='expertarticle_detail'),
     url(r'^fengfan/$', doctorarticle, name='doctorarticle'),
     url(r'^fengfan/(?P<pk>\d+)/$', doctorarticle_detail, name='doctorarticle_detail'),

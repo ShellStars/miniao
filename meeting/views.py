@@ -53,9 +53,20 @@ def article_detail(request, column, pk):
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Meetarticle.objects.filter(pk=pk, column=column, published=True)
     classes = Meetname.objects.all()
-    relate = Meetarticle.objects.filter(column=column, published=True)[0:6]
-    belong = 'meeting'
-    column1 = Meetname.objects.filter(slug=column)[0].name
+    relate = Meetarticle.objects.filter(column=column, published=True)[0:2]
+    pre_article = Meetarticle.objects.filter(id__lt=pk, published=True)
+    if pre_article:
+        pre_article = pre_article.order_by('-id')[0]
+    else:
+        pre_article = Meetarticle.objects.filter(id=pk, published=True)[0]
+    next_article = Meetarticle.objects.filter(id__gt=pk, published=True)
+    if next_article:
+        next_article = next_article[0]
+    else:
+        next_article = Meetarticle.objects.filter(id=pk, published=True)[0]
+    belong = {'name': '会议', 'slug': 'meeting'}
+    column_tmp = Meetname.objects.filter(slug=column)[0].name
+    column1 = {'name': column_tmp, 'slug': column}
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -81,10 +92,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
     else:
         return HttpResponseRedirect('/')
 

@@ -11,7 +11,7 @@ import pymysql
 # Create your views here.
 
 
-def showdetail(request):
+"""def showdetail(request):
     if request.method == "GET":
         info = Assocarticle.objects.all()[0]
         zhuwei = Peoplearticle.objects.filter(level=0)
@@ -19,7 +19,7 @@ def showdetail(request):
         huiyuan = Peoplearticle.objects.filter(level=2)
         return render(request, 'article.html', {'info': info, 'zhuwei': zhuwei, 'fuzhuwei': fuzhuwei, 'huiyuan': huiyuan})
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')"""
 
 
 def article_detail(request, column, pk):
@@ -27,9 +27,20 @@ def article_detail(request, column, pk):
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Dynamicarticle.objects.filter(pk=pk, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
-    relate = Dynamicarticle.objects.filter(column=column, published=True)[0:6]
-    belong = 'association'
-    column1 = '动态'
+    relate = Dynamicarticle.objects.filter(column=column, published=True)[0:2]
+    pre_article = Dynamicarticle.objects.filter(id__lt=pk, published=True)
+    if pre_article:
+        pre_article = pre_article.order_by('-id')[0]
+    else:
+        pre_article = Dynamicarticle.objects.filter(id=pk, published=True)[0]
+    next_article = Dynamicarticle.objects.filter(id__gt=pk, published=True)
+    if next_article:
+        next_article = next_article[0]
+    else:
+        next_article = Dynamicarticle.objects.filter(id=pk, published=True)[0]
+    belong = {'name': '学会', 'slug': 'association'}
+    column_tmp = '动态'
+    column1 = {'name': column_tmp, 'slug': column}
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -55,10 +66,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
     else:
         return HttpResponseRedirect('/')
 
@@ -75,11 +86,11 @@ def article_detail(request, column, pk):
 def article(request, column):
     tmpurl = str(request.path).strip('/')
     article = Dynamicarticle.objects.filter(column=column, published=True)
-    classes = [{'column':'动态', 'slug': 'dongtai'}]
-    belong = 'association'
-    column1 = '动态'
-    objects, page_range = my_pagination(request, article, 2)
-    return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+    associntro = Assocarticle.objects.all()[0]
+    belong = {'name': '学会', 'slug': 'association'}
+    column1 = {'name': '动态', 'slug': 'dongtai'}
+    objects, page_range = my_pagination(request, article, 9)
+    return render_to_response('article_magazine.html', {'objects':objects, 'belong': belong, 'associntro': associntro, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 
 
 def index(request):
