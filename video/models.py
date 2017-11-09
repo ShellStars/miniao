@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.urlresolvers import reverse
+from storage import ContentTypeRestrictedFileField
 
 
 @python_2_unicode_compatible
@@ -62,6 +63,12 @@ class Videoarticle(models.Model):
     smallpic = models.ImageField('封面', upload_to="uploads/images/video/")
     introduction = models.TextField('简介', default='', blank=True)
     video = models.FileField('视频', upload_to='uploads/files/video/')
+    video = ContentTypeRestrictedFileField(
+        verbose_name='视频',
+        upload_to='uploads/files/video/',
+        content_types=['video/mp4'],
+        max_upload_size=429916160,
+    )
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
     update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
     published = models.BooleanField('正式发布', default=True)

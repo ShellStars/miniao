@@ -78,10 +78,90 @@ def article(request, column):
     else:
         return HttpResponseRedirect('/')
 
+
+def dictfetchall(cursor):
+    desc = cursor.description
+    return [dict(zip([col[0] for col in desc], row)) for row in cursor.fetchall()]
+
+
 def index(request):
-    article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
-    if article:
-        return render(request, 'article2.html', {'article': article})
+    tmpurl = str(request.path).strip('/')
+    tmp = request.GET.keys()
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
+    cursor = conn.cursor()
+    small_classes = {}
+    if len(tmp) == 0:
+        cursor.execute("select * from video_videoarticle where published=True")
+        dic = dictfetchall(cursor)
+    elif len(tmp) == 1:
+        tmp_key1 = str(tmp[0])
+        tmp_val1 = str(request.GET[tmp_key1])
+        cursor.execute("select * from video_videoarticle where %s=%s and published=True" % (tmp_key1, tmp_val1))
+        dic = dictfetchall(cursor)
+        for i in request.GET.items():
+            small_classes[i[0]] = i[1]
+    elif len(tmp) == 2:
+        tmp_key1 = str(tmp[0])
+        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_key2 = str(tmp[1])
+        tmp_val2 = str(request.GET[tmp_key2])
+        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and published=True" % (tmp_key1, tmp_val1, tmp_key2, tmp_val2))
+        dic = dictfetchall(cursor)
+        for i in request.GET.items():
+            small_classes[i[0]] = i[1]
+    elif len(tmp) == 3:
+        tmp_key1 = str(tmp[0])
+        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_key2 = str(tmp[1])
+        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_key3 = str(tmp[2])
+        tmp_val3 = str(request.GET[tmp_key3])
+        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and %s=%s and published=True" % (
+        tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3))
+        dic = dictfetchall(cursor)
+        for i in request.GET.items():
+            small_classes[i[0]] = i[1]
+    elif len(tmp) == 4:
+        tmp_key1 = str(tmp[0])
+        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_key2 = str(tmp[1])
+        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_key3 = str(tmp[2])
+        tmp_val3 = str(request.GET[tmp_key3])
+        tmp_key4 = str(tmp[3])
+        tmp_val4 = str(request.GET[tmp_key4])
+        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and %s=%s and %s=%s and published=True" % (
+            tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, tmp_key4, tmp_val4))
+        dic = dictfetchall(cursor)
+        for i in request.GET.items():
+            small_classes[i[0]] = i[1]
+        # article = Videoarticle.objects.filter(tmp_key1=tmp_val1, published=True)
+    res = cursor.execute("select distinct disease from video_videoarticle")
+    row = cursor.fetchmany(res)
+    disease = []
+    for i in row:
+        disease.append(str(i[0]))
+    res1 = cursor.execute("select distinct difficulty from video_videoarticle")
+    row1 = cursor.fetchmany(res1)
+    difficulty = []
+    for i in row1:
+        difficulty.append(str(i[0]))
+    res2 = cursor.execute("select distinct other from video_videoarticle")
+    row2 = cursor.fetchmany(res2)
+    other = []
+    for i in row2:
+        other.append(str(i[0]))
+    res3 = cursor.execute("select distinct expert from video_videoarticle")
+    row3 = cursor.fetchmany(res3)
+    expert = []
+    for i in row3:
+        expert.append(str(i[0]))
+    classes = [{'name_zh': '疾病分类', 'name_en': 'disease'}, {'name_zh': '难度分级', 'name_en': 'difficulty'},
+               {'name_zh': '专家专栏', 'name_en': 'expert'}, {'name_zh': '其他', 'name_en': 'other'}]
+    # article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
+    if dic:
+        objects, page_range = my_pagination(request, dic, 2)
+        return render(request, 'article_video.html', {'objects': objects, 'page_range': page_range, 'tmpurl': tmpurl, 'classes': classes, 'small_classes': small_classes, 'article': article})
     else:
         return HttpResponseRedirect('/')
 
