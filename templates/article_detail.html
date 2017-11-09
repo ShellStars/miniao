@@ -46,7 +46,7 @@
     <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
   </li>
   <li>
-    <a href="#"><span>专家</span><i class="iconfont icon-add"></i></a>
+    <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
   </li>
   <li>
     <a href="#"><span>学科</span></a>
@@ -80,7 +80,7 @@
 <div class="article-detail-crumbs">
   <a href="/">首页</a>
   <span>></span>
-  <a href="/{{ belong }}">{{ column }}</a>
+  <a href="/{{ belong.slug }}">{{ belong.name }}</a>
   <span>></span>
   <strong class="ad-title">
     {{ article.title }}
@@ -92,7 +92,7 @@
   {% autoescape off %}
   <h1>{{ article.title }}</h1>
   <div class="meta">
-    <strong>{{ column }}</strong>
+    <strong>{{ article.tag }}</strong>
     <time>{{ article.pub_date|date:"Y-m-d" }}</time>
     <span>阅读：{{ article.browser }}</span>
   </div>
@@ -106,19 +106,19 @@
 
   <div class="pages clearfix">
     <div class="page-left">
-      <a href="#">
+      <a href="/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}">
         <i class="iconfont icon-l"></i>
         <div>
           <span>上一篇</span>
-          <h6>你好，刘主任，我是前两天跟你咨询的糖尿病患者，今天去查了</h6>
+          <h6>{{ pre_article.title }}</h6>
         </div>
       </a>
     </div>
     <div class="page-right">
-      <a href="#">
+      <a href="/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}">
         <div>
           <span>下一篇</span>
-          <h6>你好，刘主任，我是前两天跟你咨询的糖尿病患者，今天去查了</h6>
+          <h6>{{ next_article.title }}</h6>
         </div>
         <i class="iconfont icon-r"></i>
       </a>
@@ -130,24 +130,21 @@
       <h2><span>猜您喜欢</span></h2>
     </div>
     <ul class="clearfix">
-      <li>
-        <div class="inner">
-          <img src="http://localhost:8000/static/images/home_consult_1.png" alt="">
-          <h3>泌尿系结石最爱招惹哪些人？尿系结石最爱招惹哪些人？</h3>
-          <time>2017.10.12</time>
-          <p>流行病学调查显示，泌尿系结石的发病年龄多见于25岁~40岁（其中，女性在50岁~65岁会出现第二个发病高峰）</p>
-          <a href="#">查看详情</a>
-        </div>
-      </li>
-      <li>
-        <div class="inner">
-          <img src="http://localhost:8000/static/images/home_consult_1.png" alt="">
-          <h3>泌尿系结石最爱招惹哪些人？尿系结石最爱招惹哪些人？</h3>
-          <time>2017.10.12</time>
-          <p>流行病学调查显示，泌尿系结石的发病年龄多见于25岁~40岁（其中，女性在50岁~65岁会出现第二个发病高峰）</p>
-          <a href="#">查看详情</a>
-        </div>
-      </li>
+      
+        {% for i in relate %}
+        <li>
+          <div class="inner">
+            <img src="{{ i.picurl }}" alt="1">
+            <h3>{{ i.title }}</h3>
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            {% autoescape off %}
+            <p>{{ i.content | slice:"20" }}</p>
+            {% endautoescape %}
+            <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+          </div>
+        </li>
+        {% endfor %}
+      
     </ul>
   </div>
 
