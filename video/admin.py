@@ -1,10 +1,14 @@
 from django.contrib import admin
 
-from .models import Videoclass, Videoarticle
+from .models import Videoclass, Videoarticle, Videoalbum
 from django.utils.safestring import mark_safe
 
 
 class VideoclassAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+
+
+class VideoalbumAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
 
 
@@ -14,4 +18,5 @@ class VideoarticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Videoclass, VideoclassAdmin)
+admin.site.register(Videoalbum, VideoalbumAdmin)
 admin.site.register(Videoarticle, VideoarticleAdmin)

@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^fengfan/(?P<pk>\d+)/$', doctorarticle_detail, name='doctorarticle_detail'),
     url(r'^zhuanfang/$', interviewarticle, name='interviewarticle'),
     url(r'^zhuanfang/(?P<pk>\d+)/$', interviewarticle_detail, name='interviewarticle_detail'),
+    url(r'^comment/$', givecomment, name='givecomment'),
+    url(r'^zan/$', zan, name='zan'),
     #url(r'^(?P<column>[^/]+)/$', article, name='article'),
     #url(r'^(?P<column>[^/]+)/(?P<pk>\d+)/$', article_detail, name='article_detail'),
 )

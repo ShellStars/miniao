@@ -75,5 +75,55 @@ site: article_column.html
 
 详情页  url /column/###(gonggao)/id(1)/
 site: article_detail.html
-返回字段：article：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False)
+返回字段：article：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False) pre_article：前一篇 next_article：下一篇 
+          belong：分类(name,slug)  column: 栏目(name,slug) relate:猜你喜欢
 评论：使用畅言
+
+# 学会 association
+主页url /association/
+site:article_associntro.html
+返回字段：dynamic：动态文章  tmpurl：来源url除去host部分，构造文章链接  associntro：学会介绍(学会简介,章程。。。见models.py)  zhuwei: 主委 fuzhuwei：副主委 huiyuan：会员
+
+学会二级列表(动态) url /column/dongtai/
+site:article_magazine.html
+返回字段：objects：数据对象 belong：分类(name,slug)  column: 栏目(name,slug) info：学会介绍 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接
+
+详情页：url /column/dongtai/id(1)/
+site: article_detail.html
+返回字段：article：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False) pre_article：前一篇 next_article：下一篇 
+          belong：分类(name,slug)  column: 栏目(name,slug) relate:猜你喜欢
+评论：使用畅言
+
+# 杂志 magazine
+主页url /magazine/
+site: article_magazine.html
+返回字段：objects：数据对象 belong：分类(name,slug)  column: 栏目(name,slug) info：学会介绍 page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接
+
+详情页：url /magazine/dongtai/id(1)/
+site: article_detail.html
+返回字段：article：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False) pre_article：前一篇 next_article：下一篇 
+          belong：分类(name,slug)  column: 栏目(name,slug) relate:猜你喜欢
+评论：使用畅言
+
+# 专家 expert
+主页url /expert/
+site: article_expert.html
+返回字段：classes：专家下的分类(专家，专访，医路人生) sel_province：搜索的省份 sel_department：搜索的科室  objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 
+          province：所有的省份  department：所有的科室
+搜索时，get传入参数，http://127.0.0.1:8000/expert/?province=陕西 翻页时：http://127.0.0.1:8000/expert/?province=陕西&page=2
+
+专家详情页：
+url /expert/zhuangjia/id(1)/
+site: article_expert_detail.html
+返回字段：article：专家详情  comment：评论
+
+评论：
+url: /expert/comment/
+post传入：url:文章链接地址 content：评论内容
+返回数据：json格式{'info':'success'}  {'info':'fail'}
+
+
+赞：
+url: /expert/zan/
+get传入：url:文章链接地址
+返回数据：json格式{'info':'success'}  {'info':'fail'}

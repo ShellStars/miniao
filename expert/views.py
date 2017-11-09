@@ -229,7 +229,7 @@ def givecomment(request):
             url = request.POST['url']
             content = request.POST['content']
         except:
-            return HttpResponseRedirect('/')
+            return HttpResponse(json.dumps({'info': 'fail'}), content_type="application/json")
         expertid  = str(url).strip('/').split('/')[-1]
         tmp = Expertarticle.objects.filter(id=expertid)
         name = tmp[0].name
@@ -243,11 +243,12 @@ def zan(request):
         try:
             url = request.GET['url']
         except:
-            return HttpResponseRedirect('/')
+            return HttpResponse(json.dumps({'info': 'fail'}), content_type="application/json")
         expertid = str(url).strip('/').split('/')[-1]
         tmp = Expertarticle.objects.filter(id=expertid)
         ori = tmp[0].zan
         tmp.update(zan=ori+1)
+        return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
     else:
         return HttpResponseRedirect('/')
 

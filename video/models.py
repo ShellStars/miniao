@@ -24,6 +24,24 @@ class Videoclass(models.Model):
 
 
 @python_2_unicode_compatible
+class Videoalbum(models.Model):
+    name = models.CharField('专辑名称', max_length=20)
+    slug = models.CharField('专辑网址', max_length=30, db_index=True, primary_key=True)
+    intro = models.TextField('专辑简介', default='')
+    browser = models.IntegerField('访问量', default=0, editable=False)
+
+    #def get_absolute_url(self):
+    #    return reverse('information', args=(self.name, self.slug ))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '专辑栏目'
+        verbose_name_plural = '专辑栏目'
+        ordering = ['name']  # 排序
+
+@python_2_unicode_compatible
 class Videoarticle(models.Model):
     Level = (
         (0, u'初级'),
@@ -37,6 +55,7 @@ class Videoarticle(models.Model):
     browser = models.IntegerField('浏览量', default=0, editable=False)
     disease = models.CharField('疾病分类', max_length=20, blank=True)
     difficulty = models.IntegerField(choices=Level, verbose_name='难度等级')
+    album = models.ForeignKey(Videoalbum, verbose_name='归属专辑')
     expert = models.CharField('专家名称', max_length=20)
     other = models.CharField('其他', max_length=20, blank=True)
     zan = models.IntegerField('赞', default=0, editable=False)
@@ -56,6 +75,3 @@ class Videoarticle(models.Model):
     class Meta:
         verbose_name = '视频'
         verbose_name_plural = '视频'
-
-
-
