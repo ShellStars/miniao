@@ -41,7 +41,12 @@
   <div class="filter-item clearfix" data-search="department">
     <label>科室：</label>
     <ul class="clearfix">
-      <li class="all">全部</li>
+      
+      {% if sel_department %}
+      <li class="">全部</li>
+      {% else %}
+      <li class="active">全部</li>
+      {% endif %}
       
         {% for d in department %}
           {% ifequal d sel_department %}
@@ -56,7 +61,12 @@
   <div class="filter-item clearfix" data-search="province">
     <label>地区：</label>
     <ul class="clearfix">
-      <li class="all">全部</li>
+      
+      {% if sel_province %}
+      <li class="">全部</li>
+      {% else %}
+      <li class="active">全部</li>
+      {% endif %}
       
         {% for d in province %}
           {% ifequal d sel_province %}
@@ -74,7 +84,7 @@
   
     {% for i in objects %}
     <li>
-      <a href="/{{ tmpurl }}/{{ i.id }}" class="expert-inner">
+      <a href="/{{ tmpurl }}/zhuangjia/{{ i.id }}" class="expert-inner">
         <img src="{{ i.smallpic }}" alt="avatar">
         <h2>
           <span>{{ i.name }}</span>
@@ -86,23 +96,12 @@
     </li>
     {% endfor %}
   
-  <li>
-    <a href="#" class="expert-inner">
-      <img src="http://localhost:8080/static/images/home_p_4.png" alt="1">
-      <h2>
-        <span>名字吗</span>
-        <span>头衔</span>
-      </h2>
-      <p>陕西西安</p>
-      <p>西郊第一附属医院</p>
-    </a>
-  </li>
 </ul>
 
 <ul class="article-pagination clearfix">
   
-    {% if page_range.has_previous %}
-    <li class="pagination-control prev"><a href="?page={{ page_range.previous_page_number }}">&larr;上一页</a></li>
+    {% if objects.has_previous %}
+    <li class="pagination-control prev"><a data-href="{{ objects.previous_page_number }}">&larr;上一页</a></li>
     {% else %}
     <li class="pagination-control prev disabled">&larr;上一页</li>
     {% endif %}
@@ -112,13 +111,13 @@
       {% ifequal i page_range.number %}
       <span>{{ i }}</span>
       {% else %}
-      <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+      <a data-href="{{ i }}" title="第{{ i }}页">{{ i }}</a>
       {% endifequal %}
     {% endfor %}
     </li>
 
-    {% if page_range.has_next %}
-    <li class="pagination-control next"><a href="?page={{ page_range.next_page_number }}">下一页&rarr;</a></li>
+    {% if objects.has_next %}
+    <li class="pagination-control next"><a data-href="{{ objects.next_page_number }}">下一页&rarr;</a></li>
     {% else %}
     <li class="pagination-control next disabled">下一页&rarr;</li>
     {% endif %}
@@ -256,12 +255,56 @@
 <script src='/static/js/jquery.jcarousel.min.js'></script>
 <script src='/static/js/index.js'></script>
 
-<script type="text/javascript">
+<script>
   $(function () {
-    $('.filter-box .filter-item li').click(function (
+    $('.article-pagination a').click(function () {
+      var p = {
+        page: getUrlParam('page'),
+        province: getUrlParam('province'),
+        department: getUrlParam('department')
+      };
 
-    ));
+      p.page = $(this).attr('data-href');
+
+      for (key in p) {
+        if (!p[key]) {
+          delete p[key];
+        }
+      }
+
+      window.location.href = window.location.origin + window.location.pathname + '?' + $.param(p);
+    });
+    $('.filter-item li').click(function () {
+      var p = {
+        page: getUrlParam('page'),
+        province: getUrlParam('province'),
+        department: getUrlParam('department')
+      };
+
+      var pp = $(this).parent().parent().attr('data-search');
+      if ($(this).hasClass('all')) {
+        if (pp) {
+          p[pp] = '';
+        }
+      } else {
+        p[pp] = $(this).text();
+      }
+
+      for (key in p) {
+        if (!p[key]) {
+          delete p[key];
+        }
+      }
+
+      window.location.href = window.location.origin + window.location.pathname + '?' + $.param(p);
+    });
   });
+
+  function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return '';
+    }
 </script>
 
 
