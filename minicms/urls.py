@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'association/', include('association.urls')),
     url(r'expert/', include('expert.urls')),
     url(r'magazine/', include('magazine.urls')),
+    url(r'video/', include('video.urls')),
     # url(r'$', test, name='test'),
 
 

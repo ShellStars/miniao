@@ -127,3 +127,33 @@ post传入：url:文章链接地址 content：评论内容
 url: /expert/zan/
 get传入：url:文章链接地址
 返回数据：json格式{'info':'success'}  {'info':'fail'}
+
+
+# 视频 video
+主页url /video/
+site: video_index.html
+返回字段：objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
+          large_classes：条件分类（疾病分类，难度分级，专家专栏，其他） small_classes：查询输入的条件
+搜索时，get传入参数，http://127.0.0.1:8000/video/?disease=产科 翻页时：http://127.0.0.1:8000/video/?disease=产科&page=2
+
+
+视频二级列表：url /video/###(shoushu)/
+site: video_column.html
+返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug)  objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
+          large_classes：条件分类（疾病分类，难度分级，专家专栏，其他） small_classes：查询输入的条件
+
+专辑一级列表：url /video/zhuanji/
+site: video_album.html
+返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug) album: 专辑情况  num:字典类型{'专辑英文slug':视频数量} tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
+
+专辑二级列表：url /video/zhuanji/###(shoushu)/
+site: video_album_detail.html
+返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug) album：专辑(name, slug) 
+          objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
+          albuminfo: 专辑详情  num：专辑视频数量
+
+视频详情：url /video/###(gonggao)/id(1)/
+site: video_detail.html
+返回字段：video：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False) pre_article：前一篇 next_article：下一篇 
+          belong：分类(name,slug)  column: 栏目(name,slug) relate:猜你喜欢 classes：视频下的分类(手术，讲座，访谈等) tmpurl：来源url除去host部分，构造文章链接
+
