@@ -46,9 +46,9 @@ class Videoalbum(models.Model):
 @python_2_unicode_compatible
 class Videoarticle(models.Model):
     Level = (
-        (0, u'初级'),
-        (1, u'中级'),
-        (2, u'高级'),
+        ('初级', u'初级'),
+        ('中级', u'中级'),
+        ('高级', u'高级'),
     )
     column = models.ForeignKey(Videoclass, verbose_name='归属栏目')
     title = models.CharField('标题', max_length=40)
@@ -56,7 +56,7 @@ class Videoarticle(models.Model):
     author = models.CharField('作者', max_length=20)
     browser = models.IntegerField('浏览量', default=0, editable=False)
     disease = models.CharField('疾病分类', max_length=20, blank=True)
-    difficulty = models.IntegerField(choices=Level, verbose_name='难度等级')
+    difficulty = models.CharField(choices=Level, verbose_name='难度等级', max_length=10)
     album = models.ForeignKey(Videoalbum, verbose_name='归属专辑')
     expert = models.CharField('专家名称', max_length=20)
     other = models.CharField('其他', max_length=20, blank=True)

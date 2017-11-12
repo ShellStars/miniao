@@ -142,44 +142,44 @@ def video(request, column):
         dic = dictfetchall(cursor)
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
-        cursor.execute("select * from video_videoarticle where %s=%s and published=True and column_id='%s'" % (tmp_key1, tmp_val1, column))
+        tmp_val1 = request.GET[tmp_key1]
+        cursor.execute("select * from video_videoarticle where %s='%s' and published=True and column_id='%s'" % (tmp_key1, tmp_val1, column))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 2:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
-        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and published=True and column_id='%s'" % (
+        tmp_val2 = request.GET[tmp_key2]
+        cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and published=True and column_id='%s'" % (
         tmp_key1, tmp_val1, tmp_key2, tmp_val2, column))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 3:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_val2 = request.GET[tmp_key2]
         tmp_key3 = str(tmp[2])
-        tmp_val3 = str(request.GET[tmp_key3])
-        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and %s=%s and published=True and column_id='%s'" % (
+        tmp_val3 = request.GET[tmp_key3]
+        cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and published=True and column_id='%s'" % (
             tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, column))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 4:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_val2 = request.GET[tmp_key2]
         tmp_key3 = str(tmp[2])
-        tmp_val3 = str(request.GET[tmp_key3])
+        tmp_val3 = request.GET[tmp_key3]
         tmp_key4 = str(tmp[3])
-        tmp_val4 = str(request.GET[tmp_key4])
+        tmp_val4 = request.GET[tmp_key4]
         cursor.execute(
-            "select * from video_videoarticle where %s=%s and %s=%s and %s=%s and %s=%s and published=True and column_id='%s'" % (
+            "select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and %s='%s' and published=True and column_id='%s'" % (
                 tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, tmp_key4, tmp_val4, column))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
@@ -242,42 +242,42 @@ def index(request):
         dic = dictfetchall(cursor)
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
-        cursor.execute("select * from video_videoarticle where %s=%s and published=True" % (tmp_key1, tmp_val1))
+        tmp_val1 = request.GET[tmp_key1]
+        cursor.execute("select * from video_videoarticle where %s='%s' and published=True" % (tmp_key1, tmp_val1))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 2:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
-        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and published=True" % (tmp_key1, tmp_val1, tmp_key2, tmp_val2))
+        tmp_val2 = request.GET[tmp_key2]
+        cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and published=True" % (tmp_key1, tmp_val1, tmp_key2, tmp_val2))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 3:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_val2 = request.GET[tmp_key2]
         tmp_key3 = str(tmp[2])
-        tmp_val3 = str(request.GET[tmp_key3])
-        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and %s=%s and published=True" % (
+        tmp_val3 = request.GET[tmp_key3]
+        cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and published=True" % (
         tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 4:
         tmp_key1 = str(tmp[0])
-        tmp_val1 = str(request.GET[tmp_key1])
+        tmp_val1 = request.GET[tmp_key1]
         tmp_key2 = str(tmp[1])
-        tmp_val2 = str(request.GET[tmp_key2])
+        tmp_val2 = request.GET[tmp_key2]
         tmp_key3 = str(tmp[2])
-        tmp_val3 = str(request.GET[tmp_key3])
+        tmp_val3 = request.GET[tmp_key3]
         tmp_key4 = str(tmp[3])
-        tmp_val4 = str(request.GET[tmp_key4])
-        cursor.execute("select * from video_videoarticle where %s=%s and %s=%s and %s=%s and %s=%s and published=True" % (
+        tmp_val4 = request.GET[tmp_key4]
+        cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and %s='%s' and published=True" % (
             tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, tmp_key4, tmp_val4))
         dic = dictfetchall(cursor)
         for i in request.GET.items():
