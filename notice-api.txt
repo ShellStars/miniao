@@ -157,3 +157,23 @@ site: video_detail.html
 返回字段：video：详情  collect：是否收藏(True,False) avgnum: 评分的均分 scorenum：自己的打分(已经打过分，则是自己的分数，没有打过分，False) pre_article：前一篇 next_article：下一篇 
           belong：分类(name,slug)  column: 栏目(name,slug) relate:猜你喜欢 classes：视频下的分类(手术，讲座，访谈等) tmpurl：来源url除去host部分，构造文章链接
 
+
+guide,nursing,recommend,sruco,subject,universal同column
+
+other除下载部分，其余同column
+
+other下载部分：
+
+专辑一级列表：url /other/download/
+site: video_album.html
+返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug) album: 专辑情况  num:字典类型{'专辑英文slug':文件数量} tmpurl：来源url除去host部分，构造文章链接 classes：下载下的分类(期刊，报告等)
+
+
+专辑二级列表：url /other/download/###(qikan)/
+site: downfile_detail.html
+返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug) album：专辑(name, slug) 
+          objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：下载下的分类(期刊，报告等)
+          albuminfo: 专辑详情  num：专辑文件数量
+统计下载量：url /other/download/id(1)/
+点击下载链接，首先访问该url  返回json格式，成功：{'info': 'success'} 失败：{'info': 'fail'}  再访问下载链接
+get方式：传入文件id
