@@ -217,7 +217,7 @@ def video(request, column):
     if dic:
         objects, page_range = my_pagination(request, dic, 2)
         return render(request, 'video_column.html',
-                      {'belong': belong, 'column': column1, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl,
+                      {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'belong': belong, 'column': column1, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl,
                        'large_classes': large_classes, 'small_classes': small_classes})
     else:
         return HttpResponseRedirect('/')
@@ -314,7 +314,7 @@ def index(request):
     # article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
     if dic:
         objects, page_range = my_pagination(request, dic, 2)
-        return render(request, 'video_index.html', {'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl, 'large_classes': large_classes, 'small_classes': small_classes})
+        return render(request, 'video_index.html', {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl, 'large_classes': large_classes, 'small_classes': small_classes})
     else:
         return HttpResponseRedirect('/')
 

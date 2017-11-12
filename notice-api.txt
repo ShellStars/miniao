@@ -134,6 +134,7 @@ get传入：url:文章链接地址
 site: video_index.html
 返回字段：objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
           large_classes：条件分类（疾病分类，难度分级，专家专栏，其他） small_classes：查询输入的条件
+          disease: 疾病分类, difficulty: 难度分级, other: 其他, expert: 专家专栏 （数组形式）
 搜索时，get传入参数，http://127.0.0.1:8000/video/?disease=产科 翻页时：http://127.0.0.1:8000/video/?disease=产科&page=2
 
 
@@ -141,6 +142,7 @@ site: video_index.html
 site: video_column.html
 返回字段：belong：一级分类(name,slug)  column： 栏目(name,slug)  objects：数据对象  page_range：共分多少页 tmpurl：来源url除去host部分，构造文章链接 classes：视频下的分类(手术，讲座，访谈等)
           large_classes：条件分类（疾病分类，难度分级，专家专栏，其他） small_classes：查询输入的条件
+	  disease: 疾病分类, difficulty: 难度分级, other: 其他, expert: 专家专栏 （数组形式）
 
 专辑一级列表：url /video/zhuanji/
 site: video_album.html
