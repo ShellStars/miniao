@@ -1,0 +1,185 @@
+.register-wrap {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 1190px;
+  padding: 0 10px;
+}
+.register-navbar {
+  border: 1px solid #eee;
+  border-left: 0;
+  border-right: 0;
+  font-size: 16px;
+  color: #333;
+  line-height: 42px;
+  .title {
+    float: left;
+    line-height: 44px;
+    margin-right: 52px;
+    i {
+      display: inline-block;
+      margin-right: 8px;
+    }
+  }
+  .navbar-list {
+    border: 0;
+    width: auto;
+    float: left;
+    padding-left: 10px;
+    li {
+      font-weight: 16px;
+      margin-right: 40px;
+      float: left;
+      &:last-child {
+        margin-right: 0;
+      }
+      i {
+        display: inline-block;
+        font-size: 12px;
+        color: #f24a4c;
+        font-weight: bold;
+        transform: scale(.8);
+        position: relative;
+        top: -3px;
+        right: -4px;
+      }
+    }
+  }
+}
+
+.register-tab {
+  height: 34px;
+  line-height: 32px;
+  width: 288px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  margin-top: 46px;
+  li {
+    display: block;
+    float: left;
+    width: 33.333%;
+    color: #636e81;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .btn-1 {
+    border-radius: 4px 0 0 4px;
+  }
+  .btn-2 {
+    border-radius: 0 0 0 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .btn-3 {
+    border-radius: 0 4px 4px 0;
+  }
+  .active {
+    border: 1px solid #377bef;
+    background: #377bef;
+    color: #fff;
+  }
+}
+
+.register-form {
+  padding-bottom: 134px;
+  width: 400px;
+  padding: 0 10px;
+  margin: 0 auto;
+  margin-bottom: 150px;
+  .group {
+    margin-bottom: 30px;
+    label {
+      display: inline-block;
+      width: 95px;
+      text-align: right;
+      padding-right: 17px;
+      color: #666;
+      font-size: 14px;
+      line-height: 36px;
+    }
+    input {
+      height: 36px;
+      font-size: 14px;
+      color: #333;
+      line-height: 20px;
+      padding: 7px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 280px;
+      max-width: 100%;
+      box-shadow: 0 0 5px #eee inset;
+    }
+    &.group-sex {
+      label {
+        line-height: 14px;
+      }
+      input {
+        height: 14px;
+        box-shadow: none;
+        line-height: 14px;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        width: auto;
+      }
+      span {
+        color: #666;
+      }
+      i {
+        display: inline-block;
+        width: 10px;
+        height: 100%;
+      }
+    }
+    &.group-telnum {
+      position: relative;
+      span {
+        position: absolute;
+        line-height: 36px;
+        color: #377bef;
+        font-size: 14px;
+        left: 300px;
+        top: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .agree {
+    display: block;
+    padding-left: 95px;
+    color: #333;
+    font-size: 14px;
+    input {
+      margin-right: 5px;
+    }
+    a {
+      color: #377bef;
+      display: inline-block;
+    }
+  }
+
+  button {
+    margin-left: 98px;
+    width: 280px;
+    background: #377bef;
+    line-height: 36px;
+    height: 36px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 16px;
+  }
+  .error {
+    margin-left: 98px;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 16px 5px 16px 5px;
+    color: red;
+  }
+  .group-certificate {
+    margin-bottom: 0;
+  }
+}

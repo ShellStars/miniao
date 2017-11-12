@@ -1,0 +1,133 @@
+@import "./components/reset.scss";
+@import "./components/header.scss";
+@import "./components/footer.scss";
+@import "./components/login.scss";
+
+body {
+  min-width: 1000px;
+}
+.clearfix {
+  overflow: hidden;
+}
+.carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.carousel-inner {
+  position: relative;
+  width: 2000em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    float: left;
+  }
+}
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(0, 0, 0, .5);
+  color: rgba(255, 255, 255, .6);
+  line-height: 40px;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(0, 0, 0, .65);
+}
+.carousel-control-prev {
+  left: 50px;
+}
+.carousel-control-next {
+  right: 50px;
+}
+.carousel-pagination {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 30px;
+  margin: 0;
+}
+.carousel-pagination a {
+  text-decoration: none;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  background: rgba(0, 0, 0, .5);
+  line-height: 12px;
+  border-radius: 12px;
+  text-indent: -9999px;
+  margin: 0 18px;
+}
+.carousel-pagination a.active {
+  background: #00a7f2;
+}
+
+
+.navbar-list {
+  width: 100%;
+  border: 1px solid #eee;
+  border-left: 0;
+  border-right: 0;
+  line-height: 44px;
+  padding-left: 10px;
+  li {
+    color: #333;
+    font-weight: 16px;
+    margin-right: 34px;
+    float: left;
+    i {
+      display: inline-block;
+      font-size: 12px;
+      color: #f24a4c;
+      font-weight: bold;
+      transform: scale(.8);
+      position: relative;
+      top: -3px;
+      right: -4px;
+    }
+  }
+}
+
+
+.article-pagination {
+  max-width: 100%;
+  width: 1190px;
+  padding: 0 10px;
+  margin: 150px auto;
+  text-align: center;
+  a {
+    cursor: pointer;
+  }
+  li {
+    display: inline-block;
+    &.pagination-control {
+      color: #373737;
+      font-size: 16px;
+      &.disabled {
+        color: #b5b5b5;
+      }
+      &.prev {
+        margin-right: 73px;
+      }
+      &.next {
+        margin-left: 73px;
+      }
+      &.pagination-list {
+        a {
+          display: inline-block;
+          margin: 0 6px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

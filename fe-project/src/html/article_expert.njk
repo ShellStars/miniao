@@ -1,0 +1,158 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}专家列表{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/expert.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="expert-navbar clearfix">
+  <a class="title" href="#">
+    <i class="iconfont icon-list-ul"></i>
+    <span>学术园地</span>
+  </a>
+  {% include "./components/navbar_list.njk" %}
+</div>
+
+<div class="filter-box">
+  <div class="filter-item clearfix" data-search="department">
+    <label>科室：</label>
+    <ul class="clearfix">
+      {{ '
+      {% if sel_department %}
+      <li class="all">全部</li>
+      {% else %}
+      <li class="all active">全部</li>
+      {% endif %}' | safe }}
+      {{ '
+        {% for d in department %}
+          {% ifequal d sel_department %}
+          <li class="active">{{ d }}</li>
+          {% else %}
+          <li>{{ d }}</li>
+          {% endifequal %}
+        {% endfor %}
+      ' | safe }}
+    </ul>
+  </div>
+  <div class="filter-item clearfix" data-search="province">
+    <label>地区：</label>
+    <ul class="clearfix">
+      {{ '
+      {% if sel_province %}
+      <li class="all">全部</li>
+      {% else %}
+      <li class="all active">全部</li>
+      {% endif %}' | safe }}
+      {{ '
+        {% for d in province %}
+          {% ifequal d sel_province %}
+          <li class="active">{{ d }}</li>
+          {% else %}
+          <li>{{ d }}</li>
+          {% endifequal %}
+        {% endfor %}
+      ' | safe }}
+    </ul>
+  </div>
+</div>
+
+<ul class="expert-list clearfix">
+  {{ '
+    {% for i in objects %}
+    <li>
+      <a href="/{{ tmpurl }}/zhuanjia/{{ i.id }}" class="expert-inner">
+        <img src="{{ i.smallpic.url }}" alt="avatar">
+        <h2>
+          <span>{{ i.name }}</span>
+          <span>{{ i.title }}</span>
+        </h2>
+        <p>{{ i.province }}</p>
+        <p>{{ i.hospital }}</p>
+      </a>
+    </li>
+    {% endfor %}
+  ' | safe }}
+</ul>
+
+<ul class="article-pagination clearfix">
+  {{ '\
+    {% if objects.has_previous %}
+    <li class="pagination-control prev"><a data-href="{{ objects.previous_page_number }}">&larr;上一页</a></li>
+    {% else %}
+    <li class="pagination-control prev disabled">&larr;上一页</li>
+    {% endif %}
+
+    <li class="pagination-list">
+    {% for i in page_range %}
+      {% ifequal i page_range.number %}
+      <span>{{ i }}</span>
+      {% else %}
+      <a data-href="{{ i }}" title="第{{ i }}页">{{ i }}</a>
+      {% endifequal %}
+    {% endfor %}
+    </li>
+
+    {% if objects.has_next %}
+    <li class="pagination-control next"><a data-href="{{ objects.next_page_number }}">下一页&rarr;</a></li>
+    {% else %}
+    <li class="pagination-control next disabled">下一页&rarr;</li>
+    {% endif %}
+    ' | safe }}
+</ul>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(function () {
+    $('.article-pagination a').click(function () {
+      var p = {
+        page: getUrlParam('page'),
+        province: getUrlParam('province'),
+        department: getUrlParam('department')
+      };
+
+      p.page = $(this).attr('data-href');
+
+      for (key in p) {
+        if (!p[key]) {
+          delete p[key];
+        }
+      }
+
+      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+    });
+    $('.filter-item li').click(function () {
+      var p = {
+        page: getUrlParam('page'),
+        province: getUrlParam('province'),
+        department: getUrlParam('department')
+      };
+
+      var pp = $(this).parent().parent().attr('data-search');
+      if ($(this).hasClass('all')) {
+        if (pp) {
+          p[pp] = '';
+        }
+      } else {
+        p[pp] = $(this).text();
+      }
+
+      for (key in p) {
+        if (!p[key]) {
+          delete p[key];
+        }
+      }
+      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+    });
+  });
+
+  function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return '';
+    }
+</script>
+{% endblock %}

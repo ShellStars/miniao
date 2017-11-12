@@ -1,0 +1,189 @@
+{% set needSearchLinks = false %}
+{% set withoutFooter = true %}
+{% set isLogin = true %}
+{% extends './components/layout.njk' %}
+{% block title %}个人中心{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
+{% block content %}
+{% include "./components/profile-banner.njk" %}
+
+<div class="profile-content">
+  <div class="inner">
+    <div class="tabs">
+      <a href="" class="btn-1 active" data-identity="{{ "{{userinfo.identity}}" }}">个人</a>
+      <a href="#" class="btn-2">收藏</a>
+    </div>
+    <ul class="detail-list">
+      <li class="clearfix detail-avatar">
+        <label>用户头像：</label>
+        <div class="item">
+          <img src="{{ "{{ userinfo.headimg }}" }}" alt="AVATAR">
+        </div>
+        <div class="option btn-change-avatar">
+          修改头像
+        </div>
+      </li>
+      <li class="clearfix">
+        <label>真实姓名：</label>
+        <div class="item">{{ "{{ userinfo.username }}" }}</div>
+      </li>
+      <li class="clearfix">
+        <label>性别：</label>
+        <div class="item">
+          <span id="data-sex" data-sex="{{ "{{userinfo.sex}}" }}"></span>
+        </div>
+      </li>
+      <li class="clearfix">
+        <label>手机号：</label>
+        <div class="item">{{ "{{ userinfo.telnum }}" }}</div>
+        <div class="option btn-change-phone">
+          修改手机号
+        </div>
+      </li>
+      <li class="clearfix detail-address">
+        <label>所在医院：</label>
+        <div class="item">{{ "{{ userinfo.hospital }}" }}</div>
+      </li>
+      <li class="clearfix item-should-hide">
+        <label>所在科室：</label>
+        <div class="item">{{ "{{ userinfo.department }}" }}</div>
+      </li>
+      <li class="clearfix item-should-hide">
+        <label>医生职称：</label>
+        <div class="item">{{ "{{ userinfo.title }}" }}</div>
+      </li>
+      <li class="clearfix item-should-hide">
+        <label>执业证：</label>
+        <div class="item">
+          <img src="{{ "{{ userinfo.certificate }}" }}" alt="执业证">
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal-change-phone">
+  <div class="mask"></div>
+  <div class="inner">
+    <form action="/userdata/modifytelnum/" method="post">
+      <input class="ipt-oldnum" type="text" name="oldnum" placeholder="输入原手机号" required>
+      <input class="ipt-newnum" type="text" name="newnum" placeholder="输入新手机号" required>
+      <div class="send-yzm">
+        发送验证码
+      </div>
+      <input class="ipt-checknum" type="text" name="checknum" placeholder="输入验证码" required>
+      <div class="error"></div>
+      <button type="submit">提交</button>
+    </form>
+    <div class="btn-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>
+
+<form
+  class="form-change-avatar"
+  action="/userdata/modify/"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input type="file" name="headimg" id="headimg">
+  <button type="submit" name="button"></button>
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  $(function () {
+    $('.btn-change-avatar').click(function () {
+      $('.form-change-avatar input').click();
+    });
+    $('.form-change-avatar input').change(function () {
+      $('.form-change-avatar button').click();
+    });
+
+
+    var identity = $(".tabs .btn-1").attr("data-identity");
+    if (identity == 0) {
+      $(".tabs .btn-1").text('医生');
+    } else if (identity == 1) {
+      $(".tabs .btn-1").text('护士');
+    } else if (identity == 2) {
+      $(".tabs .btn-1").text('学生');
+
+      $('.item-should-hide').hide();
+    }
+
+    var sex = $("#data-sex").attr("data-sex");
+    if (sex == 0) {
+      $("#data-sex").text('女');
+    } else {
+      $("#data-sex").text('男');
+    }
+
+    $('.btn-change-phone').click(function () {
+      $('.modal-change-phone').show();
+    });
+    var sendFlag = false;
+    $('.send-yzm').click(function () {
+      if (sendFlag) {
+        return false;
+      }
+      var that = this;
+      var telnumValue = $('.ipt-newnum').val();
+      $.get('/userdata/send_num?telnum=' + telnumValue, function (res) {
+        if (res.info == 'success') {
+          $(that).text('已发送验证码');
+          sendFlag = true;
+        } else {
+          alert(res.info);
+        }
+      });
+    });
+    $('.btn-close').click(function () {
+      $('.modal-change-phone').hide();
+    });
+    $('.modal-change-phone button').click(function (e) {
+      e.preventDefault();
+      $('.modal-change-phone .error').text('');
+
+      var oldnum = $('.ipt-oldnum').val();
+      var newnum = $('.ipt-newnum').val();
+      var checknum = $('.ipt-checknum').val();
+
+      if (!oldnum) {
+        $('.modal-change-phone .error').text('请输入原手机号');
+        return false;
+      }
+      if (!newnum) {
+        $('.modal-change-phone .error').text('请输入新手机号');
+        return false;
+      }
+      if (!checknum) {
+        $('.modal-change-phone .error').text('请输入验证码');
+        return false;
+      }
+
+      $.ajax({
+        url: '/userdata/modifytelnum/',
+        type : "POST",
+        data: $('.modal-change-phone form').serialize(),
+        success: function (res) {
+          if (res.info == 'success') {
+            alert('修改成功');
+            window.location.reload();
+            return false;
+          }
+          $('.modal-change-phone .error').text(res.info);
+        },
+        error: function () {
+          $('.modal-change-phone .error').text('系统错误');
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <title>专家详情</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_42tn1s2nuwx3l3di.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/expert.css">
@@ -36,7 +36,113 @@
 </header>
 
 
+<div class="expert-navbar expert-navbar-detail clearfix">
+  <a class="title" href="#">
+    <i class="iconfont icon-list-ul"></i>
+    <span>学术园地</span>
+  </a>
+  <ul class="navbar-list clearfix">
+  <li>
+    <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/association"><span>学会</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/video"><span>视频</span></a>
+  </li>
+  <li>
+    <a href="/subject"><span>学科</span></a>
+  </li>
+  <li>
+    <a href="/meetting"><span>会议</span></a>
+  </li>
+  <li>
+    <a href="/magazine"><span>期刊</span></a>
+  </li>
+  <li>
+    <a href="/nursing"><span>护理园地</span></a>
+  </li>
+  <li>
+    <a href="/sruco"><span>SRUCO</span></a>
+  </li>
+  <li>
+    <a href="/guide"><span>指南</span></a>
+  </li>
+  <li>
+    <a href="/universal"><span>科普园地</span></a>
+  </li>
+  <li>
+    <a href="/recommend"><span>药械推荐</span></a>
+  </li>
+</ul>
 
+</div>
+
+<div class="expert-detail-banner" style="background-image: url('{{ article.midpic.url }}')">
+  <div class="mask"></div>
+  <div class="inner">
+    <div class="avatar">
+      <img src="{{ article.smallpic.url }}" alt="头像">
+    </div>
+    <div class="detail">
+      <h2 class="name">{{ article.name }}</h2>
+      <p class="intro">{{ article.introduce }}</p>
+    </div>
+    <div class="zan">
+      <i class="iconfont icon-zan"></i>
+      <div class="i">
+        <span>{{article.zan}}</span>个人赞
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="expert-detail-content">
+  <div class="inner">
+    <div class="box">
+      <h2>个人介绍</h2>
+      <div class="person">
+        <div class="avatar">
+          <img src="{{ article.smallpic.url }}" alt="头像">
+        </div>
+        <div class="detail">
+          <h3 class="name">{{ article.name }}</h3>
+          <div class="department">{{ article.department }}</div>
+        </div>
+      </div>
+      <p>{{ article.introduce }}</p>
+    </div>
+    <div class="box">
+      <h2>技术特长</h2>
+      <p>{{ article.specialty }}</p>
+    </div>
+    <div class="box">
+      <h2>编后语</h2>
+      <p>{{ article.postscript }}</p>
+    </div>
+    <div class="box">
+      <h2>联系方式</h2>
+      <div class="contact">
+        <div class="img">
+          <img src="{{ article.weixinpic.url }}" alt="微信二维码">
+          <div>
+            微信二维码
+          </div>
+        </div>
+        <div class="img">
+          <img src="{{ article.weibopic.url }}" alt="微博二维码">
+          <div>
+            微博二维码
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <footer class="footer-wrap">
@@ -168,6 +274,23 @@
 <script src='/static/js/jquery.jcarousel.min.js'></script>
 <script src='/static/js/index.js'></script>
 
+<script type="text/javascript">
+$(function () {
+  $('.zan i').click(function () {
+    $.ajax({
+      url: "/expert/zan/",
+      data: {
+        url: window.location.pathname
+      },
+      success: function (ret) {
+        if (ret.info === "success") {
+          $('.zan .i span').text((+$('.zan .i span').text()) + 1);
+        }
+      },
+    });
+  });
+});
+</script>
 
 
 </body>

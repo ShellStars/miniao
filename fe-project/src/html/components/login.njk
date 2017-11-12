@@ -1,0 +1,19 @@
+<div class="modal-login">
+  <div class="mask"></div>
+  <div class="inner" style="background-image: url('/static/images/modal_logo_bg.png')">
+    <form action="/userdata/login/" method="post">
+      <img src="/static/images/logo.png" alt="LOGO">
+      <input class="ipt-telnum" type="text" name="telnum" placeholder="输入手机号" required>
+      <input class="ipt-password" type="password" name="password" placeholder="输入密码" required>
+      <div class="error"></div>
+      <button type="submit">登录</button>
+      <div class="login-links">
+        <a href="/userdata/register/">立即注册</a>
+        <a href="/userdata/sendpwdnum/">忘记密码</a>
+      </div>
+    </form>
+    <div class="login-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>

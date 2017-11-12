@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <title>专家列表</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_42tn1s2nuwx3l3di.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/expert.css">
@@ -37,15 +37,61 @@
 
 
 
+<div class="expert-navbar clearfix">
+  <a class="title" href="#">
+    <i class="iconfont icon-list-ul"></i>
+    <span>学术园地</span>
+  </a>
+  <ul class="navbar-list clearfix">
+  <li>
+    <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/association"><span>学会</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/video"><span>视频</span></a>
+  </li>
+  <li>
+    <a href="/subject"><span>学科</span></a>
+  </li>
+  <li>
+    <a href="/meetting"><span>会议</span></a>
+  </li>
+  <li>
+    <a href="/magazine"><span>期刊</span></a>
+  </li>
+  <li>
+    <a href="/nursing"><span>护理园地</span></a>
+  </li>
+  <li>
+    <a href="/sruco"><span>SRUCO</span></a>
+  </li>
+  <li>
+    <a href="/guide"><span>指南</span></a>
+  </li>
+  <li>
+    <a href="/universal"><span>科普园地</span></a>
+  </li>
+  <li>
+    <a href="/recommend"><span>药械推荐</span></a>
+  </li>
+</ul>
+
+</div>
+
 <div class="filter-box">
   <div class="filter-item clearfix" data-search="department">
     <label>科室：</label>
     <ul class="clearfix">
       
       {% if sel_department %}
-      <li class="">全部</li>
+      <li class="all">全部</li>
       {% else %}
-      <li class="active">全部</li>
+      <li class="all active">全部</li>
       {% endif %}
       
         {% for d in department %}
@@ -63,9 +109,9 @@
     <ul class="clearfix">
       
       {% if sel_province %}
-      <li class="">全部</li>
+      <li class="all">全部</li>
       {% else %}
-      <li class="active">全部</li>
+      <li class="all active">全部</li>
       {% endif %}
       
         {% for d in province %}
@@ -84,8 +130,8 @@
   
     {% for i in objects %}
     <li>
-      <a href="/{{ tmpurl }}/zhuangjia/{{ i.id }}" class="expert-inner">
-        <img src="{{ i.smallpic }}" alt="avatar">
+      <a href="/{{ tmpurl }}/zhuanjia/{{ i.id }}" class="expert-inner">
+        <img src="{{ i.smallpic.url }}" alt="avatar">
         <h2>
           <span>{{ i.name }}</span>
           <span>{{ i.title }}</span>
@@ -272,7 +318,7 @@
         }
       }
 
-      window.location.href = window.location.origin + window.location.pathname + '?' + $.param(p);
+      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
     });
     $('.filter-item li').click(function () {
       var p = {
@@ -295,8 +341,7 @@
           delete p[key];
         }
       }
-
-      window.location.href = window.location.origin + window.location.pathname + '?' + $.param(p);
+      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
     });
   });
 

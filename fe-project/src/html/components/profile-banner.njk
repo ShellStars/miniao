@@ -1,0 +1,19 @@
+<div class="profile-banner" style="background-image: url('/static/images/connection_banner.png');">
+  <div class="inner clearfix">
+    <div class="box-profile clearfix">
+      <div class="avatar">
+        <img src="{{ "{{ userinfo.headimg }}" }}" alt="AVATAR">
+      </div>
+      <div class="detail">
+        <div class="name">{{ "{{ userinfo.username }}" }}</div>
+        <div class="title">
+          <div class="main">{{ "{{ userinfo.hospital }}" }} {{ "{{ userinfo.title }}" }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="box-integral">
+      <i class="iconfont icon-jifen"></i>
+      <span>{{ "{{ userinfo.integralnum }}" }}积分</span>
+    </div>
+  </div>
+</div>

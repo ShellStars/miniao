@@ -1,0 +1,110 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}{{ "{{ article.title }}" | safe }}{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/article.css">
+{% endblock %}
+
+{% block content %}
+<div class="article-detail-navbar">
+  <div class="article-detail-navbar-inner">
+    {% include "./components/navbar_list.njk" %}
+  </div>
+</div>
+
+<div class="article-detail-crumbs">
+  <a href="/">首页</a>
+  <span>></span>
+  <a href="/{{ '{{ belong.slug }}' | safe }}">{{ '{{ belong.name }}' | safe }}</a>
+  <span>></span>
+  <strong class="ad-title">
+    {{ '{{ article.title }}' | safe }}
+  </strong>
+</div>
+
+<div class="article-detail-container">
+  {{ '
+  {% autoescape off %}
+  <h1>{{ article.title }}</h1>
+  <div class="meta">
+    <strong>{{ article.tag }}</strong>
+    <time>{{ article.pub_date|date:"Y-m-d" }}</time>
+    <span>阅读：{{ article.browser }}</span>
+  </div>
+
+  <div class="content">{{ article.content }}</div>
+  {% endautoescape %}
+  {{collect}}
+  {{avgnum}}
+  {{scorenum}}
+  ' | safe }}
+
+  <div class="pages clearfix">
+    <div class="page-left">
+      <a href="{{ '/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}'}}">
+        <i class="iconfont icon-l"></i>
+        <div>
+          <span>上一篇</span>
+          <h6>{{ '{{ pre_article.title }}' }}</h6>
+        </div>
+      </a>
+    </div>
+    <div class="page-right">
+      <a href="{{ '/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}' }}">
+        <div>
+          <span>下一篇</span>
+          <h6>{{ '{{ next_article.title }}' }}</h6>
+        </div>
+        <i class="iconfont icon-r"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="relation-box">
+    <div class="title">
+      <h2><span>猜您喜欢</span></h2>
+    </div>
+    <ul class="clearfix">
+      {{ '
+        {% for i in relate %}
+        <li>
+          <div class="inner">
+            <img src="{{ i.picurl }}" alt="1">
+            <h3>{{ i.title }}</h3>
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            {% autoescape off %}
+            <div class="p" style="display: none;">
+              <p>{{ i.content }}</p>
+            </div>
+            {% endautoescape %}
+            <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+          </div>
+        </li>
+        {% endfor %}
+      ' | safe }}
+    </ul>
+  </div>
+
+  <div class="comment" id="SOHUCS"></div>
+
+  <script src="//changyan.sohu.com/upload/changyan.js" ></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+    appid: 'cytgwoeSU',
+    conf: 'prod_c8dac1089f2e74f05a01b6bb035c473e'
+    });
+  </script>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  $(function () {
+    var dds = $('.relation-box li');
+    for (var i = 0; i < dds.length; i++) {
+      $(dds[i]).find('.inner div').text($(dds[i]).find('.inner div').text().slice(0, 60) + '...');
+      $(dds[i]).find('.inner div').show();
+    };
+  });
+</script>
+{% endblock %}

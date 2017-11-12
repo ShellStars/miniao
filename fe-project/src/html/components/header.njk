@@ -1,0 +1,25 @@
+<header class="header-wrap">
+  <a class="logo" href="/">
+    <img src="/static/images/logo.png" alt="LOGO">
+  </a>
+  <div class="search">
+    <form>
+      <input type="text">
+      <button>
+        <i class="iconfont icon-search"></i>
+      </button>
+    </form>
+    {% if needSearchLinks == true %}
+    <ul>
+      <li><a href="/">泌尿肿瘤</a></li>
+      <li><a href="/">尿石症</a></li>
+    </ul>
+    {% endif %}
+  </div>
+  <div class="profile">
+    <button class="btn-login" id="btn_login">请登录</button>
+    <button>
+      <a href="/userdata/register/">免费注册</a>
+    </button>
+  </div>
+</header>

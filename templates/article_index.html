@@ -12,7 +12,7 @@
   文章专区
   {% endif %}
 </title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_42tn1s2nuwx3l3di.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/article.css">
@@ -96,8 +96,8 @@
 
   <ul class="article-pagination clearfix">
     
-      {% if object.has_previous %}
-      <li class="pagination-control prev"><a href="?page={{ object.previous_page_number }}">&larr;上一页</a></li>
+      {% if objects.has_previous %}
+      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
       {% else %}
       <li class="pagination-control prev disabled">&larr;上一页</li>
       {% endif %}
@@ -112,8 +112,8 @@
       {% endfor %}
       </li>
 
-      {% if object.has_next %}
-      <li class="pagination-control next"><a href="?page={{ object.next_page_number }}">下一页&rarr;</a></li>
+      {% if objects.has_next %}
+      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
       {% else %}
       <li class="pagination-control next disabled">下一页&rarr;</li>
       {% endif %}

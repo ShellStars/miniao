@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>123</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_42tn1s2nuwx3l3di.css">
+  <title>{{ article.title }}</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/article.css">
@@ -43,34 +43,37 @@
     <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
   </li>
   <li>
-    <a href="#"><span>学会</span><i class="iconfont icon-add"></i></a>
+    <a href="/association"><span>学会</span><i class="iconfont icon-add"></i></a>
   </li>
   <li>
     <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
   </li>
   <li>
-    <a href="#"><span>学科</span></a>
+    <a href="/video"><span>视频</span></a>
   </li>
   <li>
-    <a href="#"><span>会议</span></a>
+    <a href="/subject"><span>学科</span></a>
   </li>
   <li>
-    <a href="#"><span>期刊</span></a>
+    <a href="/meetting"><span>会议</span></a>
   </li>
   <li>
-    <a href="#"><span>护理园地</span></a>
+    <a href="/magazine"><span>期刊</span></a>
   </li>
   <li>
-    <a href="#"><span>SRUCO</span></a>
+    <a href="/nursing"><span>护理园地</span></a>
   </li>
   <li>
-    <a href="#"><span>指南</span></a>
+    <a href="/sruco"><span>SRUCO</span></a>
   </li>
   <li>
-    <a href="#"><span>科普园地</span></a>
+    <a href="/guide"><span>指南</span></a>
   </li>
   <li>
-    <a href="#"><span>药械推荐</span></a>
+    <a href="/universal"><span>科普园地</span></a>
+  </li>
+  <li>
+    <a href="/recommend"><span>药械推荐</span></a>
   </li>
 </ul>
 
@@ -138,7 +141,9 @@
             <h3>{{ i.title }}</h3>
             <time>{{ i.pub_date|date:"Y-m-d" }}</time>
             {% autoescape off %}
-            <p>{{ i.content | slice:"20" }}</p>
+            <div class="p" style="display: none;">
+              <p>{{ i.content }}</p>
+            </div>
             {% endautoescape %}
             <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
           </div>
@@ -289,6 +294,15 @@
 <script src='/static/js/jquery.jcarousel.min.js'></script>
 <script src='/static/js/index.js'></script>
 
+<script type="text/javascript">
+  $(function () {
+    var dds = $('.relation-box li');
+    for (var i = 0; i < dds.length; i++) {
+      $(dds[i]).find('.inner div').text($(dds[i]).find('.inner div').text().slice(0, 60) + '...');
+      $(dds[i]).find('.inner div').show();
+    };
+  });
+</script>
 
 
 </body>

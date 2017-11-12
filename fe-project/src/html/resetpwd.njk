@@ -1,0 +1,70 @@
+{% set needSearchLinks = true %}
+{% extends './components/layout.njk' %}
+{% block title %}重置密码{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="/static/css/register.css">
+{% endblock %}
+
+{% block content %}
+<div class="register-wrap">
+
+  <div class="register-navbar clearfix">
+    <a class="title" href="#">
+      <i class="iconfont icon-list-ul"></i>
+      <span>学术园地</span>
+    </a>
+    {% include "./components/navbar_list.njk" %}
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <form class="register-form" role="form" method="post" enctype="multipart/form-data" action="/userdata/resetpwd/">
+    <div class="group clearfix group-password">
+      <label>设置密码</label>
+      <input type="password" name="password" required>
+    </div>
+    <div class="group clearfix group-password-again">
+      <label>确认密码</label>
+      <input type="password" required>
+    </div>
+    <div class="error">{{ "{{ info }}" }}</div>
+    <button type="submit">提交</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+  $('.register-form button').click(function (e) {
+    e.preventDefault();
+    $('.register-form .error').text('');
+    var passwordValue = $('.group-password input').val();
+    var passwordAgainValue = $('.group-password-again input').val();
+    if (passwordValue !== passwordAgainValue) {
+      $('.register-form .error').text('两次密码不一致');
+      return false;
+    }
+    $.ajax({
+      url: '/userdata/resetpwd/',
+      type : "POST",
+      data: $('.register-form').serialize(),
+      success: function (res) {
+        if (res.info == 'success') {
+          alert('重设密码成功, 请登录');
+          $('.modal-login').show(300);
+          return false;
+        }
+        $('.register-form .error').text(res.info);
+      },
+      error: function () {
+        $('.register-form .error').text(系统错误);
+      }
+    });
+    return false;
+  });
+});
+</script>
+{% endblock %}

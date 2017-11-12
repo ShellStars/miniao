@@ -1,0 +1,82 @@
+.modal-login {
+  display: none;
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 99;
+  }
+  .inner {
+    position: fixed;
+    width: 520px;
+    height: 460px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    margin-top: -230px;
+    margin-left: -260px;
+    padding: 0 81px;
+    border-radius: 8px;
+    z-index: 100;
+    text-align: center;
+    overflow: hidden;
+    background-position: bottom center;
+    background-size: contain;
+  }
+  img {
+    width: 118px;
+    margin: 29px auto;
+  }
+  input,
+  button {
+    display: block;
+    width: 100%;
+    height: 52px;
+    margin-bottom: 20px;
+    border-radius: 52px;
+    border: 0;
+    font-size: 16px;
+    box-shadow: none;
+    outline: none;
+  }
+  input {
+    border: 1px solid #c4c4c4;
+    line-height: 20px;
+    padding: 15px 30px;
+    background: #f7f7f7;
+  }
+  button {
+    line-height: 52px;
+    background: #3d72ee;
+    color: #fff;
+  }
+  .login-links {
+    margin-top: 12px;
+    line-height: 30px;
+    font-size: 16px;
+    padding: 0 20px;
+    color: #666;
+    text-align: left;
+    a {
+      display: inline-block;
+      margin-right: 2em;
+    }
+  }
+  .login-close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    color: #999;
+    cursor: pointer;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+}

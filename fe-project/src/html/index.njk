@@ -1,0 +1,497 @@
+{% set needSearchLinks = true %}
+{% extends './components/layout.njk' %}
+{% block title %}首页{% endblock %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar-wrap clearfix">
+  <div class="box-left">
+    <h2 class="title">
+      <i class="iconfont icon-list-ul"></i>
+      <span>学术园地</span>
+    </h2>
+    <ul class="section-list">
+      <li class="section-item">
+        <h3 class="section-title">
+          <i class="iconfont icon-article"></i>
+          <span>文章</span>
+        </h3>
+        <ul class="clearfix">
+          <li>
+            <a href="#">泌尿系肿瘤</a>
+          </li>
+          <li>
+            <a href="#">泌尿系结石</a>
+          </li>
+          <li>
+            <a href="#">尿控与创建</a>
+          </li>
+          <li>
+            <a href="#">前列腺疾病</a>
+          </li>
+        </ul>
+      </li>
+      <li class="section-item">
+        <h3 class="section-title">
+          <i class="iconfont icon-video-camera"></i>
+          <span>视频</span>
+        </h3>
+        <ul class="clearfix">
+          <li>
+            <a href="#">讲座</a>
+          </li>
+          <li>
+            <a href="#">每周一课</a>
+          </li>
+          <li>
+            <a href="#">手术</a>
+          </li>
+          <li>
+            <a href="#">每周一手术</a>
+          </li>
+          <li>
+            <a href="#">视频访谈</a>
+          </li>
+          <li>
+            <a href="#">视频专辑</a>
+          </li>
+          <li>
+            <a href="#">网络课堂</a>
+          </li>
+          <li>
+            <a href="#">本科生课堂</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="box-right">
+    {% include "./components/navbar_list.njk" %}
+    <div class="carousel-out">
+      <div class="carousel-wrap">
+        <ul class="carousel-inner clearfix" data-jcarousel="true">
+          <li>
+            <img src="/static/images/slider_1.png" alt="slider">
+          </li>
+        </ul>
+        <span class="carousel-control-prev" data-jcarouselcontrol="true">
+          <i class="iconfont icon-left"></i>
+        </span>
+        <span class="carousel-control-next" data-jcarouselcontrol="true">
+          <i class="iconfont icon-right"></i>
+        </span>
+        <p class="carousel-pagination" data-jcarouselpagination="true"></p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="section-intro">
+  <div class="section-header">
+    <div class="section-header-sub">Introduction</div>
+    <h2 class="section-header-title">
+      <i class="iconfont icon-add"></i>
+      <span>支持单位简介</span>
+      <i class="iconfont icon-add"></i>
+    </h2>
+    <p class="section-header-intro">
+    </p>
+  </div>
+
+  <div class="inner">
+    <ul class="list clearfix">
+      <li>
+        <img src="/static/images/home_intro_1.png" alt="1">
+        <p>大家泌尿网成立于2017年8月23日，由全国知名泌外专家发起，致力于打造泌尿外科医生大家庭，给老百姓提供准确可靠的医学科普信息。</p>
+      </li>
+      <li>
+        <img src="/static/images/home_intro_2.png" alt="2">
+        <p>中国医疗保健国际交流促进会泌尿健康促进分会成立于2017年8月26日，西安交大一附院泌尿外科贺大林教授为分会首届主任委员。分会总工作方针为践行“总会精神，配合华佗工程，面向基层医生，惠及普通百姓”。</p>
+      </li>
+      <li>
+        <img src="/static/images/home_intro_3.png" alt="3">
+        <p>中国研究型医院学会泌尿外科分会成立于2016年3月27日。分会致力于我国泌尿外科的学科建设、循证医学、研究思维、临床转化方面的创新、交流和发展。</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-vision-wrap" style="background-image: url('/static/images/home_vision_bg.png')">
+  <div class="section-vision">
+    <div class="section-header">
+      <div class="section-header-sub">Introduction</div>
+      <h2 class="section-header-title">
+        <i class="iconfont icon-add"></i>
+        <span>我们的愿景</span>
+        <i class="iconfont icon-add"></i>
+      </h2>
+      <p class="section-header-intro">
+      </p>
+    </div>
+
+    <div class="inner">
+      <img src="/static/images/home_vision.png" alt="vision">
+    </div>
+  </div>
+</div>
+
+<div class="section-professor">
+  <div class="section-header">
+    <div class="section-header-sub">Introduction</div>
+    <h2 class="section-header-title">
+      <i class="iconfont icon-add"></i>
+      <span>专家介绍</span>
+      <i class="iconfont icon-add"></i>
+    </h2>
+    <p class="section-header-intro">
+      <br>
+    </p>
+  </div>
+
+  <div class="inner">
+    <div class="carousel-wrap">
+      <ul class="carousel-inner clearfix" data-jcarousel="true">
+        <li class="clearfix">
+          <div class="item">
+            <img src="/static/images/home_p_1.png" alt="p">
+            <h4>贺大林  主任医师</h4>
+            <h5>西安交大一附院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_2.png" alt="p">
+            <h4>李建兴  主任医师</h4>
+            <h5>北京清华长庚医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_3.png" alt="p">
+            <h4>魏金星  主任医师</h4>
+            <h5>郑大一附院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_4.png" alt="p">
+            <h4>金讯波  主任医师</h4>
+            <h5>山东省立医院泌尿微创中心</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_5.png" alt="p">
+            <h4>吴小候  主任医师</h4>
+            <h5>重医一附院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_6.png" alt="p">
+            <h4>程跃  主任医师</h4>
+            <h5>宁波第一医院泌尿外科</h5>
+          </div>
+        </li>
+        <li class="clearfix">
+          <div class="item">
+            <img src="/static/images/home_p_7.png" alt="p">
+            <h4>魏强  主任医师</h4>
+            <h5>川大华西医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_8.png" alt="p">
+            <h4>黄翼然  主任医师</h4>
+            <h5>上海仁济医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_9.png" alt="p">
+            <h4>王健  主任医师</h4>
+            <h5>青大附属医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_10.png" alt="p">
+            <h4>徐勇  主任医师</h4>
+            <h5>天津医大第二医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_11.png" alt="p">
+            <h4>廖利民  主任医师</h4>
+            <h5>北京博爱医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_12.png" alt="p">
+            <h4>齐琳  主任医师</h4>
+            <h5>中南大学湘雅医院泌尿外科</h5>
+          </div>
+        </li>
+        <li class="clearfix">
+          <div class="item">
+            <img src="/static/images/home_p_13.png" alt="p">
+            <h4>张炜   主任医师</h4>
+            <h5>江苏省人民医院泌尿外科</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_14.png" alt="p">
+            <h4>王玉杰  主任医师</h4>
+            <h5>新医大一附院泌尿中心</h5>
+          </div>
+          <div class="item">
+            <img src="/static/images/home_p_15.png" alt="p">
+            <h4>王行环  主任医师</h4>
+            <h5>武大中南医院泌尿外科</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <span class="carousel-control-prev" data-jcarouselcontrol="true">
+      <i class="iconfont icon-left"></i>
+    </span>
+    <span class="carousel-control-next" data-jcarouselcontrol="true">
+      <i class="iconfont icon-right"></i>
+    </span>
+    <p class="carousel-pagination" data-jcarouselpagination="true"></p>
+    <a href="#" class="link">查看全部专家</a>
+  </div>
+</div>
+
+<div class="section-mix clearfix">
+  <div class="box-meeting">
+    <div class="mix-title">
+      <span>会议预告</span>
+      <a href="#">更多>></a>
+    </div>
+    <ul>
+      <li>
+        <a href="#">
+          <h3>2016年12月 上海<br>青年医师论坛</h3>
+          <p>青年医师论坛在上海举办。</p>
+          <h4>会议时间</h4>
+          <time>2016年12月2-3日</time>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <h3>2017年4月 江苏南京<br>护理专题会议</h3>
+          <p>由中华医学会、中华医学会泌尿外科学分会(CUA)主办，CUA 护理学组、南京医科大学第一附属医院承办的“CUA2017 全国泌尿外科护理专题会议</p>
+          <h4>会议时间</h4>
+          <time>2017年4月14～15日</time>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <h3>2017年4月 重庆<br>泌尿专题会议</h3>
+          <p>由中华医学会、中华医学会泌尿外科分会（CUA）主办，CUA尿控学组承办</p>
+          <h4>会议时间</h4>
+          <time>2017年4月21～23日</time>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="box-consult">
+    <div class="mix-title">
+      <span>最新资讯</span>
+      <a href="#">更多>></a>
+    </div>
+    <ul>
+      <li class="clearfix">
+        <img src="/static/images/home_consult_1.png" alt="article">
+        <div class="detail">
+          <h3>2017年执医考试分数线，临床执业360分，临床执业助理180分！</h3>
+          <div class="meta clearfix">
+            <time>2017.10.31</time>
+          </div>
+          <p>
+            国家卫计委网站发布公文《国家卫生计生委医师资格考试委员会关于 2017 年医师资格考试医学综合笔试合格分数线的通知》......
+          </p>
+          <a href="#">查看详情</a>
+        </div>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_consult_2.png" alt="consult">
+        <div class="detail">
+          <h3>住院患者尿液检查应该怎么查？</h3>
+          <div class="meta clearfix">
+            <time>2017.10.26</time>
+          </div>
+          <p>
+            近期，美国的 Horstman 教授等在 Clinical Infectious Diseases 杂志上发表的一篇研究的结果表明，住院患者尿液检测......
+          </p>
+          <a href="#">查看详情</a>
+        </div>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_consult_3.png" alt="consult">
+        <div class="detail">
+          <h3>治疗尿路感染，只看药敏结果选药就错了！</h3>
+          <div class="meta clearfix">
+            <time>2017.10.17</time>
+          </div>
+          <p>
+            泌尿系感染是临床常见的感染性疾病，抗菌药物选择的正确与否，直接关系着治疗的成败。
+          </p>
+          <a href="#">查看详情</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="box-article">
+    <div class="mix-title">
+      <span>文章</span>
+      <a href="#">更多>></a>
+    </div>
+    <ul>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_1.jpg" alt="article">
+        <a class="detail">
+          <h3>CUA 首部关于膀胱过度活动症指南</h3>
+          <time>2017.10.24</time>
+        </a>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_2.jpg" alt="article">
+        <a class="detail">
+          <h3>JUA：男性下尿路症状和良性前列腺增生的 18 个问题</h3>
+          <time>2017.10.09</time>
+        </a>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_3.jpg" alt="article">
+        <a class="detail">
+          <h3>最新发布：2017 版 CSCO 肾癌诊疗指南更新与解读</h3>
+          <time>2017.09.30</time>
+        </a>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_4.jpg" alt="article">
+        <a class="detail">
+          <h3>CUA 指南：囊性肾脏病变的管理</h3>
+          <time>2017.09.25</time>
+        </a>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_5.jpg" alt="article">
+        <a class="detail">
+          <h3>EAU 前列腺癌诊疗指南九个更新要点</h3>
+          <time>2017.09.13</time>
+        </a>
+      </li>
+      <li class="clearfix">
+        <img src="/static/images/home_acticle_6.jpg" alt="article">
+        <a class="detail">
+          <h3>JUA 指南：泌尿外科围术期感染的预防</h3>
+          <time>2017.09.07</time>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+  var navbarJcarousel = $('.navbar-wrap .carousel-wrap');
+  navbarJcarousel.on('jcarousel:reload jcarousel:create', function () {
+    navbarJcarousel.jcarousel('items').width(navbarJcarousel.innerWidth());
+  }).jcarousel({
+    wrap: 'circular',
+    transitions: Modernizr.csstransitions ? {
+      transforms: Modernizr.csstransforms,
+      transforms3d: Modernizr.csstransforms3d,
+      easing: 'ease'
+    } : false
+  });
+
+  $('.navbar-wrap .carousel-control-prev')
+    .on('jcarouselcontrol:active', function() {
+        $(this).removeClass('inactive');
+    })
+    .on('jcarouselcontrol:inactive', function() {
+        $(this).addClass('inactive');
+    })
+    .on('click', function(e) {
+        e.preventDefault();
+    })
+    .jcarouselControl({
+        target: '-=1'
+    });
+
+  $('.navbar-wrap .carousel-control-next')
+    .on('jcarouselcontrol:active', function() {
+        $(this).removeClass('inactive');
+    })
+    .on('jcarouselcontrol:inactive', function() {
+        $(this).addClass('inactive');
+    })
+    .on('click', function(e) {
+        e.preventDefault();
+    })
+    .jcarouselControl({
+        target: '+=1'
+    });
+
+  $('.navbar-wrap .carousel-pagination')
+    .on('jcarouselpagination:active', 'a', function() {
+      $(this).addClass('active');
+    })
+    .on('jcarouselpagination:inactive', 'a', function() {
+      $(this).removeClass('active');
+    })
+    .on('click', function(e) {
+      e.preventDefault();
+    })
+    .jcarouselPagination({
+      item: function(page) {
+        return '<a href="#' + page + '">' + page + '</a>';
+    }
+  });
+
+  var professorJcarousel = $('.section-professor .carousel-wrap');
+  professorJcarousel.on('jcarousel:reload jcarousel:create', function () {
+    professorJcarousel.jcarousel('items').width(professorJcarousel.innerWidth());
+  }).jcarousel({
+    wrap: 'circular',
+    transitions: Modernizr.csstransitions ? {
+      transforms: Modernizr.csstransforms,
+      transforms3d: Modernizr.csstransforms3d,
+      easing: 'ease'
+    } : false
+  });
+  $('.section-professor .carousel-control-prev')
+    .on('jcarouselcontrol:active', function() {
+        $(this).removeClass('inactive');
+    })
+    .on('jcarouselcontrol:inactive', function() {
+        $(this).addClass('inactive');
+    })
+    .on('click', function(e) {
+        e.preventDefault();
+    })
+    .jcarouselControl({
+        target: '-=1'
+    });
+  $('.section-professor .carousel-control-next')
+    .on('jcarouselcontrol:active', function() {
+        $(this).removeClass('inactive');
+    })
+    .on('jcarouselcontrol:inactive', function() {
+        $(this).addClass('inactive');
+    })
+    .on('click', function(e) {
+        e.preventDefault();
+    })
+    .jcarouselControl({
+        target: '+=1'
+    });
+  $('.section-professor .carousel-pagination')
+    .on('jcarouselpagination:active', 'a', function() {
+      $(this).addClass('active');
+    })
+    .on('jcarouselpagination:inactive', 'a', function() {
+      $(this).removeClass('active');
+    })
+    .on('click', function(e) {
+      e.preventDefault();
+    })
+    .jcarouselPagination({
+      item: function(page) {
+        return '<a href="#' + page + '">' + page + '</a>';
+    }
+  });
+});
+</script>
+{% endblock %}

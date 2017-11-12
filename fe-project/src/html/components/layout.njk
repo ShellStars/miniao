@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block head %}{% endblock %}
+  <title>{% block title %}{{ title }}{% endblock %}</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  {% block stylesheet %}{% endblock %}
+</head>
+<body>
+
+{% include "./header.njk" %}
+{% block content %}{% endblock %}
+{% if withoutFooter !== true %}
+{% include "./footer.njk" %}
+{% endif %}
+{% include "./login.njk" %}
+<script src='/static/js/modernizr.js'></script>
+<script src='/static/js/jquery.min.js'></script>
+<script src='/static/js/jquery.jcarousel.min.js'></script>
+<script src='/static/js/index.js'></script>
+{% block javascript %}{% endblock %}
+
+</body>
+</html>
