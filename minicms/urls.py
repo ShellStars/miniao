@@ -34,6 +34,12 @@ urlpatterns = [
     url(r'expert/', include('expert.urls')),
     url(r'magazine/', include('magazine.urls')),
     url(r'video/', include('video.urls')),
+    url(r'guide/', include('guide.urls')),
+    url(r'nursing/', include('nursing.urls')),
+    url(r'recommend/', include('recommend.urls')),
+    url(r'sruco/', include('sruco.urls')),
+    url(r'subject/', include('subject.urls')),
+    url(r'universal/', include('universal.urls')),
     # url(r'$', test, name='test'),
 
 

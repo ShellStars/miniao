@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render, render_to_response
-from .models import Guidearticle
+from .models import Guidearticle, Guideclass
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
@@ -13,7 +13,23 @@ import pymysql
 
 def article_detail(request, column, pk):
     url = 'http://127.0.0.1:8000' + request.path
+    tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Guidearticle.objects.filter(pk=pk, column=column, published=True)
+    classes = Guideclass.objects.all()
+    relate = Guidearticle.objects.filter(column=column, published=True)[0:2]
+    pre_article = Guidearticle.objects.filter(id__lt=pk, published=True)
+    if pre_article:
+        pre_article = pre_article.order_by('-id')[0]
+    else:
+        pre_article = Guidearticle.objects.filter(id=pk, published=True)[0]
+    next_article = Guidearticle.objects.filter(id__gt=pk, published=True)
+    if next_article:
+        next_article = next_article[0]
+    else:
+        next_article = Guidearticle.objects.filter(id=pk, published=True)[0]
+    belong = {'name': '指南速递', 'slug': 'guide'}
+    column_tmp = Guideclass.objects.filter(slug=column)[0].name
+    column1 = {'name': column_tmp, 'slug': column}
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -39,10 +55,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article.html', {'article': article[0], 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article.html', {'article': article[0]})
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
     else:
         return HttpResponseRedirect('/')
 
@@ -50,18 +66,21 @@ def article_detail(request, column, pk):
 def article(request, column):
     tmpurl = str(request.path).strip('/')
     article = Guidearticle.objects.filter(column=column, published=True)
-    if article:
-        objects, page_range = my_pagination(request, article, 2)
-        return render_to_response('article1.html', {'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect('/')
+    classes = Guideclass.objects.all()
+    belong = 'guide'
+    column1 = Guideclass.objects.filter(slug=column)[0].name
+    objects, page_range = my_pagination(request, article, 2)
+    return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
+
 
 def index(request):
-    article = Guidearticle.objects.filter(column='gonggao', published=True)[0:3]
-    if article:
-        return render(request, 'article2.html', {'article': article})
-    else:
-        return HttpResponseRedirect('/')
+    tmpurl = str(request.path).strip('/')
+    article = Guidearticle.objects.filter(published=True)
+    classes = Guideclass.objects.all()
+    belong = 'guide'
+    objects, page_range = my_pagination(request, article, 9)
+    return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': classes,  'page_range': page_range, 'tmpurl': tmpurl},
+                              context_instance=RequestContext(request))
 
 def my_pagination(request, queryset, display_amount, after_range_num=3, bevor_range_num=2):
     paginator = Paginator(queryset,display_amount)
