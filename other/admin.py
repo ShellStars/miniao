@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Standardclass, Resourcesclass, Standardarticle, Resourcearticle
+from .models import Standardclass, Standardarticle, Resourcearticle, Resourcesclass
 from django.utils.safestring import mark_safe
 
 
