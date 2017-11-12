@@ -191,14 +191,14 @@ def expertarticle(request):
     classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'}, {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '专家'
     if "province" in request.GET and "department" in request.GET:
-        sel_province = request.POST["province"]
-        sel_department = request.POST["department"]
+        sel_province = request.GET["province"]
+        sel_department = request.GET["department"]
         article = Expertarticle.objects.filter(column=column, province=sel_province, department=sel_department, published=True)
     elif "province" in request.GET:
-        sel_province = request.POST["province"]
+        sel_province = request.GET["province"]
         article = Expertarticle.objects.filter(column=column, province=sel_province, published=True)
     elif "department" in request.GET:
-        sel_department = request.POST["department"]
+        sel_department = request.GET["department"]
         article = Expertarticle.objects.filter(column=column, department=sel_department, published=True)
     else:
         article = Expertarticle.objects.filter(column=column, published=True)
