@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from DjangoUeditor.models import UEditorField
 from django.core.urlresolvers import reverse
+from bs4 import BeautifulSoup
+
 
 @python_2_unicode_compatible
 class Standardclass(models.Model):
@@ -25,8 +27,11 @@ class Standardclass(models.Model):
 
 @python_2_unicode_compatible
 class Resourcesclass(models.Model):
-    name = models.CharField('栏目名称', max_length=20)
-    slug = models.CharField('栏目网址', max_length=30, db_index=True, primary_key=True)
+    name = models.CharField('下载文件类别', max_length=20)
+    slug = models.CharField('文件类别网址', max_length=30, db_index=True, primary_key=True)
+    intro = models.TextField('类别简介', default='')
+    pic = models.ImageField('封面', upload_to="uploads/images/download/")
+    browser = models.IntegerField('访问量', default=0, editable=False)
 
     #def get_absolute_url(self):
     #    return reverse('information', args=(self.name, self.slug ))
@@ -54,7 +59,15 @@ class Standardarticle(models.Model):
     content = UEditorField('内容', height=300, width=700,
         default=u'', blank=True, imagePath="uploads/images/article/",
         toolbars='besttome', filePath='uploads/files/article/')
-
+    def fengmian(self):
+        html = self.content
+        soup = BeautifulSoup(html, "html.parser")
+        try:
+            picurl = soup.img["src"]
+        except:
+            picurl = "/media/defaultpic.jpg"
+        return picurl
+    picurl = property(fengmian)
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
     update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
     published = models.BooleanField('正式发布', default=True)
@@ -72,11 +85,12 @@ class Standardarticle(models.Model):
 
 @python_2_unicode_compatible
 class Resourcearticle(models.Model):
-    column = models.CharField('下载', default='xiazai', max_length=10, editable=False)
+    column = models.CharField('下载', default='download', max_length=10, editable=False)
     title = models.CharField('标题', max_length=40)
     source = models.CharField('来源', max_length=20)
     author = models.CharField('作者', max_length=20)
     browser = models.IntegerField('下载量', default=0, editable=False)
+    album = models.ForeignKey(Resourcesclass, verbose_name='归属类别')
     filename = models.FileField('上传文件', upload_to='uploads/files/download/')
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
     update_time = models.DateTimeField('更新时间', auto_now=True, null=True)

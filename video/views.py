@@ -84,7 +84,7 @@ def video_album_datail(request, albumname):
     album1 = {'name': albuminfo.name[0].name, 'slug': albumname}
     num = albuminfo[0].browser + 1
     albuminfo.update(browser=num)
-    video = Videoarticle.objects.filter(album=albumname)
+    video = Videoarticle.objects.filter(album=albumname, published=True)
     num = video.count()
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
     cursor = conn.cursor()
