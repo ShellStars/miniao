@@ -81,7 +81,7 @@ def video_album_datail(request, albumname):
     belong = {'name': '视频', 'slug': 'video'}
     column1 = {'name': '专辑', 'slug': 'zhuanji'}
     albuminfo = Videoalbum.objects.filter(slug=albumname)
-    album1 = {'name': albuminfo.name[0].name, 'slug': albumname}
+    album1 = {'name': albuminfo[0].name, 'slug': albumname}
     num = albuminfo[0].browser + 1
     albuminfo.update(browser=num)
     video = Videoarticle.objects.filter(album=albumname, published=True)

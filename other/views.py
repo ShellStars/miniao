@@ -98,7 +98,7 @@ def download_album_datail(request, albumname):
     belong = {'name': '其他', 'slug': 'other'}
     column1 = {'name': '下载', 'slug': 'download'}
     albuminfo = Resourcesclass.objects.filter(slug=albumname)
-    album1 = {'name': albuminfo.name[0].name, 'slug': albumname}
+    album1 = {'name': albuminfo[0].name, 'slug': albumname}
     num = albuminfo[0].browser + 1
     albuminfo.update(browser=num)
     downfile = Resourcearticle.objects.filter(album=albumname, published=True)
