@@ -127,7 +127,7 @@ def download_album(request):
     column1 = {'name': column_tmp, 'slug': 'download'}
     album = Resourcesclass.objects.all()
     albumclass = [i.slug for i in album]
-    dic = []
+    dic = {}
     for j in albumclass:
         num = Resourcearticle.objects.filter(album=j, published=True).count()
         dic[j] = num

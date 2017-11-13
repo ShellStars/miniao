@@ -110,7 +110,7 @@ def video_album(request):
     column1 = {'name': column_tmp, 'slug': 'zhuanji'}
     album = Videoalbum.objects.all()
     albumclass = [i.slug for i in album]
-    dic = []
+    dic = {}
     for j in albumclass:
         num = Videoarticle.objects.filter(album=j, published=True).count()
         dic[j] = num
