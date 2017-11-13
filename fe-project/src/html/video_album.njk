@@ -1,0 +1,77 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}专辑列表{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/video.css">
+{% endblock %}
+
+{% block content %}
+<div class="video-container">
+  <ul class="video-navbar clearfix">
+    <li class="title"><a href="/video">视频专区</a></li>
+    {{ '
+      {% for i in classes %}
+      <li>
+        {% ifequal i.name column.name %}
+        <a class="active" href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% else %}
+        <a href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% endifequal %}
+      </li>
+      {% endfor %}
+    ' | safe }}
+  </ul>
+
+  <h1 class="video-album-title">
+    <span>专辑列表</span>
+  </h1>
+
+  <ul class="album-list clearfix">
+    {{ '\
+    {% for i in album %}\
+    ' | safe }}
+    <li>
+      {{ '
+      <a href="/{{tmpurl}}/{{i.slug}}">
+      ' | safe }}
+        <img src="/media/{{ '{{ i.pic }}' }}" />
+        <div class="content">
+          <h2>{{ '{{ i.name|slice:"20" }}' | safe }}</h2>
+        </div>
+      </a>
+    </li>
+    {{ '\
+    {% endfor %}\
+    ' | safe }}
+  </ul>
+
+  <ul class="article-pagination clearfix">
+    {{ '\
+      {% if objects.has_previous %}
+      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
+      {% else %}
+      <li class="pagination-control prev disabled">&larr;上一页</li>
+      {% endif %}
+
+      <li class="pagination-list">
+      {% for i in page_range %}
+        {% ifequal i page_range.number %}
+        <span>{{ i }}</span>
+        {% else %}
+        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+        {% endifequal %}
+      {% endfor %}
+      </li>
+
+      {% if objects.has_next %}
+      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
+      {% else %}
+      <li class="pagination-control next disabled">下一页&rarr;</li>
+      {% endif %}
+      ' | safe }}
+  </ul>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

@@ -12,13 +12,20 @@
     margin-bottom: 40px;
     li {
       float: left;
-      margin-right: 34px;
+      // margin-right: 34px;
       color: #333;
       font-size: 16px;
       a {
-        &.active, &:hover {
+        display: block;
+        padding: 0 2em;
+        &.active {
+          background: #377bef;
+          // font-weight: bold;
+          color: #fff;
+        }
+        &:hover {
+          color: #333;
           font-weight: bold;
-          color: #000;
         }
       }
       &.title {
@@ -138,6 +145,126 @@
     .avgnum {
       display: inline;
       color: #377bef;
+    }
+  }
+}
+
+
+
+.video-album-title {
+  max-width: 100%;
+  width: 1170px;
+  margin: 0 auto;
+  border-bottom: 2px solid #ccc;
+  line-height: 1.4;
+  margin-top: 45px;
+  span {
+    border-bottom: 2px solid #3a7def;
+    color: #333;
+    font-size: 24px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+  }
+}
+
+.album-list {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 30px;
+  li {
+    width: 33.333%;
+    padding: 0 15px;
+    float: left;
+    margin-bottom: 50px;
+    h2 {
+      font-size: 24px;
+      color: #333333;
+      line-height: 1.2;
+      position: relative;
+      padding-left: 10px;
+      margin-top: 20px;
+      line-height: 1.4;
+      min-height: 66px;
+      &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        height: 20px;
+        width: 3px;
+        background: #387bef;
+        left: 2px;
+        top: 4px;
+      }
+    }
+  }
+}
+
+
+.albun-banner {
+  width: 100%;
+  height: 300px;
+  background: #343d55;
+  .inner {
+    max-width: 100%;
+    width: 1190px;
+    padding: 0 10px;
+    margin: 0 auto;
+  }
+  .left {
+    float: left;
+    width: 73%;
+    h1 {
+      padding-top: 77px;
+      font-size: 30px;
+      line-height: 1.4;
+      color: #fff;
+    }
+    p {
+      margin-top: 14px;
+      color: #fff;
+      line-height: 1.34;
+      font-size: 16px;
+    }
+  }
+  .right {
+    float: right;
+    background: #fff;
+    width: 242px;
+    height: 100px;
+    margin-top: 100px;
+    text-align: center;
+    border-radius: 5px;
+    div {
+      float: left;
+      width: 50%;
+      padding-top: 21px;
+      span {
+        display: block;
+        font-size: 24px;
+        color: #666666;
+        margin-bottom: 7px;
+      }
+      h3 {
+        font-size: 14px;
+        color: #999999;
+      }
+    }
+    .b-num {
+      position: relative;
+      span {
+        color: #377bef;
+      }
+      &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        width: 1px;
+        background: #eee;
+        height: 70%;
+        right: 0;
+        top: 20px;
+      }
     }
   }
 }
