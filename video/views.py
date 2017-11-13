@@ -98,7 +98,7 @@ def video_album_datail(request, albumname):
         objects, page_range = my_pagination(request, video, 2)
         return render(request, 'video_album_detail.html',
                       {'belong': belong, 'column': column1, 'album': album1, 'objects': objects, 'classes': final_list,
-                       'page_range': page_range, 'tmpurl': tmpurl, 'albuminfo': albuminfo, 'num': num})
+                       'page_range': page_range, 'tmpurl': tmpurl, 'albuminfo': albuminfo[0], 'num': num})
     else:
         return HttpResponseRedirect('/')
 
