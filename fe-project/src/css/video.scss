@@ -1,0 +1,143 @@
+.video-container {
+  .video-navbar {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1170px;
+    height: 52px;
+    line-height: 50px;
+    border: 1px solid #eee;
+    border-left: 0;
+    border-right: 0;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    li {
+      float: left;
+      margin-right: 34px;
+      color: #333;
+      font-size: 16px;
+      a {
+        &.active, &:hover {
+          font-weight: bold;
+          color: #000;
+        }
+      }
+      &.title {
+        color: #377bef;
+      }
+    }
+  }
+
+  .filter-box {
+    margin: 0 auto;
+    width: 1190px;
+    max-width: 100%;
+    padding: 0 10px;
+    .filter-item {
+      border-bottom: 1px solid #eee;
+      padding: 13px 0 0 0;
+      line-height: 28px;
+      position: relative;
+      padding-left: 92px;
+      label {
+        position: absolute;
+        left: 0;
+        top: 13px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+        color: #333333;
+        margin-right: 50px;
+        margin-bottom: 13px;
+      }
+      ul {
+        display: inline-block;
+        li {
+          margin-bottom: 13px;
+          cursor: pointer;
+          display: inline-block;
+          margin-right: 20px;
+          font-size: 14px;
+          color: #666666;
+          padding: 0 10px;
+          border-radius: 3px;
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+          &.active {
+            background: #377bef;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .video-list {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+    li {
+      float: left;
+      width: 33.333%;
+      padding: 0 15px;
+      margin-bottom: 100px;
+      img {
+        width: 100%;
+      }
+      .content {
+        h2 {
+          font-size: 24px;
+          color: #333333;
+          line-height: 1.2;
+          position: relative;
+          padding-left: 10px;
+          margin-top: 20px;
+          &:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            height: 20px;
+            width: 3px;
+            background: #387bef;
+            left: 2px;
+            top: 4px;
+          }
+        }
+        .meta {
+          color: #999999;
+          font-size: 14px;
+          margin: 15px 0;
+          time {
+            display: inline-block;
+            margin-right: .8em;
+          }
+        }
+        p {
+          font-size: 14px;
+          color: #9a9a9a;
+          line-height: 1.35;
+        }
+      }
+    }
+  }
+  .article-pagination {
+    margin-top: 40px;
+  }
+}
+
+
+.article-detail-container {
+  .meta {
+    span {
+      display: inline-block;
+      margin-right: 22px;
+    }
+    .avgnum {
+      display: inline;
+      color: #377bef;
+    }
+  }
+}

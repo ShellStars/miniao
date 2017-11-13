@@ -6,8 +6,217 @@
 {% endblock %}
 
 {% block content %}
+<div class="video-container">
+  <ul class="video-navbar clearfix">
+    <li class="title">视频专区</li>
+    {{ '
+      {% for i in classes %}
+      <li>
+        {% ifequal i.name column.name %}
+        <a class="active" href="/{{ tmpurl }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% else %}
+        <a href="/{{ tmpurl }}/{{ i.slug }}/">{{ i.name}}</a>
+        {% endifequal %}
+      </li>
+      {% endfor %}
+    ' | safe }}
+  </ul>
+
+  <div class="filter-box">
+    <div class="filter-item clearfix" data-search="disease">
+      <label>疾病分类：</label>
+      <ul class="clearfix">
+        {{ '
+        {% if small_classes.disease %}
+        <li class="all">全部</li>
+        {% else %}
+        <li class="all active">全部</li>
+        {% endif %}' | safe }}
+        {{ '
+          {% for d in disease %}
+            {% ifequal d small_classes.disease %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endfor %}
+        ' | safe }}
+      </ul>
+    </div>
+    <div class="filter-item clearfix" data-search="difficulty">
+      <label>难度分级：</label>
+      <ul class="clearfix">
+        {{ '
+        {% if small_classes.difficulty %}
+        <li class="all">全部</li>
+        {% else %}
+        <li class="all active">全部</li>
+        {% endif %}' | safe }}
+        {{ '
+          {% for d in difficulty %}
+            {% ifequal d small_classes.difficulty %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endfor %}
+        ' | safe }}
+      </ul>
+    </div>
+    <div class="filter-item clearfix" data-search="expert">
+      <label>专家专栏：</label>
+      <ul class="clearfix">
+        {{ '
+        {% if small_classes.expert %}
+        <li class="all">全部</li>
+        {% else %}
+        <li class="all active">全部</li>
+        {% endif %}' | safe }}
+        {{ '
+          {% for d in expert %}
+            {% ifequal d small_classes.expert %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endfor %}
+        ' | safe }}
+      </ul>
+    </div>
+    <div class="filter-item clearfix" data-search="other">
+      <label>其他：</label>
+      <ul class="clearfix">
+        {{ '
+        {% if small_classes.other %}
+        <li class="all">全部</li>
+        {% else %}
+        <li class="all active">全部</li>
+        {% endif %}' | safe }}
+        {{ '
+          {% for d in other %}
+            {% ifequal d small_classes.other %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endfor %}
+        ' | safe }}
+      </ul>
+    </div>
+  </div>
+
+  <ul class="video-list clearfix">
+    {{ '\
+    {% for i in objects %}\
+    ' | safe }}
+    <li>
+      {{ '
+      {% if column %}
+      <a href="/{{tmpurl}}/{{i.id}}">
+      {% else %}
+      <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
+      {% endif %}
+      ' | safe }}
+        <img src="/media/{{ '{{ i.smallpic }}' }}" />
+        <div class="content">
+          <h2>{{ '{{ i.title|slice:"30" }}' | safe }}</h2>
+          <div class="meta">
+            <time>{{ '{{ i.pub_date|date:"Y-m-d" }}' | safe }}</time>
+            <span>{{ "{{ i.expert }}" }}</span>
+          </div>
+          <p>{{ '{{ i.introduction|slice:"75" }}' | safe }}</p>
+        </div>
+      </a>
+    </li>
+    {{ '\
+    {% endfor %}\
+    ' | safe }}
+  </ul>
+
+  <ul class="article-pagination clearfix">
+    {{ '\
+      {% if objects.has_previous %}
+      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
+      {% else %}
+      <li class="pagination-control prev disabled">&larr;上一页</li>
+      {% endif %}
+
+      <li class="pagination-list">
+      {% for i in page_range %}
+        {% ifequal i page_range.number %}
+        <span>{{ i }}</span>
+        {% else %}
+        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+        {% endifequal %}
+      {% endfor %}
+      </li>
+
+      {% if objects.has_next %}
+      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
+      {% else %}
+      <li class="pagination-control next disabled">下一页&rarr;</li>
+      {% endif %}
+      ' | safe }}
+  </ul>
+</div>
+
+
 
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript">
+$(function () {
+  $('.article-pagination a').click(function () {
+    var p = {
+      page: getUrlParam('page'),
+      disease: getUrlParam('disease'),
+      difficulty: getUrlParam('difficulty'),
+      expert: getUrlParam('expert'),
+      other: getUrlParam('other')
+    };
+
+    p.page = $(this).attr('data-href');
+
+    for (key in p) {
+      if (!p[key]) {
+        delete p[key];
+      }
+    }
+
+    window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+  });
+  $('.filter-item li').click(function () {
+    var p = {
+      page: getUrlParam('page'),
+      disease: getUrlParam('disease'),
+      difficulty: getUrlParam('difficulty'),
+      expert: getUrlParam('expert'),
+      other: getUrlParam('other')
+    };
+
+    var pp = $(this).parent().parent().attr('data-search');
+    if ($(this).hasClass('all')) {
+      if (pp) {
+        p[pp] = '';
+      }
+    } else {
+      p[pp] = $(this).text();
+    }
+
+    for (key in p) {
+      if (!p[key]) {
+        delete p[key];
+      }
+    }
+    window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+  });
+});
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return '';
+  }
+</script>
 {% endblock %}

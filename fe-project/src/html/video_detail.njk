@@ -1,0 +1,162 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}{{ "{{ video.title }}" | safe }}{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/article.css">
+<link rel="stylesheet" href="/static/css/video.css">
+<link rel="stylesheet" href="/static/css/video-js.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="article-detail-navbar">
+  <div class="article-detail-navbar-inner">
+    {% include "./components/navbar_list.njk" %}
+  </div>
+</div>
+
+<div class="article-detail-crumbs">
+  <a href="/">首页</a>
+  <span>></span>
+  <a href="/{{ '{{ belong.slug }}' | safe }}">{{ '{{ belong.name }}' | safe }}</a>
+  <span>></span>
+  <strong class="ad-title">
+    {{ '{{ video.title }}' | safe }}
+  </strong>
+</div>
+
+<div class="article-detail-container">
+
+  <video
+    id="my-player"
+    class="video-js"
+    poster="{{ '/media/{{ video.smallpic }}' }}"
+  >
+    <source src="{{ '/media/{{ video.video }}' }}" type='video/mp4'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+
+  <br>
+
+  {{ '
+  {% autoescape off %}
+  <h1>{{ video.title }}</h1>
+  <div class="meta">
+    <strong>视频</strong>
+    <time>{{ video.pub_date|date:"Y-m-d" }}</time>
+    <span>点击：{{ video.browser }}</span>
+    <span>评分：<div class="avgnum">{{ avgnum }}</div></span>
+  </div>
+
+  <div class="content">{{ video.introduction }}</div>
+  {% endautoescape %}
+  ' | safe }}
+
+  <div class="pages clearfix">
+    <div class="page-left">
+      <a href="{{ '/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}'}}">
+        <i class="iconfont icon-l"></i>
+        <div>
+          <span>上一篇</span>
+          <h6>{{ '{{ pre_article.title }}' }}</h6>
+        </div>
+      </a>
+    </div>
+    <div class="page-right">
+      <a href="{{ '/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}' }}">
+        <div>
+          <span>下一篇</span>
+          <h6>{{ '{{ next_article.title }}' }}</h6>
+        </div>
+        <i class="iconfont icon-r"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="relation-box">
+    <div class="title">
+      <h2><span>猜您喜欢</span></h2>
+    </div>
+    <ul class="clearfix">
+      {{ '
+        {% for i in relate %}
+        <li>
+          <div class="inner">
+            <img src="/media/{{ i.smallpic }}" alt="1">
+            <h3>{{ i.title }}</h3>
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            {% autoescape off %}
+            <div class="p">
+              <p>{{ i.introduction|slice:"45" }}...</p>
+            </div>
+            {% endautoescape %}
+            <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+          </div>
+        </li>
+        {% endfor %}
+      ' | safe }}
+    </ul>
+  </div>
+
+  <div class="comment" id="SOHUCS"></div>
+
+  <script src="//changyan.sohu.com/upload/changyan.js" ></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+    appid: 'cytgwoeSU',
+    conf: 'prod_c8dac1089f2e74f05a01b6bb035c473e'
+    });
+  </script>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="/static/js/video-js.min.js"></script>
+{# <script type="text/javascript" src="/static/js/videojs-ie8.min.js"></script> #}
+<script type="text/javascript">
+$(function () {
+  var options = {
+    controls: true,
+    autoplay: false,
+    preload: 'auto',
+    fluid: true,
+    aspectRatio: '16:9',
+    playbackRate: 1,
+    "techOrder": ["html5", "flash", "other supported tech"],
+    seekable: true,
+    looping: true,
+    loop: true,
+    // children: {
+    //   "mediaLoader": true,
+    //   "posterImage": true,
+    //   "textTrackDisplay": true,
+    //   "loadingSpinner": true,
+    //   "bigPlayButton": true,
+    //   "controlBar": {
+    //     playToggle: true,
+    //     fullscreenToggle: true,
+    //     currentTimeDisplay: true,
+    //     timeDivider: true,
+    //     durationDisplay: true,
+    //     remainingTimeDisplay: true,
+    //     progressControl: {
+    //       seekBar: {
+    //         loadProgressBar: true,
+    //         playProgressBar: true,
+    //         seekHandle: true,
+    //       }
+    //     },
+    //     volumeControl: true,
+    //     muteToggle: true,
+    //   },
+    //   "errorDisplay": true,
+    //   "textTrackSettings": true,
+    // }
+  };
+
+  var player = videojs('my-player', options);
+});
+</script>
+{% endblock %}

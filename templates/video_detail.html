@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>{{ video.title }}</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  
+<link rel="stylesheet" href="/static/css/article.css">
+<link rel="stylesheet" href="/static/css/video.css">
+<link rel="stylesheet" href="/static/css/video-js.min.css">
+
+</head>
+<body>
+
+<header class="header-wrap">
+  <a class="logo" href="/">
+    <img src="/static/images/logo.png" alt="LOGO">
+  </a>
+  <div class="search">
+    <form>
+      <input type="text">
+      <button>
+        <i class="iconfont icon-search"></i>
+      </button>
+    </form>
+    
+  </div>
+  <div class="profile">
+    <button class="btn-login" id="btn_login">请登录</button>
+    <button>
+      <a href="/userdata/register/">免费注册</a>
+    </button>
+  </div>
+</header>
+
+
+<div class="article-detail-navbar">
+  <div class="article-detail-navbar-inner">
+    <ul class="navbar-list clearfix">
+  <li>
+    <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/association"><span>学会</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/video"><span>视频</span></a>
+  </li>
+  <li>
+    <a href="/subject"><span>学科</span></a>
+  </li>
+  <li>
+    <a href="/meetting"><span>会议</span></a>
+  </li>
+  <li>
+    <a href="/magazine"><span>期刊</span></a>
+  </li>
+  <li>
+    <a href="/nursing"><span>护理园地</span></a>
+  </li>
+  <li>
+    <a href="/sruco"><span>SRUCO</span></a>
+  </li>
+  <li>
+    <a href="/guide"><span>指南</span></a>
+  </li>
+  <li>
+    <a href="/universal"><span>科普园地</span></a>
+  </li>
+  <li>
+    <a href="/recommend"><span>药械推荐</span></a>
+  </li>
+</ul>
+
+  </div>
+</div>
+
+<div class="article-detail-crumbs">
+  <a href="/">首页</a>
+  <span>></span>
+  <a href="/{{ belong.slug }}">{{ belong.name }}</a>
+  <span>></span>
+  <strong class="ad-title">
+    {{ video.title }}
+  </strong>
+</div>
+
+<div class="article-detail-container">
+
+  <video
+    id="my-player"
+    class="video-js"
+    poster="/media/{{ video.smallpic }}"
+  >
+    <source src="/media/{{ video.video }}" type='video/mp4'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+
+  <br>
+
+  
+  {% autoescape off %}
+  <h1>{{ video.title }}</h1>
+  <div class="meta">
+    <strong>视频</strong>
+    <time>{{ video.pub_date|date:"Y-m-d" }}</time>
+    <span>点击：{{ video.browser }}</span>
+    <span>评分：<div class="avgnum">{{ avgnum }}</div></span>
+  </div>
+
+  <div class="content">{{ video.introduction }}</div>
+  {% endautoescape %}
+  
+
+  <div class="pages clearfix">
+    <div class="page-left">
+      <a href="/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}">
+        <i class="iconfont icon-l"></i>
+        <div>
+          <span>上一篇</span>
+          <h6>{{ pre_article.title }}</h6>
+        </div>
+      </a>
+    </div>
+    <div class="page-right">
+      <a href="/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}">
+        <div>
+          <span>下一篇</span>
+          <h6>{{ next_article.title }}</h6>
+        </div>
+        <i class="iconfont icon-r"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="relation-box">
+    <div class="title">
+      <h2><span>猜您喜欢</span></h2>
+    </div>
+    <ul class="clearfix">
+      
+        {% for i in relate %}
+        <li>
+          <div class="inner">
+            <img src="/media/{{ i.smallpic }}" alt="1">
+            <h3>{{ i.title }}</h3>
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            {% autoescape off %}
+            <div class="p">
+              <p>{{ i.introduction|slice:"45" }}...</p>
+            </div>
+            {% endautoescape %}
+            <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+          </div>
+        </li>
+        {% endfor %}
+      
+    </ul>
+  </div>
+
+  <div class="comment" id="SOHUCS"></div>
+
+  <script src="//changyan.sohu.com/upload/changyan.js" ></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+    appid: 'cytgwoeSU',
+    conf: 'prod_c8dac1089f2e74f05a01b6bb035c473e'
+    });
+  </script>
+</div>
+
+
+<footer class="footer-wrap">
+  <div class="inner">
+    <div class="footer-header">
+      CUG 大家泌尿
+    </div>
+    <div class="box-wrap clearfix">
+      <div class="box box-1">
+        <h3>
+          友情链接
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">杏树林</a></li>
+            <li><a href="#">生育健康网</a></li>
+            <li><a href="#">爱维医学网</a></li>
+            <li><a href="#">寻医问药网</a></li>
+            <li><a href="#">华夏病理网</a></li>
+            <li><a href="#">白衣天使基金</a></li>
+            <li><a href="#">互联网医院</a></li>
+            <li><a href="#">丁香园医生网</a></li>
+            <li><a href="#">梅斯MedSci</a></li>
+            <li><a href="#">中华康网</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-2">
+        <h3>
+          合作单位
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">北京协和医院</a></li>
+            <li><a href="#">中华泌尿杂志</a></li>
+            <li><a href="#">中国医师协会</a></li>
+            <li><a href="#">健康报网</a></li>
+            <li><a href="#">OBGYN.net</a></li>
+            <li><a href="#">中华杂志</a></li>
+            <li><a href="#">搜狐健康频道</a></li>
+            <li><a href="#">丁香园妇</a></li>
+            <li><a href="#">现代进展健康报</a></li>
+            <li><a href="#">中国健康杂志</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-3">
+        <h3>
+          其他
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">设为首页</a></li>
+            <li><a href="#">加入收藏</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">广告合作</a></li>
+            <li><a href="#">求职招聘</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-4">
+        <h3>
+          联系我们
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>编辑部电话：029-88888888</li>
+            <br>
+            <br>
+            <br>
+            <br>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-5">
+        <h3>
+          投稿邮箱
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>邮箱地址：ztougao@cug.top</li>
+            
+            <li>
+              <form>
+                <input type="email" placeholder="输入您的邮箱地址......">
+                <button>
+                  <i class="iconfont icon-email"></i>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2017y</p>
+      <p>
+        本站所刊载的所有内容版权归大家泌尿网所有，未经授权不得转载。除非特别声明，本站刊出的所
+        <br>
+        有文章、视频等内容系大家泌尿网据原作者相关内容生成，不代表大家泌尿网的观点和立场。
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-login">
+  <div class="mask"></div>
+  <div class="inner" style="background-image: url('/static/images/modal_logo_bg.png')">
+    <form action="/userdata/login/" method="post">
+      <img src="/static/images/logo.png" alt="LOGO">
+      <input class="ipt-telnum" type="text" name="telnum" placeholder="输入手机号" required>
+      <input class="ipt-password" type="password" name="password" placeholder="输入密码" required>
+      <div class="error"></div>
+      <button type="submit">登录</button>
+      <div class="login-links">
+        <a href="/userdata/register/">立即注册</a>
+        <a href="/userdata/sendpwdnum/">忘记密码</a>
+      </div>
+    </form>
+    <div class="login-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>
+
+<script src='/static/js/modernizr.js'></script>
+<script src='/static/js/jquery.min.js'></script>
+<script src='/static/js/jquery.jcarousel.min.js'></script>
+<script src='/static/js/index.js'></script>
+
+<script type="text/javascript" src="/static/js/video-js.min.js"></script>
+
+<script type="text/javascript">
+$(function () {
+  var options = {
+    controls: true,
+    autoplay: false,
+    preload: 'auto',
+    fluid: true,
+    aspectRatio: '16:9',
+    playbackRate: 1,
+    "techOrder": ["html5", "flash", "other supported tech"],
+    seekable: true,
+    looping: true,
+    loop: true,
+    // children: {
+    //   "mediaLoader": true,
+    //   "posterImage": true,
+    //   "textTrackDisplay": true,
+    //   "loadingSpinner": true,
+    //   "bigPlayButton": true,
+    //   "controlBar": {
+    //     playToggle: true,
+    //     fullscreenToggle: true,
+    //     currentTimeDisplay: true,
+    //     timeDivider: true,
+    //     durationDisplay: true,
+    //     remainingTimeDisplay: true,
+    //     progressControl: {
+    //       seekBar: {
+    //         loadProgressBar: true,
+    //         playProgressBar: true,
+    //         seekHandle: true,
+    //       }
+    //     },
+    //     volumeControl: true,
+    //     muteToggle: true,
+    //   },
+    //   "errorDisplay": true,
+    //   "textTrackSettings": true,
+    // }
+  };
+
+  var player = videojs('my-player', options);
+});
+</script>
+
+
+</body>
+</html>
