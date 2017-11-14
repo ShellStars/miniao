@@ -238,7 +238,7 @@ def logout(request):
         del request.session['identity']
     except:
         pass
-    return HttpResponseRedirect('/userdata/login')
+    return HttpResponseRedirect('/')
 
 
 # 忘记密码
