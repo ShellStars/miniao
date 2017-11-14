@@ -153,10 +153,11 @@ def register(request):
                                                 hospital=hospital, department=department, title=title,
                                                 identity=identity, certificate=url1)
                         Checknum.objects.filter(telnum=telnum).delete()
-                        user1 = Userinfo.objects.filter(telnum=telnum)
-                        request.session['userid'] = user1[0].id
-                        request.session['identity'] = user1[0].identity
-                        return HttpResponseRedirect('/userdata/show/')
+                        #user1 = Userinfo.objects.filter(telnum=telnum)
+                        #request.session['userid'] = user1[0].id
+                        #request.session['identity'] = user1[0].identity
+                        return HttpResponseRedirect('/index/?from=register')
+                        #return HttpResponseRedirect('/userdata/show/')
                         #dic = {'info': '注册成功，请登录'}
                         #return render_to_response('login.html', dic)
                 else:
@@ -184,10 +185,11 @@ def register(request):
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                             identity=identity)
                     Checknum.objects.filter(telnum=telnum).delete()
-                    user = Userinfo.objects.filter(telnum=telnum)
-                    request.session['userid'] = user[0].id
-                    request.session['identity'] = user[0].identity
-                    return HttpResponseRedirect('/userdata/show/')
+                    #user = Userinfo.objects.filter(telnum=telnum)
+                    #request.session['userid'] = user[0].id
+                    #request.session['identity'] = user[0].identity
+                    return HttpResponseRedirect('/index/?from=register')
+                    #return HttpResponseRedirect('/userdata/show/')
                     # dic = {'info': '注册成功，请重新登录'}
                     # return render_to_response('login.html', dic)
                     # return HttpResponse(json.dumps({'info': '注册成功，请登录'}), content_type="application/json")
@@ -325,7 +327,8 @@ def navigationinfo(request):
         userinfo = Userinfo.objects.filter(id=a)
         username = userinfo[0].username
         headimg = userinfo[0].headimg.name
-        return HttpResponse(json.dumps({'state': 'success', 'username': username, 'headimg': headimg}), content_type="application/json")
+        identity = userinfo[0].identity
+        return HttpResponse(json.dumps({'state': 'success', 'username': username, 'headimg': headimg, 'identity': identity}), content_type="application/json")
     else:
         return HttpResponse(json.dumps({'state': 'fail'}), content_type="application/json")
 
@@ -333,7 +336,7 @@ def navigationinfo(request):
 def modify(request):
     if "userid" in request.session and "identity" in request.session:
         if request.method == "POST":
-            bf = Modify(request.POST)
+            bf = Modify(request.POST, request.FILES)
             if bf.is_valid():
                 headimg = request.FILES["headimg"]
                 img = Image.open(headimg)
