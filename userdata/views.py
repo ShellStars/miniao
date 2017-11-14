@@ -228,7 +228,7 @@ def login(request):
         if "userid" in request.session and "identity" in request.session:
             return HttpResponseRedirect('/')
         else:
-            return render_to_response('login.html')
+            return HttpResponseRedirect('/index/?from=register')
 
 
 # 退出
