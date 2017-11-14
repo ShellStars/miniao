@@ -551,8 +551,9 @@ def changlogin(request):
     callback = request.GET.get('callback')
     if "userid" in request.session and "identity" in request.session:
         user_id = request.session.get('userid')
-        print type(user_id)
-        img_url = 'http://ww4.sinaimg.cn/large/0060lm7Tly1fkiul1adrkj31hc0xc7ei.jpg'
+        # print type(user_id)
+        img_url = 'http://www.cug.top' + str(Userinfo.objects.filter(id=user_id)[0].headimg.name)
+        #img_url = 'http://ww4.sinaimg.cn/large/0060lm7Tly1fkiul1adrkj31hc0xc7ei.jpg'
         nickname = str(Userinfo.objects.filter(id=user_id)[0].username)
         print type(nickname)
         profile_url = ''
