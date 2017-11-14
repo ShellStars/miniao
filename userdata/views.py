@@ -156,7 +156,7 @@ def register(request):
                         #user1 = Userinfo.objects.filter(telnum=telnum)
                         #request.session['userid'] = user1[0].id
                         #request.session['identity'] = user1[0].identity
-                        return HttpResponseRedirect('/index/?from=register')
+                        return HttpResponseRedirect('/?from=register')
                         #return HttpResponseRedirect('/userdata/show/')
                         #dic = {'info': '注册成功，请登录'}
                         #return render_to_response('login.html', dic)
@@ -188,7 +188,7 @@ def register(request):
                     #user = Userinfo.objects.filter(telnum=telnum)
                     #request.session['userid'] = user[0].id
                     #request.session['identity'] = user[0].identity
-                    return HttpResponseRedirect('/index/?from=register')
+                    return HttpResponseRedirect('/?from=register')
                     #return HttpResponseRedirect('/userdata/show/')
                     # dic = {'info': '注册成功，请重新登录'}
                     # return render_to_response('login.html', dic)
@@ -228,7 +228,7 @@ def login(request):
         if "userid" in request.session and "identity" in request.session:
             return HttpResponseRedirect('/')
         else:
-            return HttpResponseRedirect('/index/?from=register')
+            return HttpResponseRedirect('/?from=register')
 
 
 # 退出
