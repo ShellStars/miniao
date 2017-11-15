@@ -119,13 +119,13 @@ def register(request):
                     except:
                         checknum1 = ''
                     if len(telnum1) > 0 :
-                        # dic = {'info': '用户已存在'}
-                        # return render_to_response('register.html', dic)
-                        return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
+                        dic = {'info': '用户已存在'}
+                        return render_to_response('register.html', dic)
+                        # return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                     elif checknum1 == '' or str(checknum) != checknum1:
-                        # dic = {'info': '验证码错误'}
-                        # return render_to_response('register.html', dic)
-                        return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
+                        dic = {'info': '验证码错误'}
+                        return render_to_response('register.html', dic)
+                        # return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                     else:
                         username = uf.cleaned_data['username']
                         password = uf.cleaned_data['password']
@@ -171,13 +171,13 @@ def register(request):
                 except:
                     checknum1 = ''
                 if len(telnum1) > 0:
-                    # dic = {'info': '用户已存在'}
-                    # return render_to_response('register.html', dic)
-                    return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
+                    dic = {'info': '用户已存在'}
+                    return render_to_response('register.html', dic)
+                    # return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                 elif checknum1 == '' or str(checknum) != checknum1:
-                    # dic = {'info': '验证码错误'}
-                    # return render_to_response('register.html', dic)
-                    return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
+                    dic = {'info': '验证码错误'}
+                    return render_to_response('register.html', dic)
+                    # return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                 else:
                     username = request.POST['username']
                     password = request.POST['password']
@@ -348,7 +348,8 @@ def modify(request):
                 #title = bf.cleaned_data['title']
                 b = request.session.get("userid")
                 Userinfo.objects.filter(id=b).update(headimg=url1)
-                return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
+                return HttpResponseRedirect('/userdata/show')
+                #return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
                 #userinfo1 = Userinfo.objects.filter(id=b)
                 #return render_to_response('userinfo.html', {'userinfo': userinfo1[0]})
             else:
