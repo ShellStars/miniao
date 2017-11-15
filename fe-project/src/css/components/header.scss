@@ -19,6 +19,7 @@
     }
   }
   .profile {
+    position: relative;
     float: right;
     width: 18.38%;
     button {
@@ -42,7 +43,7 @@
     }
   }
   .profile-islogin {
-    display: block;
+    display: inline-block;
     position: relative;
     top: -8px;
     img {
@@ -120,5 +121,16 @@
         color: #f24a4c;
       }
     }
+  }
+}
+
+.btn-layout {
+  color: #396ef2;
+  position: absolute;
+  right: 34px;
+  top: 10px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }

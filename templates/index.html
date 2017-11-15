@@ -68,7 +68,7 @@
           </li>
         </ul>
       </li>
-      <li class="section-item">
+      <li class="section-item video-hide">
         <h3 class="section-title">
           <i class="iconfont icon-video-camera"></i>
           <span>视频</span>
@@ -114,7 +114,7 @@
   <li>
     <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
   </li>
-  <li>
+  <li class="video-hide">
     <a href="/video"><span>视频</span></a>
   </li>
   <li>
@@ -693,6 +693,13 @@ $(function () {
         return '<a href="#' + page + '">' + page + '</a>';
     }
   });
+// 
+  if (getUrlParam('from') == 'register') {
+    $('.modal-login').show();
+    $('.modal-login .login-close').click(function () {
+      window.location.search = ''
+    });
+  }
 });
 </script>
 

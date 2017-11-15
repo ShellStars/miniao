@@ -1,0 +1,35 @@
+.magazine-banner {
+  height: 300px;
+  position: relative;
+  background: #343a52;
+  .banner-inner {
+    position: relative;
+    max-width: 100%;
+    width: 1190px;
+    padding: 0 10px;
+    margin: 0 auto;
+    height: 100%;
+    padding-left: 170px;
+  }
+  img {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    margin-top: -50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+  }
+  .detail {
+    color: #fff;
+    padding-top: 90px;
+    h1 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+  }
+}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>期刊列表</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_vj8o96w7vmml5wmi.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  
+<link rel="stylesheet" href="/static/css/article.css">
+<link rel="stylesheet" href="/static/css/magazine.css">
+
+</head>
+<body>
+
+<header class="header-wrap">
+  <a class="logo" href="/">
+    <img src="/static/images/logo.png" alt="LOGO">
+  </a>
+  <div class="search">
+    <form>
+      <input type="text">
+      <button>
+        <i class="iconfont icon-search"></i>
+      </button>
+    </form>
+    
+  </div>
+  <div class="profile">
+    <button class="btn-login" id="btn_login">请登录</button>
+    <button>
+      <a href="/userdata/register/">免费注册</a>
+    </button>
+  </div>
+</header>
+
+
+<div class="magazine-banner">
+  <div class="banner-inner">
+    <img src="/media/{{ info.pic }}" alt="huizhang">
+    <div class="detail">
+      <h1>杂志简介</h1>
+      <p>{{ info }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="magazine-container article-container">
+
+  <h1 class="title">
+    <span>杂志专区</span>
+  </h1>
+  <ul class="article-list clearfix">
+    
+    {% for i in objects %}
+    
+    <li>
+      
+      <a href="/{{tmpurl}}/dongtai/{{i.id}}">
+      
+        <img src="/media/{{ i.picurl }}" />
+        <div class="content">
+          <h2>{{ i.title|slice:"20" }}</h2>
+          <div class="meta">
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            <span>阅读：{{ i.browser }}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    
+    {% endfor %}
+    
+  </ul>
+
+  <ul class="article-pagination clearfix">
+    
+      {% if objects.has_previous %}
+      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
+      {% else %}
+      <li class="pagination-control prev disabled">&larr;上一页</li>
+      {% endif %}
+
+      <li class="pagination-list">
+      {% for i in page_range %}
+        {% ifequal i page_range.number %}
+        <span>{{ i }}</span>
+        {% else %}
+        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+        {% endifequal %}
+      {% endfor %}
+      </li>
+
+      {% if objects.has_next %}
+      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
+      {% else %}
+      <li class="pagination-control next disabled">下一页&rarr;</li>
+      {% endif %}
+      
+  </ul>
+</div>
+
+
+<footer class="footer-wrap">
+  <div class="inner">
+    <div class="footer-header">
+      CUG 大家泌尿
+    </div>
+    <div class="box-wrap clearfix">
+      <div class="box box-1">
+        <h3>
+          友情链接
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">杏树林</a></li>
+            <li><a href="#">生育健康网</a></li>
+            <li><a href="#">爱维医学网</a></li>
+            <li><a href="#">寻医问药网</a></li>
+            <li><a href="#">华夏病理网</a></li>
+            <li><a href="#">白衣天使基金</a></li>
+            <li><a href="#">互联网医院</a></li>
+            <li><a href="#">丁香园医生网</a></li>
+            <li><a href="#">梅斯MedSci</a></li>
+            <li><a href="#">中华康网</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-2">
+        <h3>
+          合作单位
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">北京协和医院</a></li>
+            <li><a href="#">中华泌尿杂志</a></li>
+            <li><a href="#">中国医师协会</a></li>
+            <li><a href="#">健康报网</a></li>
+            <li><a href="#">OBGYN.net</a></li>
+            <li><a href="#">中华杂志</a></li>
+            <li><a href="#">搜狐健康频道</a></li>
+            <li><a href="#">丁香园妇</a></li>
+            <li><a href="#">现代进展健康报</a></li>
+            <li><a href="#">中国健康杂志</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-3">
+        <h3>
+          其他
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li><a href="#">设为首页</a></li>
+            <li><a href="#">加入收藏</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">广告合作</a></li>
+            <li><a href="#">求职招聘</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-4">
+        <h3>
+          联系我们
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>编辑部电话：029-88888888</li>
+            <br>
+            <br>
+            <br>
+            <br>
+          </ul>
+        </div>
+      </div>
+      <div class="box box-5">
+        <h3>
+          投稿邮箱
+        </h3>
+        <div class="links clearfix">
+          <ul class="link-list">
+            <li>邮箱地址：ztougao@cug.top</li>
+            
+            <li>
+              <form>
+                <input type="email" placeholder="输入您的邮箱地址......">
+                <button>
+                  <i class="iconfont icon-email"></i>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2017y</p>
+      <p>
+        本站所刊载的所有内容版权归大家泌尿网所有，未经授权不得转载。除非特别声明，本站刊出的所
+        <br>
+        有文章、视频等内容系大家泌尿网据原作者相关内容生成，不代表大家泌尿网的观点和立场。
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-login">
+  <div class="mask"></div>
+  <div class="inner" style="background-image: url('/static/images/modal_logo_bg.png')">
+    <form action="/userdata/login/" method="post">
+      <img src="/static/images/logo.png" alt="LOGO">
+      <input class="ipt-telnum" type="text" name="telnum" placeholder="输入手机号" required>
+      <input class="ipt-password" type="password" name="password" placeholder="输入密码" required>
+      <div class="error"></div>
+      <button type="submit">登录</button>
+      <div class="login-links">
+        <a href="/userdata/register/">立即注册</a>
+        <a href="/userdata/sendpwdnum/">忘记密码</a>
+      </div>
+    </form>
+    <div class="login-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>
+
+<script src='/static/js/modernizr.js'></script>
+<script src='/static/js/jquery.min.js'></script>
+<script src='/static/js/jquery.jcarousel.min.js'></script>
+<script src='/static/js/index.js'></script>
+
+
+
+</body>
+</html>

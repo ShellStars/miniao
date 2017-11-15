@@ -181,7 +181,7 @@ $(function () {
       }
     }
 
-    window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+    window.location.href = (window.location.origin + window.location.pathname + '?' + param(p));
   });
   $('.filter-item li').click(function () {
     var p = {
@@ -206,14 +206,9 @@ $(function () {
         delete p[key];
       }
     }
-    window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+    window.location.href = (window.location.origin + window.location.pathname + '?' + param(p));
   });
 });
 
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return '';
-  }
 </script>
 {% endblock %}

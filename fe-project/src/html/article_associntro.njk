@@ -1,0 +1,243 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}学会{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/article.css">
+<link rel="stylesheet" href="/static/css/magazine.css">
+<link rel="stylesheet" href="/static/css/expert.css">
+<link rel="stylesheet" href="/static/css/associntro.css">
+{% endblock %}
+
+{% block content %}
+<div class="magazine-banner">
+  <div class="banner-inner">
+    <img src="/media/{{ '{{ associntro.pic }}' }}" alt="huizhang">
+    <div class="detail">
+      <h1>学会简介</h1>
+      <p>{{ '{{ associntro }}' }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="associntro-container clearfix">
+  <div class="left-bar">
+    <ul>
+      <li data-u="dt" class="dt active">动态 <span>>></span></li>
+      <li data-u="zc" class="zc">章程 <span>>></span></li>
+      <li data-u="hh" class="hh">会徽 <span>>></span></li>
+      <li data-u="zw" class="zw">主委 <span>>></span></li>
+      <li data-u="fzw" class="fzw">副主委 <span>>></span></li>
+      <li data-u="hy" class="hy">会员 <span>>></span></li>
+      <li data-u="lxfs" class="lxfs">联系方式 <span>>></span></li>
+    </ul>
+  </div>
+  <div class="right-content">
+
+    <div class="r-box r-box-dt">
+      <ul class="article-list clearfix">
+        {{ '\
+        {% for i in dynamic %}\
+        ' | safe }}
+        <li>
+          {{ '
+          <a href="/column/dongtai/{{i.id}}">
+          ' | safe }}
+          {# <a href="{{ '/{{tmpurl}}/{{ i.column_id }}/{{i.id}}' }}"> #}
+            <img src="{{ '{{ i.picurl }}' }}" />
+            <div class="content">
+              <h2>{{ '{{ i.title|slice:"20" }}' | safe }}</h2>
+              <div class="meta">
+                <time>{{ '{{ i.pub_date|date:"Y-m-d" }}' | safe }}</time>
+                <span>阅读：{{ "{{ i.browser }}" }}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        {{ '\
+        {% endfor %}\
+        ' | safe }}
+      </ul>
+    </div>
+
+    <div class="r-box r-box-zc">
+      <h5>章程</h5>
+      <p>
+        {{ '{{ associntro.constitution }}' }}
+      </p>
+    </div>
+
+    <div class="r-box r-box-hh">
+      <h5>会徽</h5>
+      <img class="huihui" src="/media/{{ '{{ associntro.pic }}' }}" alt="huizhang">
+    </div>
+
+    <div class="r-box r-box-zw">
+      <div class="expert-detail-content">
+        <div class="inner">
+          <div class="box">
+            <h2>个人介绍</h2>
+            <div class="person">
+              <div class="avatar">
+                <img src="{{ "{{ zhuwei.smallpic.url }}" }}" alt="头像">
+              </div>
+              <div class="detail">
+                <h3 class="name">{{ "{{ zhuwei.name }}" }}</h3>
+                <div class="department">{{ "{{ zhuwei.department }}" }}</div>
+              </div>
+            </div>
+            <p>{{ "{{ zhuwei.introduce }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>技术特长</h2>
+            <p>{{ "{{ zhuwei.specialty }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>编后语</h2>
+            <p>{{ "{{ zhuwei.postscript }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>联系方式</h2>
+            <div class="contact">
+              <div class="img">
+                <img src="{{ "{{ zhuwei.weixinpic.url }}" }}" alt="微信二维码">
+                <div>
+                  微信二维码
+                </div>
+              </div>
+              <div class="img">
+                <img src="{{ "{{ zhuwei.weibopic.url }}" }}" alt="微博二维码">
+                <div>
+                  微博二维码
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-box r-box-fzw">
+      <div class="expert-detail-content">
+        <div class="inner">
+          <div class="box">
+            <h2>个人介绍</h2>
+            <div class="person">
+              <div class="avatar">
+                <img src="{{ "{{ fuzhuwei.smallpic.url }}" }}" alt="头像">
+              </div>
+              <div class="detail">
+                <h3 class="name">{{ "{{ fuzhuwei.name }}" }}</h3>
+                <div class="department">{{ "{{ fuzhuwei.department }}" }}</div>
+              </div>
+            </div>
+            <p>{{ "{{ fuzhuwei.introduce }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>技术特长</h2>
+            <p>{{ "{{ fuzhuwei.specialty }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>编后语</h2>
+            <p>{{ "{{ fuzhuwei.postscript }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>联系方式</h2>
+            <div class="contact">
+              <div class="img">
+                <img src="{{ "{{ fuzhuwei.weixinpic.url }}" }}" alt="微信二维码">
+                <div>
+                  微信二维码
+                </div>
+              </div>
+              <div class="img">
+                <img src="{{ "{{ fuzhuwei.weibopic.url }}" }}" alt="微博二维码">
+                <div>
+                  微博二维码
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-box r-box-hy">
+      <div class="expert-detail-content">
+        <div class="inner">
+          <div class="box">
+            <h2>个人介绍</h2>
+            <div class="person">
+              <div class="avatar">
+                <img src="{{ "{{ huiyuan.smallpic.url }}" }}" alt="头像">
+              </div>
+              <div class="detail">
+                <h3 class="name">{{ "{{ huiyuan.name }}" }}</h3>
+                <div class="department">{{ "{{ huiyuan.department }}" }}</div>
+              </div>
+            </div>
+            <p>{{ "{{ huiyuan.introduce }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>技术特长</h2>
+            <p>{{ "{{ huiyuan.specialty }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>编后语</h2>
+            <p>{{ "{{ huiyuan.postscript }}" }}</p>
+          </div>
+          <div class="box">
+            <h2>联系方式</h2>
+            <div class="contact">
+              <div class="img">
+                <img src="{{ "{{ huiyuan.weixinpic.url }}" }}" alt="微信二维码">
+                <div>
+                  微信二维码
+                </div>
+              </div>
+              <div class="img">
+                <img src="{{ "{{ huiyuan.weibopic.url }}" }}" alt="微博二维码">
+                <div>
+                  微博二维码
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-box r-box-lxfs">
+      <h5>联系方式</h5>
+      <div class="contact">
+        <div class="img">
+          <img src="{{ "{{ associntro.weixinpic.url }}" }}" alt="微信二维码">
+          <div>
+            微信二维码
+          </div>
+        </div>
+        <div class="img">
+          <img src="{{ "{{ associntro.weibopic.url }}" }}" alt="微博二维码">
+          <div>
+            微博二维码
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  $(function () {
+    $('.left-bar ul li').click(function () {
+      $('.left-bar ul li').removeClass('active');
+      $(this).addClass('active');
+      $('.right-content>.r-box').hide();
+      $('.right-content>.r-box-' + $(this).attr('data-u')).show();
+    });
+  });
+</script>
+{% endblock %}

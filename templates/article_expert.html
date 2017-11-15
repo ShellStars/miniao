@@ -52,7 +52,7 @@
   <li>
     <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
   </li>
-  <li>
+  <li class="video-hide">
     <a href="/video"><span>视频</span></a>
   </li>
   <li>
@@ -318,7 +318,7 @@
         }
       }
 
-      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+      window.location.href = (window.location.origin + window.location.pathname + '?' + param(p));
     });
     $('.filter-item li').click(function () {
       var p = {
@@ -341,15 +341,9 @@
           delete p[key];
         }
       }
-      window.location.href = (window.location.origin + window.location.pathname + '?' + $.param(p));
+      window.location.href = (window.location.origin + window.location.pathname + '?' + param(p));
     });
   });
-
-  function getUrlParam(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return unescape(r[2]); return '';
-    }
 </script>
 
 
