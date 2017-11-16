@@ -14,7 +14,7 @@ import pymysql
 def video_detail(request, column, pk):
     if "userid" in request.session and "identity" in request.session:
         identity = request.session.get("identity")
-        if identity == '0' or identity == '1' or identity == '2':
+        if identity == 0 or identity == 1 or identity == 2:
             url = request.path.strip('/')
             # url = 'http://127.0.0.1:8000' + request.path
             tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
