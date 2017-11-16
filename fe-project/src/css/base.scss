@@ -132,5 +132,50 @@ body {
   }
 }
 .video-hide {
+  // display: none;
+}
+
+
+.modal-vodeo {
   display: none;
+  background: rgba(0,0,0,.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  .inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 150px;
+    margin-left: -150px;
+    margin-top: -75px;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    border-radius: 4px;
+    text-align: center;
+    padding: 30px;
+    line-height: 2;
+    font-size: 15px;
+    p {
+      margin-top: 20px;
+    }
+    a {
+      color: #00a7f2;
+      cursor: pointer;
+    }
+  }
+}
+
+#btn-collect {
+  background: #387bef;
+  display: inline-block;
+  padding: 3px 10px;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 20px;
 }

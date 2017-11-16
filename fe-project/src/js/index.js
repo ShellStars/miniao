@@ -50,11 +50,49 @@ $(function () {
         <a href="/userdata/logout" class="btn-layout">退出</a>\
       ');
 
-      if (ret.identity === 0 || ret.identity === 2) {
-        $('.video-hide').show();
+      // if (ret.identity === 0 || ret.identity === 2) {
+      //   $('.video-hide').show();
+      // }
+      if (ret.state == 'fail' && window.isVideo) {
+        showVideoAlert();
       }
+    },
+    error: function() {
+      showVideoAlert();
     }
   })
+
+
+  $('#btn-collect').click(function () {
+    var t = this;
+    if ($(this).attr('data-action') == 1) {
+      $.ajax({
+        url: '/userdata/collect/',
+        method: 'get',
+        data: {
+          title: $(this).attr('data-title'),
+          url: window.location.href,
+        },
+        success: function () {
+          $(t).text('取消收藏');
+          $(t).attr('data-action', '0');
+        }
+      });
+    } else {
+      $.ajax({
+        url: '/userdata/cancel/',
+        method: 'get',
+        data: {
+          title: $(this).attr('data-title'),
+          url: window.location.href,
+        },
+        success: function () {
+          $(t).text('收藏');
+          $(t).attr('data-action', '1');
+        }
+      });
+    }
+  });
 });
 
 
@@ -73,3 +111,8 @@ $(function () {
     }
     return arr.join('&');
   }
+
+
+function showVideoAlert() {
+  $('.modal-vodeo').show();
+}

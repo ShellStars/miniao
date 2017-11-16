@@ -29,6 +29,11 @@
   <div class="meta">
     <strong>{{ article.tag }}</strong>
     <time>{{ article.pub_date|date:"Y-m-d" }}</time>
+    {% if collect %}
+    <div id="btn-collect" data-title="{{ article.title }}" data-action="0">取消收藏</div>
+    {% else %}
+    <div id="btn-collect" data-title="{{ article.title }}" data-action="1">收藏</div>
+    {% endif %}
     <span>阅读：{{ article.browser }}</span>
   </div>
 

@@ -48,56 +48,20 @@
       <span>学术园地</span>
     </h2>
     <ul class="section-list">
-      <li class="section-item">
-        <h3 class="section-title">
-          <i class="iconfont icon-article"></i>
-          <span>文章</span>
-        </h3>
-        <ul class="clearfix">
-          <li>
-            <a href="#">泌尿系肿瘤</a>
-          </li>
-          <li>
-            <a href="#">泌尿系结石</a>
-          </li>
-          <li>
-            <a href="#">尿控与创建</a>
-          </li>
-          <li>
-            <a href="#">前列腺疾病</a>
-          </li>
-        </ul>
-      </li>
+      
       <li class="section-item video-hide">
         <h3 class="section-title">
           <i class="iconfont icon-video-camera"></i>
           <span>视频</span>
         </h3>
         <ul class="clearfix">
+          
+          {% for i in video_list %}
           <li>
-            <a href="#">讲座</a>
+            <a href="/video/{{ i.slug }}">{{ i.name }}</a>
           </li>
-          <li>
-            <a href="#">每周一课</a>
-          </li>
-          <li>
-            <a href="#">手术</a>
-          </li>
-          <li>
-            <a href="#">每周一手术</a>
-          </li>
-          <li>
-            <a href="#">视频访谈</a>
-          </li>
-          <li>
-            <a href="#">视频专辑</a>
-          </li>
-          <li>
-            <a href="#">网络课堂</a>
-          </li>
-          <li>
-            <a href="#">本科生课堂</a>
-          </li>
+          {% endfor %}
+          
         </ul>
       </li>
     </ul>
@@ -317,7 +281,7 @@
       <i class="iconfont icon-right"></i>
     </span>
     <p class="carousel-pagination" data-jcarouselpagination="true"></p>
-    <a href="#" class="link">查看全部专家</a>
+    <a href="/expert" class="link">查看全部专家</a>
   </div>
 </div>
 
@@ -325,7 +289,7 @@
   <div class="box-meeting">
     <div class="mix-title">
       <span>会议预告</span>
-      <a href="#">更多>></a>
+      <a href="/meetting">更多>></a>
     </div>
     <ul>
       <li>
@@ -357,98 +321,46 @@
   <div class="box-consult">
     <div class="mix-title">
       <span>最新资讯</span>
-      <a href="#">更多>></a>
+      <a href="/column">更多>></a>
     </div>
     <ul>
+      {% for i in zixuninfo %}
       <li class="clearfix">
-        <img src="/static/images/home_consult_1.png" alt="article">
+        <img src="{{ i.picurl }}" alt="consult">
         <div class="detail">
-          <h3>2017年执医考试分数线，临床执业360分，临床执业助理180分！</h3>
-          <div class="meta clearfix">
-            <time>2017.10.31</time>
-          </div>
-          <p>
-            国家卫计委网站发布公文《国家卫生计生委医师资格考试委员会关于 2017 年医师资格考试医学综合笔试合格分数线的通知》......
-          </p>
-          <a href="#">查看详情</a>
-        </div>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_consult_2.png" alt="consult">
-        <div class="detail">
-          <h3>住院患者尿液检查应该怎么查？</h3>
-          <div class="meta clearfix">
-            <time>2017.10.26</time>
-          </div>
-          <p>
-            近期，美国的 Horstman 教授等在 Clinical Infectious Diseases 杂志上发表的一篇研究的结果表明，住院患者尿液检测......
-          </p>
-          <a href="#">查看详情</a>
-        </div>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_consult_3.png" alt="consult">
-        <div class="detail">
-          <h3>治疗尿路感染，只看药敏结果选药就错了！</h3>
+          <h3>{{ i.title }}</h3>
           <div class="meta clearfix">
             <time>2017.10.17</time>
           </div>
-          <p>
-            泌尿系感染是临床常见的感染性疾病，抗菌药物选择的正确与否，直接关系着治疗的成败。
-          </p>
-          <a href="#">查看详情</a>
+          <div class="ppp" style="display: none;">
+            <p>
+            
+            {% autoescape off %}
+            {{ i.content }}
+            {% endautoescape %}
+            </p>
+          </div>
+          <a href="/column/{{ i.column_id }}/{{ i.id }}">查看详情</a>
         </div>
       </li>
+      {% endfor %}
     </ul>
   </div>
   <div class="box-article">
     <div class="mix-title">
-      <span>文章</span>
-      <a href="#">更多>></a>
+      <span>视频</span>
+      <a href="/acticle">更多>></a>
     </div>
     <ul>
+      {% for i in shipininfo %}
       <li class="clearfix">
-        <img src="/static/images/home_acticle_1.jpg" alt="article">
-        <a class="detail">
-          <h3>CUA 首部关于膀胱过度活动症指南</h3>
-          <time>2017.10.24</time>
+        <img src="/media/{{ i.smallpic }}" alt="article">
+        <a class="detail" href="/video/{{ i.column_id }}/{{ i.id }}">
+          <h3>{{ i.title }}</h3>
+          <time>{{ i.pub_date|date:"Y-m-d" }}</time>
         </a>
       </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle_2.jpg" alt="article">
-        <a class="detail">
-          <h3>JUA：男性下尿路症状和良性前列腺增生的 18 个问题</h3>
-          <time>2017.10.09</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle_3.jpg" alt="article">
-        <a class="detail">
-          <h3>最新发布：2017 版 CSCO 肾癌诊疗指南更新与解读</h3>
-          <time>2017.09.30</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle_4.jpg" alt="article">
-        <a class="detail">
-          <h3>CUA 指南：囊性肾脏病变的管理</h3>
-          <time>2017.09.25</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle_5.jpg" alt="article">
-        <a class="detail">
-          <h3>EAU 前列腺癌诊疗指南九个更新要点</h3>
-          <time>2017.09.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle_6.jpg" alt="article">
-        <a class="detail">
-          <h3>JUA 指南：泌尿外科围术期感染的预防</h3>
-          <time>2017.09.07</time>
-        </a>
-      </li>
+      {% endfor %}
     </ul>
   </div>
 </div>
@@ -556,6 +468,14 @@
     </div>
   </div>
 </footer>
+
+
+<div class="modal-vodeo">
+  <div class="inner">
+    <p>抱歉，您无权访问视频</p>
+    <a href="/">返回首页</a>
+  </div>
+</div>
 
 
 <div class="modal-login">
@@ -693,7 +613,7 @@ $(function () {
         return '<a href="#' + page + '">' + page + '</a>';
     }
   });
-// 
+//
   if (getUrlParam('from') == 'register') {
     $('.modal-login').show();
     $('.modal-login .login-close').click(function () {
@@ -701,6 +621,18 @@ $(function () {
     });
   }
 });
+</script>
+
+
+<script type="text/javascript">
+  $(function () {
+    var dds = $('.ppp');
+    for (var i = 0; i < dds.length; i++) {
+      $(dds[i]).html('<p>' + $(dds[i]).text().slice(0, 60) + '...' + '</p>');
+      $(dds[i]).show();
+      console.log($(dds[i]).text().slice(0, 60) + '...');
+    };
+  });
 </script>
 
 

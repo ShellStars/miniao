@@ -8,6 +8,9 @@
 {% endblock %}
 
 {% block content %}
+<script type="text/javascript">
+  window.isVideo = true;
+</script>
 <div class="article-detail-navbar">
   <div class="article-detail-navbar-inner">
     {% include "./components/navbar_list.njk" %}
@@ -46,6 +49,11 @@
   <div class="meta">
     <strong>视频</strong>
     <time>{{ video.pub_date|date:"Y-m-d" }}</time>
+    {% if collect %}
+    <div id="btn-collect" data-title="{{ video.title }}" data-action="0">取消收藏</div>
+    {% else %}
+    <div id="btn-collect" data-title="{{ video.title }}" data-action="1">收藏</div>
+    {% endif %}
     <span>点击：{{ video.browser }}</span>
     <span>评分：<div class="avgnum">{{ avgnum }}</div></span>
   </div>

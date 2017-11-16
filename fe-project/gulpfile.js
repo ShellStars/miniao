@@ -13,7 +13,7 @@ const rename = require('gulp-rename');
 
 gulp.task('js', function () {
   gulp.src('./src/js/*.js')
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest('../static/js'));
 });
 

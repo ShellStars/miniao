@@ -40,7 +40,7 @@
         ' | safe }}
         <li>
           {{ '
-          <a href="/column/dongtai/{{i.id}}">
+          <a href="/association/dongtai/{{i.id}}">
           ' | safe }}
           {# <a href="{{ '/{{tmpurl}}/{{ i.column_id }}/{{i.id}}' }}"> #}
             <img src="{{ '{{ i.picurl }}' }}" />
@@ -57,6 +57,9 @@
         {% endfor %}\
         ' | safe }}
       </ul>
+      <div class="show-all">
+        <a href="/association/dongtai/">查看全部 >></a>
+      </div>
     </div>
 
     <div class="r-box r-box-zc">
@@ -72,40 +75,41 @@
     </div>
 
     <div class="r-box r-box-zw">
+      {{ "{% for i in zhuwei %}" }}
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
             <h2>个人介绍</h2>
             <div class="person">
               <div class="avatar">
-                <img src="{{ "{{ zhuwei.smallpic.url }}" }}" alt="头像">
+                <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
               </div>
               <div class="detail">
-                <h3 class="name">{{ "{{ zhuwei.name }}" }}</h3>
-                <div class="department">{{ "{{ zhuwei.department }}" }}</div>
+                <h3 class="name">{{ "{{ i.name }}" }}</h3>
+                <div class="department">{{ "{{ i.department }}" }}</div>
               </div>
             </div>
-            <p>{{ "{{ zhuwei.introduce }}" }}</p>
+            <p>{{ "{{ i.introduce }}" }}</p>
           </div>
           <div class="box">
             <h2>技术特长</h2>
-            <p>{{ "{{ zhuwei.specialty }}" }}</p>
+            <p>{{ "{{ i.specialty }}" }}</p>
           </div>
           <div class="box">
             <h2>编后语</h2>
-            <p>{{ "{{ zhuwei.postscript }}" }}</p>
+            <p>{{ "{{ i.postscript }}" }}</p>
           </div>
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
               <div class="img">
-                <img src="{{ "{{ zhuwei.weixinpic.url }}" }}" alt="微信二维码">
+                <img src="{{ "{{ i.weixinpic.url }}" }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
               <div class="img">
-                <img src="{{ "{{ zhuwei.weibopic.url }}" }}" alt="微博二维码">
+                <img src="{{ "{{ i.weibopic.url }}" }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
@@ -114,43 +118,45 @@
           </div>
         </div>
       </div>
+      {{ "{% endfor %}" }}
     </div>
 
     <div class="r-box r-box-fzw">
+      {{ "{% for i in fuzhuwei %}" }}
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
             <h2>个人介绍</h2>
             <div class="person">
               <div class="avatar">
-                <img src="{{ "{{ fuzhuwei.smallpic.url }}" }}" alt="头像">
+                <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
               </div>
               <div class="detail">
-                <h3 class="name">{{ "{{ fuzhuwei.name }}" }}</h3>
-                <div class="department">{{ "{{ fuzhuwei.department }}" }}</div>
+                <h3 class="name">{{ "{{ i.name }}" }}</h3>
+                <div class="department">{{ "{{ i.department }}" }}</div>
               </div>
             </div>
-            <p>{{ "{{ fuzhuwei.introduce }}" }}</p>
+            <p>{{ "{{ i.introduce }}" }}</p>
           </div>
           <div class="box">
             <h2>技术特长</h2>
-            <p>{{ "{{ fuzhuwei.specialty }}" }}</p>
+            <p>{{ "{{ i.specialty }}" }}</p>
           </div>
           <div class="box">
             <h2>编后语</h2>
-            <p>{{ "{{ fuzhuwei.postscript }}" }}</p>
+            <p>{{ "{{ i.postscript }}" }}</p>
           </div>
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
               <div class="img">
-                <img src="{{ "{{ fuzhuwei.weixinpic.url }}" }}" alt="微信二维码">
+                <img src="{{ "{{ i.weixinpic.url }}" }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
               <div class="img">
-                <img src="{{ "{{ fuzhuwei.weibopic.url }}" }}" alt="微博二维码">
+                <img src="{{ "{{ i.weibopic.url }}" }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
@@ -159,43 +165,45 @@
           </div>
         </div>
       </div>
+      {{ "{% endfor %}" }}
     </div>
 
     <div class="r-box r-box-hy">
+      {{ "{% for i in huiyuan %}" }}
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
             <h2>个人介绍</h2>
             <div class="person">
               <div class="avatar">
-                <img src="{{ "{{ huiyuan.smallpic.url }}" }}" alt="头像">
+                <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
               </div>
               <div class="detail">
-                <h3 class="name">{{ "{{ huiyuan.name }}" }}</h3>
-                <div class="department">{{ "{{ huiyuan.department }}" }}</div>
+                <h3 class="name">{{ "{{ i.name }}" }}</h3>
+                <div class="department">{{ "{{ i.department }}" }}</div>
               </div>
             </div>
-            <p>{{ "{{ huiyuan.introduce }}" }}</p>
+            <p>{{ "{{ i.introduce }}" }}</p>
           </div>
           <div class="box">
             <h2>技术特长</h2>
-            <p>{{ "{{ huiyuan.specialty }}" }}</p>
+            <p>{{ "{{ i.specialty }}" }}</p>
           </div>
           <div class="box">
             <h2>编后语</h2>
-            <p>{{ "{{ huiyuan.postscript }}" }}</p>
+            <p>{{ "{{ i.postscript }}" }}</p>
           </div>
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
               <div class="img">
-                <img src="{{ "{{ huiyuan.weixinpic.url }}" }}" alt="微信二维码">
+                <img src="{{ "{{ i.weixinpic.url }}" }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
               <div class="img">
-                <img src="{{ "{{ huiyuan.weibopic.url }}" }}" alt="微博二维码">
+                <img src="{{ "{{ i.weibopic.url }}" }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
@@ -204,6 +212,7 @@
           </div>
         </div>
       </div>
+      {{ "{% endfor %}" }}
     </div>
 
     <div class="r-box r-box-lxfs">

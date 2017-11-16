@@ -17,93 +17,44 @@
       <a href="#" class="btn-2 active">收藏</a>
     </div>
     <ul class="clearfix">
+      {{ '
+      {% for i in objects  %}
       <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
+        <a class="detail" href="{{ i.url }}">
+          <h3>{{ i.title }}</h3>
         </a>
       </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
-      <li class="clearfix">
-        <img src="/static/images/home_acticle.png" alt="article">
-        <a class="detail">
-          <h3>重磅！新版临床路径管理指导原则发布，和医</h3>
-          <time>2017.10.13</time>
-        </a>
-      </li>
+      {% endfor %}
+      ' | safe }}
     </ul>
   </div>
 </div>
+
+<ul class="article-pagination clearfix">
+  {{ '\
+    {% if objects.has_previous %}
+    <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
+    {% else %}
+    <li class="pagination-control prev disabled">&larr;上一页</li>
+    {% endif %}
+
+    <li class="pagination-list">
+    {% for i in page_range %}
+      {% ifequal i page_range.number %}
+      <span>{{ i }}</span>
+      {% else %}
+      <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
+      {% endifequal %}
+    {% endfor %}
+    </li>
+
+    {% if objects.has_next %}
+    <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
+    {% else %}
+    <li class="pagination-control next disabled">下一页&rarr;</li>
+    {% endif %}
+    ' | safe }}
+</ul>
 {% endblock %}
 
 {% block javascript %}
