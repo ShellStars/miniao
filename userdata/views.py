@@ -108,59 +108,98 @@ def register(request):
         # 医生0，护士1，学生2
         if "identity" in request.POST and request.POST["identity"] != '':
             identity = request.POST["identity"]
-            uf = UserForm(request.POST, request.FILES)
-            if uf.is_valid():
-                telnum = uf.cleaned_data['telnum']
-                checknum = uf.cleaned_data['checknum']
+            if identity == '0' or identity == '1':
+                uf = UserForm(request.POST, request.FILES)
+                if uf.is_valid():
+                    telnum = uf.cleaned_data['telnum']
+                    checknum = uf.cleaned_data['checknum']
+                    telnum1 = Userinfo.objects.filter(telnum=telnum)
+                    try:
+                        checknum1 = Checknum.objects.filter(telnum=telnum)[0].checknum
+                    except:
+                        checknum1 = ''
+                    if len(telnum1) > 0 :
+                        dic = {'info': '用户已存在'}
+                        return render_to_response('register.html', dic)
+                        # return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
+                    elif checknum1 == '' or str(checknum) != checknum1:
+                        dic = {'info': '验证码错误'}
+                        return render_to_response('register.html', dic)
+                        # return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
+                    else:
+                        username = uf.cleaned_data['username']
+                        password = uf.cleaned_data['password']
+                        sex = uf.cleaned_data['sex']
+                        hospital = uf.cleaned_data['hospital']
+                        department = uf.cleaned_data['department']
+                        title = uf.cleaned_data['title']
+                        identity = identity
+                        certificate = request.FILES["certificate"]
+                        img = Image.open(certificate)
+                        url = BASE_DIR + '/media/uploads/images/certificate/' + certificate.name
+                        img.save(url, "jpeg")
+                        user = Userinfo()
+                        user.username = username
+                        user.password = password
+                        user.sex = sex
+                        user.telnum = telnum
+                        user.hospital = hospital
+                        user.department = department
+                        user.title = title
+                        user.identity = identity
+                        url1 = '/media/uploads/images/certificate/' + certificate.name
+                        #Userinfo.objects.create(username=username, password=password, telnum=telnum, email=email, identity=identity, certificate=url)
+                        Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
+                                                hospital=hospital, department=department, title=title,
+                                                identity=identity, certificate=url1)
+                        Checknum.objects.filter(telnum=telnum).delete()
+                        #user1 = Userinfo.objects.filter(telnum=telnum)
+                        #request.session['userid'] = user1[0].id
+                        #request.session['identity'] = user1[0].identity
+                        return HttpResponseRedirect('/?from=register')
+                        #return HttpResponseRedirect('/userdata/show/')
+                        #dic = {'info': '注册成功，请登录'}
+                        #return render_to_response('login.html', dic)
+                else:
+                    return render_to_response('register.html')
+            elif identity == '2':
+                telnum = request.POST['telnum']
+                checknum = request.POST['checknum']
                 telnum1 = Userinfo.objects.filter(telnum=telnum)
                 try:
                     checknum1 = Checknum.objects.filter(telnum=telnum)[0].checknum
                 except:
                     checknum1 = ''
-                if len(telnum1) > 0 :
-                    dic = {'info': '用户已存在'}
-                    return render_to_response('register.html', dic)
-                    # return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
+                if len(telnum1) > 0:
+                    # dic = {'info': '用户已存在'}
+                    # return render_to_response('register.html', dic)
+                    return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                 elif checknum1 == '' or str(checknum) != checknum1:
-                    dic = {'info': '验证码错误'}
-                    return render_to_response('register.html', dic)
-                    # return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
+                    # dic = {'info': '验证码错误'}
+                    # return render_to_response('register.html', dic)
+                    return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                 else:
-                    username = uf.cleaned_data['username']
-                    password = uf.cleaned_data['password']
-                    sex = uf.cleaned_data['sex']
-                    hospital = uf.cleaned_data['hospital']
-                    department = uf.cleaned_data['department']
-                    title = uf.cleaned_data['title']
-                    identity = identity
+                    username = request.POST['username']
+                    password = request.POST['password']
+                    sex = request.POST['sex']
                     certificate = request.FILES["certificate"]
                     img = Image.open(certificate)
                     url = BASE_DIR + '/media/uploads/images/certificate/' + certificate.name
                     img.save(url, "jpeg")
-                    user = Userinfo()
-                    user.username = username
-                    user.password = password
-                    user.sex = sex
-                    user.telnum = telnum
-                    user.hospital = hospital
-                    user.department = department
-                    user.title = title
-                    user.identity = identity
                     url1 = '/media/uploads/images/certificate/' + certificate.name
-                    #Userinfo.objects.create(username=username, password=password, telnum=telnum, email=email, identity=identity, certificate=url)
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
-                                            hospital=hospital, department=department, title=title,
                                             identity=identity, certificate=url1)
                     Checknum.objects.filter(telnum=telnum).delete()
-                    #user1 = Userinfo.objects.filter(telnum=telnum)
-                    #request.session['userid'] = user1[0].id
-                    #request.session['identity'] = user1[0].identity
+                    # user = Userinfo.objects.filter(telnum=telnum)
+                    # request.session['userid'] = user[0].id
+                    # request.session['identity'] = user[0].identity
                     return HttpResponseRedirect('/?from=register')
-                    #return HttpResponseRedirect('/userdata/show/')
-                    #dic = {'info': '注册成功，请登录'}
-                    #return render_to_response('login.html', dic)
+                    # return HttpResponseRedirect('/userdata/show/')
+                    # dic = {'info': '注册成功，请重新登录'}
+                    # return render_to_response('login.html', dic)
+                    # return HttpResponse(json.dumps({'info': '注册成功，请登录'}), content_type="application/json")
             else:
-                return render_to_response('register.html')
+                return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/')
     else:
