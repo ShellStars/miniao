@@ -30,6 +30,7 @@ class Meetname(models.Model):
 class Meetarticle(models.Model):
     column = models.ForeignKey(Meetname, verbose_name='归属栏目')
     title = models.CharField('标题', max_length=40)
+    meeting_time = models.DateField('会议时间')
     source = models.CharField('来源', max_length=20)
     author = models.CharField('作者', max_length=20)
     browser = models.IntegerField('浏览量', default=0, editable=False)

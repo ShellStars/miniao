@@ -31,7 +31,7 @@ class Magearticle(models.Model):
     browser = models.IntegerField('浏览量', default=0, editable=False)
     keyword = models.CharField('关键词', max_length=30, blank=True)
     tag = models.CharField('标签', max_length=30, blank=True)
-    pic = models.ImageField('封面图片', upload_to="uploads/images/article/")
+    picurl = models.ImageField('封面图片', upload_to="uploads/images/article/")
     content = models.TextField('内容', default='', blank=True)
     content = UEditorField('内容', height=300, width=700,
         default=u'', blank=True, imagePath="uploads/images/article/",

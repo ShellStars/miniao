@@ -12,7 +12,8 @@ import pymysql
 
 
 def article_detail(request, column, pk):
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Standardarticle.objects.filter(pk=pk, column=column, published=True)
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
@@ -70,7 +71,7 @@ def article_detail(request, column, pk):
         return HttpResponseRedirect('/')
 def article(request, column):
     tmpurl = str(request.path).strip('/')
-    article = Standardarticle.objects.filter(column=column, published=True)
+    article = Standardarticle.objects.filter(column=column, published=True).order_by("-id")
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
     cursor = conn.cursor()
     cursor.execute("select * from other_standardclass")
@@ -101,7 +102,7 @@ def download_album_datail(request, albumname):
     album1 = {'name': albuminfo[0].name, 'slug': albumname}
     num = albuminfo[0].browser + 1
     albuminfo.update(browser=num)
-    downfile = Resourcearticle.objects.filter(album=albumname, published=True)
+    downfile = Resourcearticle.objects.filter(album=albumname, published=True).order_by("-id")
     num = downfile.count()
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
     cursor = conn.cursor()
@@ -153,7 +154,7 @@ def dictfetchall(cursor):
 
 def index(request):
     tmpurl = str(request.path).strip('/')
-    article = Standardarticle.objects.filter(published=True)
+    article = Standardarticle.objects.filter(published=True).order_by("-id")
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
     cursor = conn.cursor()
     cursor.execute("select * from other_standardclass")

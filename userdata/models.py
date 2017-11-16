@@ -13,7 +13,6 @@ class Userinfo(models.Model):
         (0, u'医生'),
         (1, u'护士'),
         (2, u'学生'),
-        (3, u'其它'),
     )
     username = models.CharField('真实姓名', max_length=30)
     sex = models.IntegerField('性别')

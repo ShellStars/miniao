@@ -1,6 +1,6 @@
 注册：post form 表单 action:/userdata/register/   site:register.html
 传入字段信息：
-identity：（身份），可取值0（医生），1（护士），2（学生），3（其它）
+identity：（身份），可取值0（医生），1（护士），2（学生
 验证码发送链接：/userdata/send_num?telnum=####
 提示消息{{info}}
 当注册时为医生和护士身份时，传入表单字段包括：
@@ -15,13 +15,6 @@ identity：身份（如上述）
 password：密码
 certificate：证书（文件）
 
-当注册时为学生和其他身份时，传入表单字段包括：
-username：真实姓名
-sex：性别（0为女，1为男）
-telnum：手机号
-checknum：验证码
-identity：身份（如上述）
-password：密码
 
 登录：post form 表单 action:/userdata/login/   site:login.html
 登陆后保存用户id（userid）和身份代码（identity）在session中
@@ -184,3 +177,9 @@ get方式：传入文件id
 畅言：
  appid: 'cyti4u9K7',
  conf: 'prod_534e7946cc8b7dc35348547356cc4e76'
+
+首页：url /
+site:index.html
+返回字段：
+video_list: 视频分类栏数据, expertinfo: 18名专家信息, yugaoinfo: 会议预告, zixuninfo: 最新资讯, shipininfo: top5视频
+各字段的具体字段同以前

@@ -23,7 +23,8 @@ import pymysql
 
 
 def article_detail(request, column, pk):
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Dynamicarticle.objects.filter(pk=pk, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
@@ -85,7 +86,7 @@ def article_detail(request, column, pk):
 """
 def article(request, column):
     tmpurl = str(request.path).strip('/')
-    article = Dynamicarticle.objects.filter(column=column, published=True)
+    article = Dynamicarticle.objects.filter(column=column, published=True).order_by("-id")
     associntro = Assocarticle.objects.all()[0]
     belong = {'name': '学会', 'slug': 'association'}
     column1 = {'name': '动态', 'slug': 'dongtai'}
@@ -95,7 +96,7 @@ def article(request, column):
 
 def index(request):
     tmpurl = str(request.path).strip('/')
-    article = Dynamicarticle.objects.filter(published=True)[0:6]
+    article = Dynamicarticle.objects.filter(published=True).order_by("-id")[0:6]
     associntro = Assocarticle.objects.all()[0]
     # people = Peoplearticle.objects.all()
     zhuwei = Peoplearticle.objects.filter(level=0)

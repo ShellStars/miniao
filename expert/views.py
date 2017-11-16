@@ -13,7 +13,8 @@ import json
 
 def interviewarticle_detail(request, pk):
     column = 'zhuanfang'
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'},
                {'name': '专访', 'slug': 'zhuanfang'}]
@@ -73,7 +74,7 @@ def interviewarticle(request):
                {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '专访'
     belong = 'expert'
-    article = Interviewarticle.objects.filter(column=column, published=True)
+    article = Interviewarticle.objects.filter(column=column, published=True).order_by("-id")
     if article:
         objects, page_range = my_pagination(request, article, 2)
         return render_to_response('article_column.html', {'classes': classes, 'column': column1, 'belong': belong, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
@@ -166,7 +167,7 @@ def doctorarticle(request):
                {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '大家风范'
     belong = 'expert'
-    article = Doctorarticle.objects.filter(column=column, published=True)
+    article = Doctorarticle.objects.filter(column=column, published=True).order_by("-id")
     if article:
         objects, page_range = my_pagination(request, article, 2)
         return render_to_response('article_column.html', {'classes': classes, 'column': column1, 'belong': belong, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
@@ -177,7 +178,7 @@ def doctorarticle(request):
 def expertarticle_detail(request, pk):
     column = 'zhuanjia'
     article = Expertarticle.objects.filter(pk=pk, column=column, published=True)
-    comment = Comment.objects.filter(name=article[0].name, published=True)
+    comment = Comment.objects.filter(name=article[0].name, published=True).order_by("-id")
     if article:
             return render(request, 'article_expert_detail.html', {'article': article[0], 'comment': comment})
     else:
@@ -193,15 +194,15 @@ def expertarticle(request):
     if "province" in request.GET and "department" in request.GET:
         sel_province = request.GET["province"]
         sel_department = request.GET["department"]
-        article = Expertarticle.objects.filter(column=column, province=sel_province, department=sel_department, published=True)
+        article = Expertarticle.objects.filter(column=column, province=sel_province, department=sel_department, published=True).order_by("-id")
     elif "province" in request.GET:
         sel_province = request.GET["province"]
-        article = Expertarticle.objects.filter(column=column, province=sel_province, published=True)
+        article = Expertarticle.objects.filter(column=column, province=sel_province, published=True).order_by("-id")
     elif "department" in request.GET:
         sel_department = request.GET["department"]
-        article = Expertarticle.objects.filter(column=column, department=sel_department, published=True)
+        article = Expertarticle.objects.filter(column=column, department=sel_department, published=True).order_by("-id")
     else:
-        article = Expertarticle.objects.filter(column=column, published=True)
+        article = Expertarticle.objects.filter(column=column, published=True).order_by("-id")
     tmpurl = str(request.path).strip('/')
     # article = Expertarticle.objects.filter(column=column, published=True)
     conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')

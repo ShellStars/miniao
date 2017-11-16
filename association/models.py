@@ -43,8 +43,8 @@ class Assocarticle(models.Model):
     constitution = models.TextField('章程', default='')
     pic = models.ImageField('会徽', upload_to='uploads/images/doctor/')
     picintro = models.TextField('会徽简介', default='')
-    weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/', blank=True)
-    weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/', blank=True)
+    weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/')
+    weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/')
 
     #def get_absolute_url(self):
     #    return reverse('infoarticle', args=(self.pk, self.slug))

@@ -13,7 +13,8 @@ import pymysql
 
 
 def article_detail(request, column, pk):
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Magearticle.objects.filter(pk=pk, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
@@ -78,7 +79,7 @@ def article(request, column):
 
 def index(request):
     tmpurl = str(request.path).strip('/')
-    article = Magearticle.objects.filter(published=True)
+    article = Magearticle.objects.filter(published=True).order_by("-id")
     belong = {'name': '杂志', 'slug': 'magazine'}
     column1 = {'name':'动态', 'slug': 'dongtai'}
     info = Mageinfo.objects.all()[0]

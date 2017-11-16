@@ -49,7 +49,8 @@ def article_detail(request, column, pk):
 
 
 def article_detail(request, column, pk):
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Meetarticle.objects.filter(pk=pk, column=column, published=True)
     classes = Meetname.objects.all()
@@ -102,7 +103,7 @@ def article_detail(request, column, pk):
 
 def article(request, column):
     tmpurl = str(request.path).strip('/')
-    article = Meetarticle.objects.filter(column=column, published=True)
+    article = Meetarticle.objects.filter(column=column, published=True).order_by("-id")
     classes = Meetname.objects.all()
     belong = 'meeting'
     column1 = Meetname.objects.filter(slug=column)[0].name
@@ -124,7 +125,7 @@ def special(request):
 
 def index(request):
     tmpurl = str(request.path).strip('/')
-    article = Meetarticle.objects.filter(published=True)
+    article = Meetarticle.objects.filter(published=True).order_by("-id")
     classes = Meetname.objects.all()
     belong = 'meeting'
     objects, page_range = my_pagination(request, article, 9)

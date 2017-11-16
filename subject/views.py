@@ -12,7 +12,8 @@ import pymysql
 
 
 def article_detail(request, column, pk):
-    url = 'http://127.0.0.1:8000' + request.path
+    url = request.path.strip('/')
+    # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Subjectarticle.objects.filter(pk=pk, column=column, published=True)
     classes = Subjectclass.objects.all()
@@ -64,7 +65,7 @@ def article_detail(request, column, pk):
 
 def article(request, column):
     tmpurl = str(request.path).strip('/')
-    article = Subjectarticle.objects.filter(column=column, published=True)
+    article = Subjectarticle.objects.filter(column=column, published=True).order_by("-id")
     classes = Subjectclass.objects.all()
     belong = 'subject'
     column1 = Subjectclass.objects.filter(slug=column)[0].name
@@ -74,7 +75,7 @@ def article(request, column):
 
 def index(request):
     tmpurl = str(request.path).strip('/')
-    article = Subjectarticle.objects.filter(published=True)
+    article = Subjectarticle.objects.filter(published=True).order_by("-id")
     classes = Subjectclass.objects.all()
     belong = 'subject'
     objects, page_range = my_pagination(request, article, 9)
