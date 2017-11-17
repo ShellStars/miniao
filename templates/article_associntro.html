@@ -41,11 +41,13 @@
 
 <div class="magazine-banner">
   <div class="banner-inner">
-    <img src="/media/{{ associntro.pic }}" alt="huizhang">
+    {% for associntro0 in associntro %}
+    <img src="/media/{{ associntro0.pic }}" alt="huizhang">
     <div class="detail">
       <h1>学会简介</h1>
-      <p>{{ associntro }}</p>
+      <p>{{ associntro0.associntro }}</p>
     </div>
+    {% endfor %}
   </div>
 </div>
 
@@ -95,13 +97,17 @@
     <div class="r-box r-box-zc">
       <h5>章程</h5>
       <p>
-        {{ associntro.constitution }}
+        {% for associntro0 in associntro %}
+        {{ associntro0.constitution }}
+        {% endfor %}
       </p>
     </div>
 
     <div class="r-box r-box-hh">
       <h5>会徽</h5>
-      <img class="huihui" src="/media/{{ associntro.pic }}" alt="huizhang">
+      {% for associntro0 in associntro %}
+      <img class="huihui" src="/media/{{ associntro0.pic }}" alt="huizhang">
+      {% endfor %}
     </div>
 
     <div class="r-box r-box-zw">
@@ -247,20 +253,22 @@
 
     <div class="r-box r-box-lxfs">
       <h5>联系方式</h5>
+      {% for associntro0 in associntro %}
       <div class="contact">
         <div class="img">
-          <img src="{{ associntro.weixinpic.url }}" alt="微信二维码">
+          <img src="{{ associntro0.weixinpic.url }}" alt="微信二维码">
           <div>
             微信二维码
           </div>
         </div>
         <div class="img">
-          <img src="{{ associntro.weibopic.url }}" alt="微博二维码">
+          <img src="{{ associntro0.weibopic.url }}" alt="微博二维码">
           <div>
             微博二维码
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
 
   </div>
