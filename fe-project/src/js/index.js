@@ -47,7 +47,7 @@ $(function () {
           <img src="' + ret.headimg + '" alt="AVATAR">\
           <h6>'+ ret.username +'</h6>\
         </a>\
-        <a href="/userdata/logout" class="btn-layout">退出</a>\
+        <a href="" class="btn-layout">退出</a>\
       ');
 
       // if (ret.identity === 0 || ret.identity === 2) {
