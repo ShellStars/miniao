@@ -1,0 +1,2 @@
+/usr/lib/python2.7/site-packages/suit/templates/admin/index.html 
+/usr/lib64/python2.7/site-packages/django/contrib/admin/sites.py

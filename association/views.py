@@ -97,7 +97,7 @@ def article(request, column):
 def index(request):
     tmpurl = str(request.path).strip('/')
     article = Dynamicarticle.objects.filter(published=True).order_by("-id")[0:6]
-    associntro = Assocarticle.objects.all()[0]
+    associntro = Assocarticle.objects.all()[0:1]
     # people = Peoplearticle.objects.all()
     zhuwei = Peoplearticle.objects.filter(level=0)
     fuzhuwei = Peoplearticle.objects.filter(level=1)

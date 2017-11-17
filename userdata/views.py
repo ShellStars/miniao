@@ -469,7 +469,8 @@ def collect(request):
             Favourite.objects.create(userid=a, title=title, url=url)
             return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
         else:
-            return HttpResponseRedirect('/')
+            return HttpResponse(json.dumps({'info': 'fail'}), content_type="application/json")
+            #return HttpResponseRedirect('/')
 
     else:
         return HttpResponseRedirect('/')
@@ -511,7 +512,8 @@ def cancel(request):
                 # response = HttpResponseRedirect('/userdata/showcollect')
                 # return response
         else:
-            return HttpResponseRedirect('/')
+            return HttpResponse(json.dumps({'info': 'fail'}), content_type="application/json")
+            # return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/')
 
@@ -531,8 +533,10 @@ def scoreclass(request):
             b = Userinfo.objects.filter(id=a)
             newnum = b[0].integralnum + 1
             b.update(integralnum=newnum)
+            return HttpResponse(json.dumps({'info': 'success'}), content_type="application/json")
         else:
-            return HttpResponseRedirect('/')
+            return HttpResponse(json.dumps({'info': 'fail'}), content_type="application/json")
+            # return HttpResponseRedirect('/')
 
     else:
         return HttpResponseRedirect('/')
