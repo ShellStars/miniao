@@ -196,7 +196,7 @@ SUIT_CONFIG = {
               },
              {'label': '杂志',
               'app': 'magazine',
-              'models': ('Magearticle',)
+              'models': ('Mageinfo', 'Magearticle',)
               },
              ),
 
