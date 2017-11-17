@@ -481,9 +481,11 @@ def showcollect(request):
     if request.method == 'GET':
         a = request.session.get("userid")
         if a:
+            userinfo = Userinfo.objects.filter(id=a)
+            # cc = userinfo[0].username
             result = Favourite.objects.filter(userid=a).order_by("-addtime")
             objects, page_range = my_pagination(request, result, 20)
-            return render_to_response('collection.html', {'objects': objects, 'page_range': page_range},
+            return render_to_response('collection.html', {'userinfo': userinfo[0], 'objects': objects, 'page_range': page_range},
                                       context_instance=RequestContext(request))
         else:
             return HttpResponseRedirect('/')
