@@ -180,7 +180,12 @@ def expertarticle_detail(request, pk):
     article = Expertarticle.objects.filter(pk=pk, column=column, published=True)
     comment = Comment.objects.filter(name=article[0].name, published=True).order_by("-id")
     if article:
-            return render(request, 'article_expert_detail.html', {'article': article[0], 'comment': comment})
+        objects, page_range = my_pagination(request, comment, 2)
+        return render_to_response('article_expert_detail.html',
+                                  {'objects': objects,
+                                   'page_range': page_range, 'article': article[0]},
+                                  context_instance=RequestContext(request))
+        # return render(request, 'article_expert_detail.html', {'article': article[0], 'comment': comment})
     else:
         return HttpResponseRedirect('/')
 
