@@ -56,6 +56,15 @@ $(function () {
       if (ret.state == 'fail' && window.isVideo) {
         showVideoAlert();
       }
+
+      $('.btn-layout').click(function (e) {
+        e.preventDefault();
+        var img = new Image();
+        img.src = 'http://changyan.sohu.com/api/logout?client_id={cyti4u9K7}';
+        setTimeout(function () {
+          window.location.href = "/userdata/logout";
+        }, 500);
+      });
     },
     error: function() {
       showVideoAlert();
@@ -73,7 +82,11 @@ $(function () {
           title: $(this).attr('data-title'),
           url: window.location.href,
         },
-        success: function () {
+        success: function (data) {
+          if (data.info === 'fail') {
+            alert('请登录后收藏');
+            return ;
+          }
           $(t).text('取消收藏');
           $(t).attr('data-action', '0');
         }
