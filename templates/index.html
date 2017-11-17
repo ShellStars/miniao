@@ -85,7 +85,7 @@
     <a href="/subject"><span>学科</span></a>
   </li>
   <li>
-    <a href="/meetting"><span>会议</span></a>
+    <a href="/meeting"><span>会议</span></a>
   </li>
   <li>
     <a href="/magazine"><span>期刊</span></a>
@@ -194,7 +194,7 @@
           {% for item in expertinfo %}
           <div class="item">
             <img src="/media/{{ item.smallpic }}" alt="p">
-            <h4>{{ item.name }}  {{ item.title }}</h4>
+            <h4>{{ item.name }} <span>  </span>  {{ item.ranks }}</h4>
             <h5>{{ item.hospital }}{{ item.department }}</h5>
           </div>
           
@@ -228,12 +228,12 @@
   <div class="box-meeting">
     <div class="mix-title">
       <span>会议预告</span>
-      <a href="/meetting">更多>></a>
+      <a href="/meeting">更多>></a>
     </div>
     <ul>
       {% for i in yugaoinfo %}
       <li>
-        <a href="/meetting/{{ i.column_id }}/{{ i.id }}">
+        <a href="/meeting/{{ i.column_id }}/{{ i.id }}">
           <h3>{{ i.title }}</h3>
           <div class="ppp" style="display: none;">
             <p>
