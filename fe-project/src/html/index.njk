@@ -133,90 +133,29 @@
       <br>
     </p>
   </div>
-
   <div class="inner">
     <div class="carousel-wrap">
       <ul class="carousel-inner clearfix" data-jcarousel="true">
         <li class="clearfix">
+          {{ '{% for item in expertinfo %}' | safe }}
           <div class="item">
-            <img src="/static/images/home_p_1.png" alt="p">
-            <h4>贺大林  主任医师</h4>
-            <h5>西安交大一附院泌尿外科</h5>
+            <img src="/media/{{ '{{ item.smallpic }}' }}" alt="p">
+            <h4>{{ '{{ item.name }}' }}  {{ '{{ item.title }}' }}</h4>
+            <h5>{{ '{{ item.hospital }}{{ item.department }}' }}</h5>
           </div>
-          <div class="item">
-            <img src="/static/images/home_p_2.png" alt="p">
-            <h4>李建兴  主任医师</h4>
-            <h5>北京清华长庚医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_3.png" alt="p">
-            <h4>魏金星  主任医师</h4>
-            <h5>郑大一附院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_4.png" alt="p">
-            <h4>金讯波  主任医师</h4>
-            <h5>山东省立医院泌尿微创中心</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_5.png" alt="p">
-            <h4>吴小候  主任医师</h4>
-            <h5>重医一附院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_6.png" alt="p">
-            <h4>程跃  主任医师</h4>
-            <h5>宁波第一医院泌尿外科</h5>
-          </div>
-        </li>
-        <li class="clearfix">
-          <div class="item">
-            <img src="/static/images/home_p_7.png" alt="p">
-            <h4>魏强  主任医师</h4>
-            <h5>川大华西医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_8.png" alt="p">
-            <h4>黄翼然  主任医师</h4>
-            <h5>上海仁济医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_9.png" alt="p">
-            <h4>王健  主任医师</h4>
-            <h5>青大附属医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_10.png" alt="p">
-            <h4>徐勇  主任医师</h4>
-            <h5>天津医大第二医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_11.png" alt="p">
-            <h4>廖利民  主任医师</h4>
-            <h5>北京博爱医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_12.png" alt="p">
-            <h4>齐琳  主任医师</h4>
-            <h5>中南大学湘雅医院泌尿外科</h5>
-          </div>
-        </li>
-        <li class="clearfix">
-          <div class="item">
-            <img src="/static/images/home_p_13.png" alt="p">
-            <h4>张炜   主任医师</h4>
-            <h5>江苏省人民医院泌尿外科</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_14.png" alt="p">
-            <h4>王玉杰  主任医师</h4>
-            <h5>新医大一附院泌尿中心</h5>
-          </div>
-          <div class="item">
-            <img src="/static/images/home_p_15.png" alt="p">
-            <h4>王行环  主任医师</h4>
-            <h5>武大中南医院泌尿外科</h5>
-          </div>
+          {{ '
+          {% ifequal forloop.counter 6 %}
+          </li>
+          <li class="clearfix">
+          {% endifequal %}
+
+          {% ifequal forloop.counter 12 %}
+          </li>
+          <li class="clearfix">
+          {% endifequal %}
+          ' | safe }}
+          {# <div>{{ '{{ forloop.counter }}' }}</div> #}
+          {{ '{% endfor %}' | safe }}
         </li>
       </ul>
     </div>
@@ -238,30 +177,16 @@
       <a href="/meetting">更多>></a>
     </div>
     <ul>
+      {{ '{% for i in yugaoinfo %}' }}
       <li>
-        <a href="#">
-          <h3>2016年12月 上海<br>青年医师论坛</h3>
-          <p>青年医师论坛在上海举办。</p>
+        <a href="/meetting/{{ '{{ i.column_id }}' }}/{{ '{{ i.id }}' }}">
+          <h3>{{ '{{ i.title }}' }}</h3>
+          <p>{{ '{{ i.content|slice:"14" }}' | safe }}</p>
           <h4>会议时间</h4>
-          <time>2016年12月2-3日</time>
+          <time>{{ '{{ i.pub_date|date:"Y-m-d" }}' | safe }}</time>
         </a>
       </li>
-      <li>
-        <a href="#">
-          <h3>2017年4月 江苏南京<br>护理专题会议</h3>
-          <p>由中华医学会、中华医学会泌尿外科学分会(CUA)主办，CUA 护理学组、南京医科大学第一附属医院承办的“CUA2017 全国泌尿外科护理专题会议</p>
-          <h4>会议时间</h4>
-          <time>2017年4月14～15日</time>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <h3>2017年4月 重庆<br>泌尿专题会议</h3>
-          <p>由中华医学会、中华医学会泌尿外科分会（CUA）主办，CUA尿控学组承办</p>
-          <h4>会议时间</h4>
-          <time>2017年4月21～23日</time>
-        </a>
-      </li>
+      {{ '{% endfor %}' }}
     </ul>
   </div>
   <div class="box-consult">

@@ -309,9 +309,11 @@ $(function () {
 
   $('.register-tab li').click(function () {
     if ($(this).attr('data-type') == 2) {
-      $('.group-hospital, .group-department, .group-title, .group-certificate').hide();
+      $('.group-hospital, .group-department, .group-title').hide();
+      $('.group-certificate label').text('学生证');
     } else {
-      $('.group-hospital, .group-department, .group-title, .group-certificate').show();
+      $('.group-hospital, .group-department, .group-title').show();
+      $('.group-certificate label').text('执业证');
     }
     $('#ipt-identity').val($(this).attr('data-type'));
     $('.register-tab li').removeClass('active');
