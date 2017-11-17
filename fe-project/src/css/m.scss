@@ -67,4 +67,28 @@
     .collection-content ul li {
       padding-right: 10px !important;
     }
+    .article-detail-container h1:after {
+      top: 1px !important;
+    }
+    .article-detail-crumbs {
+      width: 100% !important;
+    }
+    .expert-navbar {
+      display: none !important;
+    }
+    .expert-list li {
+      width: 50% !important;
+      margin-top: 34px !important;
+      padding: 0 20px !important;
+    }
+    .expert-detail-banner .inner .detail {
+      padding: 52px 0px !important;
+      height: 100% !important;
+    }
+    .expert-detail-banner .inner .detail p {
+      font-size: 12px !important;
+    }
+    .expert-detail-banner .inner .detail h2 {
+      font-size: 20px !important;
+    }
 }
