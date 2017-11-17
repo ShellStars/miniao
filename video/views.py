@@ -315,11 +315,8 @@ def index(request):
     large_classes = [{'name_zh': '疾病分类', 'name_en': 'disease'}, {'name_zh': '难度分级', 'name_en': 'difficulty'},
                        {'name_zh': '专家专栏', 'name_en': 'expert'}, {'name_zh': '其他', 'name_en': 'other'}]
     # article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
-    if dic:
-        objects, page_range = my_pagination(request, dic, 2)
-        return render(request, 'video_index.html', {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl, 'large_classes': large_classes, 'small_classes': small_classes})
-    else:
-        return HttpResponseRedirect('/')
+    objects, page_range = my_pagination(request, dic, 2)
+    return render(request, 'video_index.html', {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl, 'large_classes': large_classes, 'small_classes': small_classes})
 
 # 赞
 def zan(request):
