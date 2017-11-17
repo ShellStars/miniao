@@ -60,10 +60,13 @@ $(function () {
       $('.btn-layout').click(function (e) {
         e.preventDefault();
         var img = new Image();
-        img.src = 'http://changyan.sohu.com/api/logout?client_id={cyti4u9K7}';
+        img.src = 'http://changyan.sohu.com/api/2/logout?client_id=cyti4u9K7';
+        img.onload = function() {
+          window.location.href = "/userdata/logout";
+        }
         setTimeout(function () {
           window.location.href = "/userdata/logout";
-        }, 500);
+        }, 2000);
       });
     },
     error: function() {

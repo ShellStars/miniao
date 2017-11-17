@@ -1,0 +1,70 @@
+@media screen and (max-width: 600px) {
+    body {
+        min-width: auto !important;
+    }
+    .header-wrap {
+      display: none !important;
+    }
+    .footer-wrap {
+      display: none !important;
+    }
+    .article-container {
+      padding: 0 10px !important;
+      .article-list {
+        li {
+          width: 100% !important;
+          padding: 0 45px 0 10px !important;
+        }
+      }
+      .title {
+        margin-top: 10px !important;
+        span {
+          font-size: 20px !important;
+        }
+      }
+      .article-navbar {
+        padding: 0 2px !important;
+      }
+    }
+    .relation-box {
+      ul {
+        li {
+          width: 100% !important;
+        }
+      }
+    }
+    .video-container .video-navbar {
+      margin-bottom: 10px !important;
+      padding: 0 10px !important;
+    }
+    .video-container .video-list li {
+      width: 50% !important;
+      margin-bottom: 30px !important;
+    }
+    .article-detail-container h1 {
+      font-size: 21px !important;
+    }
+    .article-detail-container {
+      width: 100% !important;
+    }
+    .article-detail-navbar {
+      display: none !important;
+    }
+    .profile-content .inner {
+      width: 100% !important;
+    }
+    .profile-banner .box-profile .avatar {
+      width: 54px !important;
+      height: 54px !important;
+      margin-top: 90px !important;
+    }
+    .profile-banner .box-profile .detail {
+      margin-left: 20px !important;
+    }
+    .collection-content .inner {
+      width: 100% !important;
+    }
+    .collection-content ul li {
+      padding-right: 10px !important;
+    }
+}
