@@ -235,14 +235,7 @@
       <li>
         <a href="/meetting/{{ i.column_id }}/{{ i.id }}">
           <h3>{{ i.title }}</h3>
-          <div class="ppp" style="display: none;">
-            <p>
-            
-            {% autoescape off %}
-            {{ i.content }}
-            {% endautoescape %}
-            </p>
-          </div>
+          <p>{{ i.content|slice:"14" }}</p>
           <h4>会议时间</h4>
           <time>{{ i.pub_date|date:"Y-m-d" }}</time>
         </a>
