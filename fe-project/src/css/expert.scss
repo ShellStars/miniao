@@ -282,3 +282,82 @@
     }
   }
 }
+
+
+.expert-comment {
+  width: 1190px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  margin-top: 70px;
+  .inner {
+    width: 860px;
+    max-width: 100%;
+  }
+  h2 {
+    border-bottom: 2px solid #9e9e9e;
+    line-height: 44px;
+    span {
+      font-size: 24px;
+      color: #000000;
+      border-bottom: 2px solid #000;
+      position: relative;
+      display: inline-block;
+      top: 2px;
+    }
+  }
+  li {
+    margin-top: 36px;
+  }
+  p {
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.44;
+  }
+  time {
+    line-height: 2;
+    font-size: 14px;
+    color: #cacaca;
+    margin: 10px 0;
+    display: block;
+    i {
+      font-size: 14px;
+      position: relative;
+      top: 1px;
+    }
+  }
+  .comment-form {
+    padding: 0 20px;
+    margin-top: 40px;
+    margin-bottom: 120px;
+    h2 {
+      span {
+        border-bottom: 2px solid #377bef;
+      }
+    }
+  }
+  textarea {
+    margin: 30px 0;
+    width: 100%;
+    height: 230px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 20px;
+    overflow: auto;
+    resize: none;
+  }
+  button {
+    background: #377bef;
+    font-size: 15px;
+    height: 50px;
+    width: 170px;
+    text-align: center;
+    line-height: 50px;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    color: #fff;
+  }
+}

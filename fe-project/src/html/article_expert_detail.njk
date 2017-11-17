@@ -75,6 +75,31 @@
     </div>
   </div>
 </div>
+
+<div class="expert-comment">
+  <div class="inner">
+    <h2>
+      <span>游客评论（{{ '{{ comment.count }}' }}）</span>
+    </h2>
+    <ul>
+      {{ '{% for i in comment %}' | safe }}
+      <li>
+        <p>{{ '{{ i.content }}' | safe }}</p>
+        <time><i class="iconfont icon-bishujushichang5"></i><span> </span>
+          {{ '{{ i.pub_date|date:"Y-m-d H:m" }}' | safe }}
+        </time>
+      </li>
+      {{ '{% endfor %}' | safe }}
+    </ul>
+    <div class="comment-form">
+      <h2>
+        <span>发表评论</span>
+      </h2>
+      <textarea name="comment" id="comment-textarea"></textarea>
+      <button type="button" id="comment-btn">发布评论</button>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block javascript %}
@@ -91,6 +116,34 @@ $(function () {
           $('.zan .i span').text((+$('.zan .i span').text()) + 1);
         }
       },
+    });
+  });
+
+  var isCommenting = false;
+  $("#comment-btn").click(function () {
+    var val = $("#comment-textarea").val();
+    if (!val) return;
+    if (isCommenting) return;
+    isCommenting = true;
+    $.ajax({
+      url: '/expert/comment/',
+      method: 'post',
+      data: {
+        url: window.location.href,
+        content: val,
+      },
+      success: function(ret) {
+        isCommenting = false;
+        if (ret.info == "success") {
+          window.location.reload();
+        } else {
+          alert('评论失败');
+        }
+      },
+      error: function() {
+        isCommenting = false;
+        alert('评论失败');
+      }
     });
   });
 });
