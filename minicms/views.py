@@ -6,6 +6,11 @@
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext, loader, Context
 from bs4 import BeautifulSoup
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from expert.models import Expertarticle
+from article.models import Artiarticle
+from video.models import Videoarticle
 import pymysql
 
 
@@ -42,3 +47,56 @@ def index(request):
     return render_to_response('index.html',
                               {'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
                               context_instance=RequestContext(request))
+
+
+def search(request):
+    if "type" in request.GET and "value" in request.GET:
+        type1 = request.GET["type"]
+        value1 = request.GET["value"]
+        if value1 == '':
+            target = '/'+type1+'/'
+            return HttpResponseRedirect(target)
+        else:
+            if type1 == "expert":
+                article = Expertarticle.objects.filter(name__contains=value1, published=True).order_by("-id")
+                objects, page_range = my_pagination(request, article, 9)
+                return render_to_response('search_expert.html',
+                                          {'objects': objects, 'page_range': page_range, 'type': type1, 'value': value1},
+                                          context_instance=RequestContext(request))
+            elif type1 == "article":
+                article = Artiarticle.objects.filter(title__contains=value1, published=True).order_by("-id")
+                objects, page_range = my_pagination(request, article, 9)
+                return render_to_response('search_article.html',
+                                          {'objects': objects, 'page_range': page_range, 'type': type1,
+                                           'value': value1},
+                                          context_instance=RequestContext(request))
+            elif type1 == "video":
+                article = Videoarticle.objects.filter(title__contains=value1, published=True).order_by("-id")
+                objects, page_range = my_pagination(request, article, 9)
+                return render_to_response('search_video.html',
+                                          {'objects': objects, 'page_range': page_range, 'type': type1,
+                                           'value': value1},
+                                          context_instance=RequestContext(request))
+            else:
+                return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+
+
+def my_pagination(request, queryset, display_amount, after_range_num=3, bevor_range_num=2):
+    paginator = Paginator(queryset,display_amount)
+    try:
+        page = int(request.GET["page"])
+    except:
+        page = 1
+    try:
+        object = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        object = paginator.page(paginator.num_pages)
+    except:
+        object = paginator.page(1)
+    if page >= after_range_num:
+        page_range = paginator.page_range[page-after_range_num:page+bevor_range_num]
+    else:
+        page_range = paginator.page_range[0:page+bevor_range_num]
+    return object,page_range

@@ -183,3 +183,18 @@ site:index.html
 返回字段：
 video_list: 视频分类栏数据, expertinfo: 18名专家信息, yugaoinfo: 会议预告, zixuninfo: 最新资讯, shipininfo: top5视频
 各字段的具体字段同以前
+
+
+
+搜索： url /search
+传入字段：type(video,article,expert)  value
+搜索时，get传入参数，http://127.0.0.1:8000/search/?type=video&value=手术 翻页时：http://127.0.0.1:8000/search/?type=video&value=手术&page=2
+
+返回页面：
+当type=video时：search_video.html
+当type=article时：search_article.html
+当type=expert时：search_expert.html
+
+返回值：
+	objects：数据对象  page_range：共分多少页  type:传入type value:传入value
+  数据对象的内容同之前专家，文章，视频对应的数据。
