@@ -90,7 +90,7 @@ def article(request, column):
     associntro = Assocarticle.objects.all()[0]
     belong = {'name': '学会', 'slug': 'association'}
     column1 = {'name': '动态', 'slug': 'dongtai'}
-    objects, page_range = my_pagination(request, article, 9)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('dongtai_index.html', {'objects':objects, 'belong': belong, 'info': associntro, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 
 

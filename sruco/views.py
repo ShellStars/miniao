@@ -70,7 +70,7 @@ def article(request, column):
     classes = Srucoclass.objects.all()
     belong = 'sruco'
     column1 = Srucoclass.objects.filter(slug=column)[0].name
-    objects, page_range = my_pagination(request, article, 2)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 
 
@@ -79,7 +79,7 @@ def index(request):
     article = Srucoarticle.objects.filter(published=True).order_by("-id")
     classes = Srucoclass.objects.all()
     belong = 'sruco'
-    objects, page_range = my_pagination(request, article, 9)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': classes,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 

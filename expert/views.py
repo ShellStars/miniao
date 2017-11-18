@@ -76,7 +76,7 @@ def interviewarticle(request):
     belong = 'expert'
     article = Interviewarticle.objects.filter(column=column, published=True).order_by("-id")
     if article:
-        objects, page_range = my_pagination(request, article, 2)
+        objects, page_range = my_pagination(request, article, 15)
         return render_to_response('article_column.html', {'classes': classes, 'column': column1, 'belong': belong, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/')
@@ -222,7 +222,7 @@ def expertarticle(request):
     province = []
     for i in row1:
         province.append(str(i[0]))
-    objects, page_range = my_pagination(request, article, 3)
+    objects, page_range = my_pagination(request, article, 12)
     return render_to_response('article_expert.html', {'classes': classes, 'column': column1, 'sel_province': sel_province, 'sel_department': sel_department, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl, 'department': department, 'province': province},context_instance=RequestContext(request))
 
 # 评论

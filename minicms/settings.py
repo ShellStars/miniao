@@ -169,7 +169,8 @@ SUIT_CONFIG = {
               },
              {'label': '其它',
               'app': 'other',
-              'models': ('Friend', 'Standardarticle', 'Resourcearticle',)
+              'models': ('Friend', 'Standardarticle',)
+              # 'models': ('Friend', 'Standardarticle', 'Resourcearticle',)
               },
              {'label': '科普园地',
               'app': 'universal',

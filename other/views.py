@@ -23,7 +23,7 @@ def article_detail(request, column, pk):
     final_list = []
     for i in dic1:
         final_list.append(i)
-    final_list.append({u'name': u'下载', u'slug': u'download'})
+    # final_list.append({u'name': u'下载', u'slug': u'download'})
     relate = Standardarticle.objects.filter(column=column, published=True)[0:2]
     pre_article = Standardarticle.objects.filter(id__lt=pk, published=True)
     if pre_article:
@@ -79,12 +79,12 @@ def article(request, column):
     final_list = []
     for i in dic1:
         final_list.append(i)
-    final_list.append({u'name': u'下载', u'slug': u'download'})
+    # final_list.append({u'name': u'下载', u'slug': u'download'})
     belong = 'other'
     column1 = Standardclass.objects.filter(slug=column)[0].name
-    objects, page_range = my_pagination(request, article, 2)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': final_list, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
-
+"""
 def download_cal(request, pk):
     downfile = Resourcearticle.objects.filter(pk=pk, published=True)
     if downfile:
@@ -141,7 +141,7 @@ def download_album(request):
         final_list.append(i)
     final_list.append({u'name': u'下载', u'slug': u'download'})
     return render(request, 'video_album.html', {'album': album, 'num': dic, 'belong': belong, 'column': column1, 'classes': final_list, 'tmpurl': tmpurl})
-
+"""
 
 
 
@@ -162,9 +162,9 @@ def index(request):
     final_list = []
     for i in dic1:
         final_list.append(i)
-    final_list.append({u'name': u'下载', u'slug': u'download'})
+    # final_list.append({u'name': u'下载', u'slug': u'download'})
     belong = 'other'
-    objects, page_range = my_pagination(request, article, 9)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': final_list,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 

@@ -83,7 +83,7 @@ def index(request):
     belong = {'name': '杂志', 'slug': 'magazine'}
     column1 = {'name':'动态', 'slug': 'dongtai'}
     info = Mageinfo.objects.all()[0]
-    objects, page_range = my_pagination(request, article, 9)
+    objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_magazine.html', {'objects': objects, 'belong': belong, 'info': info, 'column': column1,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 

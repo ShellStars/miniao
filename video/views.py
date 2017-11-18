@@ -102,7 +102,7 @@ def video_album_datail(request, albumname):
     for i in dic1:
         final_list.append(i)
     final_list.append({u'name': u'专辑', u'slug': u'zhuanji'})
-    objects, page_range = my_pagination(request, video, 2)
+    objects, page_range = my_pagination(request, video, 15)
     return render(request, 'video_album_detail.html',
                       {'belong': belong, 'column': column1, 'album': album1, 'objects': objects, 'classes': final_list,
                        'page_range': page_range, 'tmpurl': tmpurl, 'albuminfo': albuminfo[0], 'num': num})
@@ -219,7 +219,7 @@ def video(request, column):
     large_classes = [{'name_zh': '疾病分类', 'name_en': 'disease'}, {'name_zh': '难度分级', 'name_en': 'difficulty'},
                      {'name_zh': '专家专栏', 'name_en': 'expert'}, {'name_zh': '其他', 'name_en': 'other'}]
     # article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
-    objects, page_range = my_pagination(request, dic, 2)
+    objects, page_range = my_pagination(request, dic, 15)
     return render(request, 'video_column.html',
                       {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'belong': belong, 'column': column1, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl,
                        'large_classes': large_classes, 'small_classes': small_classes})
@@ -315,7 +315,7 @@ def index(request):
     large_classes = [{'name_zh': '疾病分类', 'name_en': 'disease'}, {'name_zh': '难度分级', 'name_en': 'difficulty'},
                        {'name_zh': '专家专栏', 'name_en': 'expert'}, {'name_zh': '其他', 'name_en': 'other'}]
     # article = Videoarticle.objects.filter(column='gonggao', published=True)[0:3]
-    objects, page_range = my_pagination(request, dic, 2)
+    objects, page_range = my_pagination(request, dic, 15)
     return render(request, 'video_index.html', {'disease': disease, 'difficulty': difficulty, 'other': other, 'expert': expert, 'objects': objects, 'classes': final_list, 'page_range': page_range, 'tmpurl': tmpurl, 'large_classes': large_classes, 'small_classes': small_classes})
 
 # 赞
