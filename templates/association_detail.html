@@ -159,7 +159,7 @@
 
   <div class="pages clearfix">
     <div class="page-left">
-      <a href="/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}">
+      <a href="/{{ belong.slug }}/{{ pre_article.assoccolumn }}/{{ pre_article.column_id }}/{{ pre_article.id }}">
         <i class="iconfont icon-l"></i>
         <div>
           <span>上一篇</span>
@@ -168,7 +168,7 @@
       </a>
     </div>
     <div class="page-right">
-      <a href="/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}">
+      <a href="/{{ belong.slug }}/{{ next_article.assoccolumn }}/{{ next_article.column_id }}/{{ next_article.id }}">
         <div>
           <span>下一篇</span>
           <h6>{{ next_article.title }}</h6>
@@ -195,7 +195,7 @@
               <p>{{ i.content }}</p>
             </div>
             {% endautoescape %}
-            <a href="/{{ belong.slug }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+            <a href="/{{ belong.slug }}/{{ i.assoccolumn }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
           </div>
         </li>
         {% endfor %}
