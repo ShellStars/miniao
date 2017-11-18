@@ -91,6 +91,7 @@ body {
     font-weight: 16px;
     margin-right: 34px;
     float: left;
+    position: relative;
     i {
       display: inline-block;
       font-size: 12px;
@@ -100,6 +101,34 @@ body {
       position: relative;
       top: -3px;
       right: -4px;
+    }
+    a {
+      cursor: pointer;
+    }
+    &:hover {
+      .nav-children {
+        display: block;
+      }
+    }
+    .nav-children {
+      display: none;
+      position: absolute;
+      width: 100%;
+      z-index: 999;
+      top: 100%;
+      left: 50%;
+      margin-left: -9em;
+      background: #fafafa;
+      width: 18em;
+      padding: .3em 0;
+      font-size: 14px;
+      a {
+        display: block;
+        padding: 0 .8em;
+        &:hover {
+          background: darken(#fafafa, 10%);
+        }
+      }
     }
   }
 }
