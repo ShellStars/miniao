@@ -44,7 +44,7 @@ def interviewarticle_detail(request, pk):
         if row1[0]:
             avgnum = row1[0]
         else:
-            avgnum = 0
+            avgnum = 5
         if "userid" in request.session and "identity" in request.session:
             userid = request.session.get("userid")
             cursor.execute("select * from userdata_favourite where userid=%s and url='%s'" % (userid, url))

@@ -55,7 +55,7 @@ def article_detail(request, column, pk):
             if row1[0]:
                 avgnum = row1[0]
             else:
-                avgnum = 0
+                avgnum = 5
             cursor.execute("select scorenum from userdata_score where userid=%s and url='%s'" % (userid, url))
             row2 = cursor.fetchone()
             if row2:
