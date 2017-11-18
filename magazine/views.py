@@ -12,23 +12,23 @@ import pymysql
 # Create your views here.
 
 
-def article_detail(request, column, pk):
+def article_detail(request, magacolumn, column, pk):
     url = request.path.strip('/')
     # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
-    article = Magearticle.objects.filter(pk=pk, column=column, published=True)
+    article = Magearticle.objects.filter(pk=pk, magacolumn=magacolumn, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
-    relate = Magearticle.objects.filter(column=column, published=True)[0:2]
-    pre_article = Magearticle.objects.filter(id__lt=pk, published=True)
+    relate = Magearticle.objects.filter(magacolumn=magacolumn, column=column, published=True)[0:2]
+    pre_article = Magearticle.objects.filter(id__lt=pk, magacolumn=magacolumn, published=True)
     if pre_article:
         pre_article = pre_article.order_by('-id')[0]
     else:
-        pre_article = Magearticle.objects.filter(id=pk, published=True)[0]
-    next_article = Magearticle.objects.filter(id__gt=pk, published=True)
+        pre_article = Magearticle.objects.filter(id=pk, magacolumn=magacolumn, published=True)[0]
+    next_article = Magearticle.objects.filter(id__gt=pk, magacolumn=magacolumn, published=True)
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Magearticle.objects.filter(id=pk, published=True)[0]
+        next_article = Magearticle.objects.filter(id=pk, magacolumn=magacolumn, published=True)[0]
     belong = {'name': '杂志', 'slug': 'magazine'}
     column_tmp = '动态'
     column1 = {'name': column_tmp, 'slug': column}
@@ -76,15 +76,16 @@ def article_detail(request, column, pk):
     objects, page_range = my_pagination(request, article, 2)
     return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': classes, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 """
-def article(request, column):
-    return HttpResponseRedirect('/magazine/index/')
+def article(request, magacolumn, column):
+    url = '/magazine/'+magacolumn+'/'
+    return HttpResponseRedirect(url)
 
-def index(request):
+def index(request, magacolumn):
     tmpurl = str(request.path).strip('/')
-    article = Magearticle.objects.filter(published=True).order_by("-id")
+    article = Magearticle.objects.filter(magacolumn=magacolumn, published=True).order_by("-id")
     belong = {'name': '杂志', 'slug': 'magazine'}
     column1 = {'name':'动态', 'slug': 'dongtai'}
-    info = Mageinfo.objects.all()[0]
+    info = Mageinfo.objects.filter(magacolumn=magacolumn)[0:1]
     objects, page_range = my_pagination(request, article, 15)
     return render_to_response('article_magazine.html', {'objects': objects, 'belong': belong, 'info': info, 'column': column1,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))

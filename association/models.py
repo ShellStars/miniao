@@ -9,6 +9,22 @@ from bs4 import BeautifulSoup
 
 
 @python_2_unicode_compatible
+class Assocclass(models.Model):
+    name = models.CharField('学会名称', max_length=20)
+    slug = models.CharField('学会网址', max_length=30, db_index=True, primary_key=True)
+
+    #def get_absolute_url(self):
+    #    return reverse('information', args=(self.name, self.slug ))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '学会栏目'
+        verbose_name_plural = '学会栏目'
+        ordering = ['name']  # 排序
+
+@python_2_unicode_compatible
 class Peoplearticle(models.Model):
     Area_Level = (
         (0, u'主委'),
@@ -16,6 +32,7 @@ class Peoplearticle(models.Model):
         (2, u'会员'),
     )
     # column = models.ForeignKey(Peopleclass, verbose_name='归属栏目')
+    assoccolumn = models.ForeignKey(Assocclass, verbose_name='所属学会')
     level = models.IntegerField(choices=Area_Level, verbose_name='等级')
     name = models.CharField('姓名', max_length=30)
     pic = models.ImageField('头像', upload_to='uploads/images/doctor/')
@@ -39,6 +56,7 @@ class Peoplearticle(models.Model):
 
 @python_2_unicode_compatible
 class Assocarticle(models.Model):
+    assoccolumn = models.ForeignKey(Assocclass, verbose_name='所属学会')
     associntro = models.TextField('学会简介', default='')
     constitution = models.TextField('章程', default='')
     pic = models.ImageField('会徽', upload_to='uploads/images/doctor/')
@@ -60,6 +78,7 @@ class Assocarticle(models.Model):
 
 @python_2_unicode_compatible
 class Dynamicarticle(models.Model):
+    assoccolumn = models.ForeignKey(Assocclass, verbose_name='所属学会')
     column = models.CharField('动态', default='dongtai', max_length=10, editable=False)
     title = models.CharField('标题', max_length=40)
     source = models.CharField('来源', max_length=20)

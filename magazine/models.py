@@ -8,7 +8,25 @@ from django.core.urlresolvers import reverse
 
 
 @python_2_unicode_compatible
+class Magaclass(models.Model):
+    name = models.CharField('杂志名称', max_length=20)
+    slug = models.CharField('杂志网址', max_length=30, db_index=True, primary_key=True)
+
+    #def get_absolute_url(self):
+    #    return reverse('information', args=(self.name, self.slug ))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '杂志栏目'
+        verbose_name_plural = '杂志栏目'
+        ordering = ['name']  # 排序
+
+
+@python_2_unicode_compatible
 class Mageinfo(models.Model):
+    magacolumn = models.ForeignKey(Magaclass, verbose_name='所属杂志')
     info = models.TextField('杂志简介', default='')
     pic = models.ImageField('杂志徽章', upload_to='uploads/images/article/')
 
@@ -24,6 +42,7 @@ class Mageinfo(models.Model):
 
 @python_2_unicode_compatible
 class Magearticle(models.Model):
+    magacolumn = models.ForeignKey(Magaclass, verbose_name='所属杂志')
     column = models.CharField('动态', default='dongtai', max_length=10, editable=False)
     title = models.CharField('标题', max_length=40)
     source = models.CharField('来源', max_length=20)

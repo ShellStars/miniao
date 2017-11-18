@@ -22,23 +22,23 @@ import pymysql
         return HttpResponseRedirect('/')"""
 
 
-def article_detail(request, column, pk):
+def article_detail(request, assoccolumn, column, pk):
     url = request.path.strip('/')
     # url = 'http://127.0.0.1:8000' + request.path
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
-    article = Dynamicarticle.objects.filter(pk=pk, column=column, published=True)
+    article = Dynamicarticle.objects.filter(pk=pk, assoccolumn=assoccolumn, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
-    relate = Dynamicarticle.objects.filter(column=column, published=True)[0:2]
-    pre_article = Dynamicarticle.objects.filter(id__lt=pk, published=True)
+    relate = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, column=column, published=True)[0:2]
+    pre_article = Dynamicarticle.objects.filter(id__lt=pk, assoccolumn=assoccolumn, published=True)
     if pre_article:
         pre_article = pre_article.order_by('-id')[0]
     else:
-        pre_article = Dynamicarticle.objects.filter(id=pk, published=True)[0]
-    next_article = Dynamicarticle.objects.filter(id__gt=pk, published=True)
+        pre_article = Dynamicarticle.objects.filter(id=pk, assoccolumn=assoccolumn, published=True)[0]
+    next_article = Dynamicarticle.objects.filter(id__gt=pk, assoccolumn=assoccolumn, published=True)
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Dynamicarticle.objects.filter(id=pk, published=True)[0]
+        next_article = Dynamicarticle.objects.filter(id=pk, assoccolumn=assoccolumn, published=True)[0]
     belong = {'name': '学会', 'slug': 'association'}
     column_tmp = '动态'
     column1 = {'name': column_tmp, 'slug': column}
@@ -67,10 +67,10 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
-            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
+            return render(request, 'association_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
+            return render(request, 'association_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
     else:
         return HttpResponseRedirect('/')
 
@@ -84,24 +84,24 @@ def article_detail(request, column, pk):
     else:
         return HttpResponseRedirect('/')
 """
-def article(request, column):
+def article(request, assoccolumn, column):
     tmpurl = str(request.path).strip('/')
-    article = Dynamicarticle.objects.filter(column=column, published=True).order_by("-id")
-    associntro = Assocarticle.objects.all()[0]
+    article = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, column=column, published=True).order_by("-id")
+    associntro = Assocarticle.objects.filter(assoccolumn=assoccolumn)[0:1]
     belong = {'name': '学会', 'slug': 'association'}
     column1 = {'name': '动态', 'slug': 'dongtai'}
     objects, page_range = my_pagination(request, article, 15)
     return render_to_response('dongtai_index.html', {'objects':objects, 'belong': belong, 'info': associntro, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 
 
-def index(request):
+def index(request, assoccolumn):
     tmpurl = str(request.path).strip('/')
-    article = Dynamicarticle.objects.filter(published=True).order_by("-id")[0:6]
-    associntro = Assocarticle.objects.all()[0:1]
+    article = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, published=True).order_by("-id")[0:6]
+    associntro = Assocarticle.objects.filter(assoccolumn=assoccolumn)[0:1]
     # people = Peoplearticle.objects.all()
-    zhuwei = Peoplearticle.objects.filter(level=0)
-    fuzhuwei = Peoplearticle.objects.filter(level=1)
-    huiyuan = Peoplearticle.objects.filter(level=2)
+    zhuwei = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=0)
+    fuzhuwei = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=1)
+    huiyuan = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=2)
     # objects, page_range = my_pagination(request, article, 9)
     return render_to_response('article_associntro.html', {'dynamic': article, 'tmpurl': tmpurl, 'associntro': associntro, 'zhuwei': zhuwei, 'fuzhuwei': fuzhuwei, 'huiyuan': huiyuan},
                               context_instance=RequestContext(request))
