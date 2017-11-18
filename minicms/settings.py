@@ -186,7 +186,7 @@ SUIT_CONFIG = {
               },
              {'label': '泌尿学会',
               'app': 'association',
-              'models': ('Peoplearticle', 'Assocarticle')
+              'models': ('Peoplearticle', 'Assocarticle', 'Dynamicarticle',)
               },
              {'label': '药械推荐',
               'app': 'recommend',
