@@ -109,7 +109,7 @@
 <div class="article-detail-crumbs">
   <a href="/">首页</a>
   <span>></span>
-  <a href="/{{ belong.slug }}">{{ belong.name }}</a>
+  <a href="/{{ belong.slug }}/{{ magazine.id }}">{{ belong.name }}</a>
   <span>></span>
   <strong class="ad-title">
     {{ article.title }}
@@ -160,7 +160,7 @@
 
   <div class="pages clearfix">
     <div class="page-left">
-      <a href="/{{ belong.slug }}/{{ pre_article.magacolumn }}/{{ pre_article.column_id }}/{{ pre_article.id }}">
+      <a href="/{{ belong.slug }}/{{ pre_article.magacolumn_id }}/{{ pre_article.column }}/{{ pre_article.id }}">
         <i class="iconfont icon-l"></i>
         <div>
           <span>上一篇</span>
@@ -169,7 +169,7 @@
       </a>
     </div>
     <div class="page-right">
-      <a href="/{{ belong.slug }}/{{ next_article.magacolumn }}/{{ next_article.column_id }}/{{ next_article.id }}">
+      <a href="/{{ belong.slug }}/{{ next_article.magacolumn_id }}/{{ next_article.column }}/{{ next_article.id }}">
         <div>
           <span>下一篇</span>
           <h6>{{ next_article.title }}</h6>
@@ -196,7 +196,7 @@
               <p>{{ i.content }}</p>
             </div>
             {% endautoescape %}
-            <a href="/{{ belong.slug }}/{{ i.magacolumn }}/{{ i.column_id }}/{{ i.id }}">查看详情</a>
+            <a href="/{{ belong.slug }}/{{ i.magacolumn_id }}/{{ i.column }}/{{ i.id }}">查看详情</a>
           </div>
         </li>
         {% endfor %}

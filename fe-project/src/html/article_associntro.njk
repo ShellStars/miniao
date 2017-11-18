@@ -42,7 +42,7 @@
         ' | safe }}
         <li>
           {{ '
-          <a href="/association/{{ assoccolumn }}/dongtai/{{i.id}}">
+          <a href="/{{tmpurl}}/dongtai/{{i.id}}">
           ' | safe }}
           {# <a href="{{ '/{{tmpurl}}/{{ i.column_id }}/{{i.id}}' }}"> #}
             <img src="{{ '{{ i.picurl }}' }}" />
@@ -60,7 +60,7 @@
         ' | safe }}
       </ul>
       <div class="show-all">
-        <a href="/association/{{ assoccolumn }}/dongtai/">查看全部 >></a>
+        <a href="/{{ '{{ tmpurl }}' }}/dongtai/">查看全部 >></a>
       </div>
     </div>
 
