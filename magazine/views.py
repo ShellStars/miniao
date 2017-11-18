@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render, render_to_response
-from .models import Magearticle, Mageinfo
+from .models import Magearticle, Mageinfo, Magaclass
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
@@ -31,6 +31,8 @@ def article_detail(request, magacolumn, column, pk):
         next_article = Magearticle.objects.filter(id=pk, magacolumn=magacolumn, published=True)[0]
     belong = {'name': '杂志', 'slug': 'magazine'}
     column_tmp = '动态'
+    name1 = Magaclass.objects.filter(slug=magacolumn)[0].name
+    second = {'name': name1, 'slug': magacolumn}
     column1 = {'name': column_tmp, 'slug': column}
     if article:
         num = article[0].browser + 1
@@ -60,9 +62,9 @@ def article_detail(request, magacolumn, column, pk):
             else:
                 scorenum = False
             return render(request, 'magazine_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
-                                                    'scorenum': scorenum})
+                                                    'scorenum': scorenum, 'second':second})
         else:
-            return render(request, 'magazine_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
+            return render(request, 'magazine_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum, 'second': second})
     else:
         return HttpResponseRedirect('/')
 
