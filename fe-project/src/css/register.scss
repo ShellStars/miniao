@@ -150,9 +150,13 @@
         line-height: 36px;
         color: #377bef;
         font-size: 14px;
-        left: 300px;
+        // left: 300px;
         top: 0;
         cursor: pointer;
+
+        width: 7em;
+        text-align: right;
+        right: 1em;
       }
     }
   }
