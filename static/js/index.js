@@ -190,7 +190,7 @@ function param(obj) {
   return arr.join('&');
 }
 function showVideoAlert() {
-  $('.video-list li a').click(function (e) {
+  $('.video-list li a, .section-mix .box-article ul li a').click(function (e) {
     if (!canShowVideoDetail) {
       e.preventDefault();
       $('.modal-vodeo').show();
