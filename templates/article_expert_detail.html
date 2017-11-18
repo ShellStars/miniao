@@ -340,7 +340,8 @@ $(function () {
       success: function(ret) {
         isCommenting = false;
         if (ret.info == "success") {
-          window.location.reload();
+          alert('评论成功，等待后台审核');
+          $("#comment-textarea").val('');
         } else {
           alert('评论失败');
         }
