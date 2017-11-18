@@ -7,7 +7,16 @@ body {
   min-width: 1000px;
 }
 .clearfix {
-  overflow: hidden;
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
 }
 .carousel-wrap {
   position: relative;
@@ -161,11 +170,12 @@ body {
     line-height: 2;
     font-size: 15px;
     p {
-      margin-top: 20px;
+      margin-bottom: 10px;
     }
     a {
       color: #00a7f2;
       cursor: pointer;
+      display: block;
     }
   }
 }
@@ -177,5 +187,6 @@ body {
   color: #fff;
   border-radius: 2px;
   cursor: pointer;
-  margin-right: 20px;
+  margin: 0 11px;
+  vertical-align: unset;
 }

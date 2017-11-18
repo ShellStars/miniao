@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <title>{{ article.title }}</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_r3xxcesboihvkj4i.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_ps5tx1p6bf6tuik9.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/article.css">
@@ -109,13 +109,36 @@
   <h1>{{ article.title }}</h1>
   <div class="meta">
     <strong>{{ article.tag }}</strong>
+    |
     <time>{{ article.pub_date|date:"Y-m-d" }}</time>
+    |
     {% if collect %}
     <div id="btn-collect" data-title="{{ article.title }}" data-action="0">取消收藏</div>
     {% else %}
     <div id="btn-collect" data-title="{{ article.title }}" data-action="1">收藏</div>
     {% endif %}
+    |
     <span>阅读：{{ article.browser }}</span>
+    |
+    <span>评分：{{ avgnum }}</span>
+    |
+    <span class="my-score">
+      我的评分：
+      {% if scorenum %}
+      <div class="score-box" data-score="{{ scorenum }}">
+      {% else %}
+      <div class="score-box" data-score="no">
+      {% endif %}
+        <div class="score-star">
+          <i class="star-1 icon-star iconfont"></i>
+          <i class="star-2 icon-star iconfont"></i>
+          <i class="star-3 icon-star iconfont"></i>
+          <i class="star-4 icon-star iconfont"></i>
+          <i class="star-5 icon-star iconfont"></i>
+        </div>
+        <div class="submit-score">提交</div>
+      </div>
+    </span>
   </div>
 
   <div class="content">{{ article.content }}</div>
@@ -287,6 +310,7 @@
 <div class="modal-vodeo">
   <div class="inner">
     <p>抱歉，您无权访问视频</p>
+    <a href="/userdata/register/">立即注册</a>
     <a href="/">返回首页</a>
   </div>
 </div>

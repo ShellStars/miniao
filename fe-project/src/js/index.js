@@ -1,4 +1,9 @@
+var canShowVideoDetail = false;
+
 $(function () {
+
+  showVideoAlert();
+
   $("#btn_login").click(function () {
     $('.modal-login').show(300);
   });
@@ -50,12 +55,56 @@ $(function () {
         <a href="" class="btn-layout">退出</a>\
       ');
 
+      ret.username && $('.my-score').show();
+      // 评分
+      var score = $('.score-box').attr('data-score');
+      if ($('.score-box')[0]) {
+        if (score === 'no') {
+          var score = 5;
+          $('.score-box i').click(function () {
+            $('.score-box')[0].className = 'score-box';
+            $('.score-box').addClass('score-' + ($(this).index() + 1));
+            score = $(this).index() + 1;
+          });
+
+          $('.submit-score').click(function () {
+            $.ajax({
+              url: '/userdata/scoreclass/',
+              method: 'get',
+              data: {
+                scorenum: score,
+                url: window.location.href,
+              },
+              success: function (rrr) {
+                if (rrr.info === 'success') {
+                  window.location.reload();
+                } else {
+                  alert('评分失败');
+                }
+              },
+              error: function () {
+                alert('评分失败');
+              }
+            });
+          });
+        } else {
+          score && (score = score.toString());
+          if (score.length > 1) {
+            $('.score-box').addClass('score-' + score[0]);
+          } else {
+            $('.score-box').addClass('score-' + score);
+          }
+          $('.submit-score').hide();
+        }
+      }
+
       // if (ret.identity === 0 || ret.identity === 2) {
       //   $('.video-hide').show();
       // }
       if (ret.state == 'fail' && window.isVideo) {
-        showVideoAlert();
+        // showVideoAlert();
       }
+      ret.username && (canShowVideoDetail = true);
 
       $('.btn-layout').click(function (e) {
         e.preventDefault();
@@ -70,7 +119,7 @@ $(function () {
       });
     },
     error: function() {
-      showVideoAlert();
+      // showVideoAlert();
     }
   })
 
@@ -127,25 +176,24 @@ $(function () {
     $('.header-wrap .select-box .select-value').removeClass('active');
   });
 });
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return (r[2]); return '';
+}
 
-
-
-
-  function getUrlParam(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return (r[2]); return '';
+function param(obj) {
+  var arr = [];
+  for (var key in obj) {
+    arr.push(key + '=' + obj[key]);
   }
-
-  function param(obj) {
-    var arr = [];
-    for (var key in obj) {
-      arr.push(key + '=' + obj[key]);
-    }
-    return arr.join('&');
-  }
-
-
+  return arr.join('&');
+}
 function showVideoAlert() {
-  $('.modal-vodeo').show();
+  $('.video-list li a').click(function (e) {
+    if (!canShowVideoDetail) {
+      e.preventDefault();
+      $('.modal-vodeo').show();
+    }
+  });
 }

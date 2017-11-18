@@ -159,7 +159,11 @@
     }
     time {
       display: inline-block;
-      margin-right: 22px;
+      margin: 0 11px;
+    }
+    span {
+      display: inline-block;
+      margin: 0 11px;
     }
   }
 
@@ -308,5 +312,83 @@
         }
       }
     }
+  }
+}
+
+.article-detail-container .meta .my-score {
+  display: none;
+}
+.score-box {
+  display: inline-block;
+  .score-star {
+    display: inline-block;
+    color: #f5bf5d;
+    i {
+      cursor: pointer;
+    }
+  }
+  &.score-0 {
+    .score-star {
+      i {
+        color: #ccc;
+      }
+    }
+  }
+  &.score-1 {
+    .score-star {
+      .star-2 {
+        color: #ccc;
+      }
+      .star-3 {
+        color: #ccc;
+      }
+      .star-4 {
+        color: #ccc;
+      }
+      .star-5 {
+        color: #ccc;
+      }
+    }
+  }
+  &.score-2 {
+    .score-star {
+      .star-3 {
+        color: #ccc;
+      }
+      .star-4 {
+        color: #ccc;
+      }
+      .star-5 {
+        color: #ccc;
+      }
+    }
+  }
+  &.score-3 {
+    .score-star {
+      .star-4 {
+        color: #ccc;
+      }
+      .star-5 {
+        color: #ccc;
+      }
+    }
+  }
+  &.score-4 {
+    .score-star {
+      .star-5 {
+        color: #ccc;
+      }
+    }
+  }
+  .submit-score {
+    display: inline-block;
+    background: #387bef;
+    font-size: 12px;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
   }
 }

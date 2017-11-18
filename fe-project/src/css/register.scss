@@ -89,6 +89,17 @@
   margin-bottom: 150px;
   .group {
     margin-bottom: 30px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '*';
+      color: #f24a4c;
+      line-height: 36px;
+      top: 0;
+      height: 36px;
+      display: block;
+      right: -20px;
+    }
     label {
       display: inline-block;
       width: 95px;
