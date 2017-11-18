@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 from django.shortcuts import render, render_to_response
-from .models import Assocarticle, Peoplearticle, Dynamicarticle
+from .models import Assocarticle, Peoplearticle, Dynamicarticle, Assocclass
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -28,6 +28,8 @@ def article_detail(request, assoccolumn, column, pk):
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Dynamicarticle.objects.filter(pk=pk, assoccolumn=assoccolumn, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
+    name1 = Assocclass.objects.filter(slug=magacolumn)[0].name
+    second = {'name': name1, 'slug': magacolumn}
     relate = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, column=column, published=True)[0:2]
     pre_article = Dynamicarticle.objects.filter(id__lt=pk, assoccolumn=assoccolumn, published=True)
     if pre_article:
@@ -68,9 +70,9 @@ def article_detail(request, assoccolumn, column, pk):
             else:
                 scorenum = False
             return render(request, 'association_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
-                                                    'scorenum': scorenum})
+                                                    'scorenum': scorenum, 'second':second})
         else:
-            return render(request, 'association_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
+            return render(request, 'association_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum, 'second':second})
     else:
         return HttpResponseRedirect('/')
 
