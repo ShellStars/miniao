@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'sruco/', include('sruco.urls')),
     url(r'subject/', include('subject.urls')),
     url(r'universal/', include('universal.urls')),
+    url(r'other/', include('other.urls')),
     # url(r'$', test, name='test'),
 
 

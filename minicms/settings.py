@@ -164,7 +164,8 @@ SUIT_CONFIG = {
               },
              {'label': '专家风采',
               'app': 'expert',
-              'models': ('Interviewarticle', 'Doctorarticle', 'Expertarticle', 'Comment',)
+              'models': ('Interviewarticle', 'Expertarticle', 'Comment',)
+              # 'models': ('Interviewarticle', 'Doctorarticle', 'Expertarticle', 'Comment',)
               },
              {'label': '其它',
               'app': 'other',
