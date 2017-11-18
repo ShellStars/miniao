@@ -34,9 +34,15 @@ def article_detail(request, column, pk):
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
+        conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
+        cursor = conn.cursor()
+        cursor.execute("select avg(scorenum) from userdata_score where url='%s'" % url)
+        row1 = cursor.fetchone()
+        if row1[0]:
+            avgnum = row1[0]
+        else:
+            avgnum = 0
         if "userid" in request.session and "identity" in request.session:
-            conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
-            cursor = conn.cursor()
             userid = request.session.get("userid")
             cursor.execute("select * from userdata_favourite where userid=%s and url='%s'" % (userid, url))
             row = cursor.fetchone()
@@ -49,7 +55,7 @@ def article_detail(request, column, pk):
             if row1[0]:
                 avgnum = row1[0]
             else:
-                avgnum = 0
+                avgnum = 5
             cursor.execute("select scorenum from userdata_score where userid=%s and url='%s'" % (userid, url))
             row2 = cursor.fetchone()
             if row2:
@@ -59,7 +65,7 @@ def article_detail(request, column, pk):
             return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
-            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate})
+            return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
     else:
         return HttpResponseRedirect('/')
 
