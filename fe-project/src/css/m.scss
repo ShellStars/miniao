@@ -94,4 +94,22 @@
       padding-top: 83px;
       padding-left: 25px;
     }
+    .album-list {
+      max-width: 100%;
+    }
+    .video-album-title {
+      padding: 0 10px;
+    }
+    .video-album-title span {
+      font-size: 20px;
+    }
+    .album-list li h2 {
+      font-size: 20px;
+    }
+    .album-list li h2:after {
+      top: 2px;
+    }
+    .album-list li {
+      width: 50%;
+    }
 }
