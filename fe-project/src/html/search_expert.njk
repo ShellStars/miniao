@@ -1,0 +1,40 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}专家列表{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/expert.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="expert-navbar clearfix">
+  <a class="title" href="#">
+    <i class="iconfont icon-list-ul"></i>
+    <span>学术园地</span>
+  </a>
+  {% include "./components/navbar_list.njk" %}
+</div>
+
+<ul class="expert-list clearfix">
+  {{ '
+    {% for i in objects %}
+    <li>
+      <a href="/expert/zhuanjia/{{ i.id }}" class="expert-inner">
+        <img src="{{ i.smallpic.url }}" alt="avatar">
+        <h2>
+          <span>{{ i.name }}</span>
+          <span>{{ i.ranks }}</span>
+        </h2>
+        <p>{{ i.province }}</p>
+        <p>{{ i.hospital }}</p>
+      </a>
+    </li>
+    {% endfor %}
+  ' | safe }}
+</ul>
+<br>
+<br>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% set needSearchLinks = false %}
+{% extends './components/layout.njk' %}
+{% block title %}文章专区{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/css/article.css">
+{% endblock %}
+
+{% block content %}
+<div class="article-container">
+  <h1 class="title">
+    <span>{{ '
+        {% if column %}
+        {{ column }}
+        {% else %}
+        文章专区
+        {% endif %}
+      ' | safe }}</span>
+  </h1>
+  <ul class="article-list clearfix">
+    {{ '\
+    {% for i in objects %}\
+    ' | safe }}
+    <li>
+      {{ '
+      <a href="/article/{{ i.column_id }}/{{i.id}}">
+      ' | safe }}
+      {# <a href="{{ '/{{tmpurl}}/{{ i.column_id }}/{{i.id}}' }}"> #}
+        <img src="{{ '{{ i.picurl }}' }}" />
+        <div class="content">
+          <h2>{{ '{{ i.title|slice:"20" }}' | safe }}</h2>
+          <div class="meta">
+            <time>{{ '{{ i.pub_date|date:"Y-m-d" }}' | safe }}</time>
+            <span>阅读：{{ "{{ i.browser }}" }}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    {{ '\
+    {% endfor %}\
+    ' | safe }}
+  </ul>
+  <br>
+  <br>
+  <br>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

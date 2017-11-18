@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
   <title>期刊列表</title>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_qrb34m5k9tjll3di.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_r3xxcesboihvkj4i.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
 <link rel="stylesheet" href="/static/css/article.css">
@@ -21,9 +21,21 @@
     <img src="/static/images/logo.png" alt="LOGO">
   </a>
   <div class="search">
-    <form>
-      <input type="text">
-      <button>
+    <form action="/search/" method="get">
+      <input type="text" name="value" value="">
+      <input class="hidden-ipt"  type="text" name="type" value="article">
+      <div class="select-box">
+        <div class="select-value">
+          <span>文章</span>
+          <i class="iconfont icon-down"></i>
+        </div>
+        <ul>
+          <li data-value="article">文章</li>
+          <li data-value="video">视频</li>
+          <li data-value="expert">专家</li>
+        </ul>
+      </div>
+      <button type="submit" class="search-btn">
         <i class="iconfont icon-search"></i>
       </button>
     </form>

@@ -77,8 +77,8 @@
       line-height: 36px;
       border: 2px solid #eaeaea;
       border-radius: 3px;
-      padding-right: 90px;
-      overflow: hidden;
+      padding-right: 170px;
+      // overflow: hidden;
       input {
         display: block;
         font-size: 14px;
@@ -102,6 +102,51 @@
         color: #333;
         font-weight: bold;
         outline: none;
+      }
+      .hidden-ipt {
+        position: absolute;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+      }
+
+      .select-box {
+        position: absolute;
+        right: 90px;
+        top: 0;
+        width: 80px;
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #666;
+        ul {
+          z-index: 999;
+          display: none;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          background: #fafafa;
+          height: 102px;
+          li {
+            width: 100%;
+            color: #666;
+            cursor: pointer;
+            margin: 0;
+            line-height: 34px;
+            padding-right: 9px;
+          }
+        }
+        .select-value {
+          cursor: pointer;
+          &.active {
+            i {
+              display: inline-block;
+              transform: rotate(180deg);
+            }
+          }
+        }
       }
     }
   }

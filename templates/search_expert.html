@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>专辑列表</title>
+  <title>专家列表</title>
   <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_r3xxcesboihvkj4i.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
-<link rel="stylesheet" href="/static/css/video.css">
+<link rel="stylesheet" href="/static/css/expert.css">
 
   <link rel="stylesheet" href="/static/css/m.css">
 </head>
@@ -49,74 +49,72 @@
 </header>
 
 
-<script type="text/javascript">
-  window.isVideo = true;
-</script>
-<div class="video-container">
-  <ul class="video-navbar clearfix">
-    <li class="title"><a href="/video">视频专区</a></li>
-    
-      {% for i in classes %}
-      <li>
-        {% ifequal i.name column.name %}
-        <a class="active" href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
-        {% else %}
-        <a href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
-        {% endifequal %}
-      </li>
-      {% endfor %}
-    
-  </ul>
 
-  <h1 class="video-album-title">
-    <span>专辑列表</span>
-  </h1>
+<div class="expert-navbar clearfix">
+  <a class="title" href="#">
+    <i class="iconfont icon-list-ul"></i>
+    <span>学术园地</span>
+  </a>
+  <ul class="navbar-list clearfix">
+  <li>
+    <a href="/column"><span>资讯</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/association"><span>学会</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li>
+    <a href="/expert"><span>专家</span><i class="iconfont icon-add"></i></a>
+  </li>
+  <li class="video-hide">
+    <a href="/video"><span>视频</span></a>
+  </li>
+  <li>
+    <a href="/subject"><span>学科</span></a>
+  </li>
+  <li>
+    <a href="/meeting"><span>会议</span></a>
+  </li>
+  <li>
+    <a href="/magazine"><span>期刊</span></a>
+  </li>
+  <li>
+    <a href="/nursing"><span>护理园地</span></a>
+  </li>
+  <li>
+    <a href="/sruco"><span>SRUCO</span></a>
+  </li>
+  <li>
+    <a href="/guide"><span>指南</span></a>
+  </li>
+  <li>
+    <a href="/universal"><span>科普园地</span></a>
+  </li>
+  <li>
+    <a href="/recommend"><span>药械推荐</span></a>
+  </li>
+</ul>
 
-  <ul class="album-list clearfix">
-    
-    {% for i in album %}
-    
+</div>
+
+<ul class="expert-list clearfix">
+  
+    {% for i in objects %}
     <li>
-      
-      <a href="/{{tmpurl}}/{{i.slug}}">
-      
-        <img src="/media/{{ i.pic }}" />
-        <div class="content">
-          <h2>{{ i.name|slice:"20" }}</h2>
-        </div>
+      <a href="/expert/zhuanjia/{{ i.id }}" class="expert-inner">
+        <img src="{{ i.smallpic.url }}" alt="avatar">
+        <h2>
+          <span>{{ i.name }}</span>
+          <span>{{ i.ranks }}</span>
+        </h2>
+        <p>{{ i.province }}</p>
+        <p>{{ i.hospital }}</p>
       </a>
     </li>
-    
     {% endfor %}
-    
-  </ul>
-
-  <ul class="article-pagination clearfix">
-    
-      {% if objects.has_previous %}
-      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
-      {% else %}
-      <li class="pagination-control prev disabled">&larr;上一页</li>
-      {% endif %}
-
-      <li class="pagination-list">
-      {% for i in page_range %}
-        {% ifequal i page_range.number %}
-        <span>{{ i }}</span>
-        {% else %}
-        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
-        {% endifequal %}
-      {% endfor %}
-      </li>
-
-      {% if objects.has_next %}
-      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
-      {% else %}
-      <li class="pagination-control next disabled">下一页&rarr;</li>
-      {% endif %}
-      
-  </ul>
-</div>
+  
+</ul>
+<br>
+<br>
 
 
 <footer class="footer-wrap">

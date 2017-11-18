@@ -109,6 +109,23 @@ $(function () {
       });
     }
   });
+
+
+  $('.header-wrap .select-box .select-value').click(function () {
+    if (!$(this).hasClass('active')) {
+      $('.header-wrap .select-box ul').show();
+      $(this).addClass('active');
+    } else {
+      $('.header-wrap .select-box ul').hide();
+      $(this).removeClass('active');
+    }
+  });
+  $('.header-wrap .select-box ul li').click(function () {
+    $('.header-wrap .select-box .select-value span').text($(this).text());
+    $('.header-wrap .hidden-ipt').val($(this).attr('data-value'));
+    $('.header-wrap .select-box ul').hide();
+    $('.header-wrap .select-box .select-value').removeClass('active');
+  });
 });
 
 

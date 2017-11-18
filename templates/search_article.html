@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>专辑列表</title>
+  <title>文章专区</title>
   <link rel="stylesheet" href="//at.alicdn.com/t/font_456673_r3xxcesboihvkj4i.css">
   <link rel="stylesheet" href="/static/css/base.css">
   
-<link rel="stylesheet" href="/static/css/video.css">
+<link rel="stylesheet" href="/static/css/article.css">
 
   <link rel="stylesheet" href="/static/css/m.css">
 </head>
@@ -49,40 +49,32 @@
 </header>
 
 
-<script type="text/javascript">
-  window.isVideo = true;
-</script>
-<div class="video-container">
-  <ul class="video-navbar clearfix">
-    <li class="title"><a href="/video">视频专区</a></li>
-    
-      {% for i in classes %}
-      <li>
-        {% ifequal i.name column.name %}
-        <a class="active" href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
+<div class="article-container">
+  <h1 class="title">
+    <span>
+        {% if column %}
+        {{ column }}
         {% else %}
-        <a href="/{{ belong.slug }}/{{ i.slug }}/">{{ i.name}}</a>
-        {% endifequal %}
-      </li>
-      {% endfor %}
-    
-  </ul>
-
-  <h1 class="video-album-title">
-    <span>专辑列表</span>
+        文章专区
+        {% endif %}
+      </span>
   </h1>
-
-  <ul class="album-list clearfix">
+  <ul class="article-list clearfix">
     
-    {% for i in album %}
+    {% for i in objects %}
     
     <li>
       
-      <a href="/{{tmpurl}}/{{i.slug}}">
+      <a href="/article/{{ i.column_id }}/{{i.id}}">
       
-        <img src="/media/{{ i.pic }}" />
+      
+        <img src="{{ i.picurl }}" />
         <div class="content">
-          <h2>{{ i.name|slice:"20" }}</h2>
+          <h2>{{ i.title|slice:"20" }}</h2>
+          <div class="meta">
+            <time>{{ i.pub_date|date:"Y-m-d" }}</time>
+            <span>阅读：{{ i.browser }}</span>
+          </div>
         </div>
       </a>
     </li>
@@ -90,32 +82,9 @@
     {% endfor %}
     
   </ul>
-
-  <ul class="article-pagination clearfix">
-    
-      {% if objects.has_previous %}
-      <li class="pagination-control prev"><a href="?page={{ objects.previous_page_number }}">&larr;上一页</a></li>
-      {% else %}
-      <li class="pagination-control prev disabled">&larr;上一页</li>
-      {% endif %}
-
-      <li class="pagination-list">
-      {% for i in page_range %}
-        {% ifequal i page_range.number %}
-        <span>{{ i }}</span>
-        {% else %}
-        <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>
-        {% endifequal %}
-      {% endfor %}
-      </li>
-
-      {% if objects.has_next %}
-      <li class="pagination-control next"><a href="?page={{ objects.next_page_number }}">下一页&rarr;</a></li>
-      {% else %}
-      <li class="pagination-control next disabled">下一页&rarr;</li>
-      {% endif %}
-      
-  </ul>
+  <br>
+  <br>
+  <br>
 </div>
 
 
