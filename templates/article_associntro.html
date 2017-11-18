@@ -148,23 +148,29 @@
             <h2>编后语</h2>
             <p>{{ i.postscript }}</p>
           </div>
+          {% if i.weixinpic and i.weibopic %}
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
+              {% if i.weixinpic %}
               <div class="img">
                 <img src="{{ i.weixinpic.url }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
+              {% endif %}
+              {% if i.weibopic %}
               <div class="img">
                 <img src="{{ i.weibopic.url }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
@@ -195,23 +201,29 @@
             <h2>编后语</h2>
             <p>{{ i.postscript }}</p>
           </div>
+          {% if i.weixinpic and i.weibopic %}
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
+              {% if i.weixinpic %}
               <div class="img">
                 <img src="{{ i.weixinpic.url }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
+              {% endif %}
+              {% if i.weibopic %}
               <div class="img">
                 <img src="{{ i.weibopic.url }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
@@ -242,23 +254,29 @@
             <h2>编后语</h2>
             <p>{{ i.postscript }}</p>
           </div>
+          {% if i.weixinpic and i.weibopic %}
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
+              {% if i.weixinpic %}
               <div class="img">
                 <img src="{{ i.weixinpic.url }}" alt="微信二维码">
                 <div>
                   微信二维码
                 </div>
               </div>
+              {% endif %}
+              {% if i.weibopic %}
               <div class="img">
                 <img src="{{ i.weibopic.url }}" alt="微博二维码">
                 <div>
                   微博二维码
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
