@@ -28,7 +28,7 @@ def article_detail(request, assoccolumn, column, pk):
     tmpurl = '/'.join(str(request.path).split('/')[:-1]) + '/'
     article = Dynamicarticle.objects.filter(pk=pk, assoccolumn=assoccolumn, column=column, published=True)
     classes = [{'column':'动态', 'slug': 'dongtai'}]
-    name1 = Assocclass.objects.filter(slug=magacolumn)[0].name
+    name1 = Assocclass.objects.filter(slug=assoccolumn)[0].name
     second = {'name': name1, 'slug': magacolumn}
     relate = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, column=column, published=True)[0:2]
     pre_article = Dynamicarticle.objects.filter(id__lt=pk, assoccolumn=assoccolumn, published=True)
