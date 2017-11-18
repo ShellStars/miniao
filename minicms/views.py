@@ -59,20 +59,20 @@ def search(request):
         else:
             if type1 == "expert":
                 article = Expertarticle.objects.filter(name__contains=value1, published=True).order_by("-id")
-                objects, page_range = my_pagination(request, article, 9)
+                objects, page_range = my_pagination(request, article, 50)
                 return render_to_response('search_expert.html',
                                           {'objects': objects, 'page_range': page_range, 'type': type1, 'value': value1},
                                           context_instance=RequestContext(request))
             elif type1 == "article":
                 article = Artiarticle.objects.filter(title__contains=value1, published=True).order_by("-id")
-                objects, page_range = my_pagination(request, article, 9)
+                objects, page_range = my_pagination(request, article, 50)
                 return render_to_response('search_article.html',
                                           {'objects': objects, 'page_range': page_range, 'type': type1,
                                            'value': value1},
                                           context_instance=RequestContext(request))
             elif type1 == "video":
                 article = Videoarticle.objects.filter(title__contains=value1, published=True).order_by("-id")
-                objects, page_range = my_pagination(request, article, 9)
+                objects, page_range = my_pagination(request, article, 50)
                 return render_to_response('search_video.html',
                                           {'objects': objects, 'page_range': page_range, 'type': type1,
                                            'value': value1},

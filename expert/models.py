@@ -143,8 +143,8 @@ class Comment(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = '审核'
-        verbose_name_plural = '审核'
+        verbose_name = '评论审核'
+        verbose_name_plural = '评论审核'
 
 
 
