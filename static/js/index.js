@@ -178,21 +178,24 @@ $(function () {
 
   $('.video-container .video-list').length && $('.video-container .video-list').masonry({
     // options...
-    itemSelector: 'li',
+    itemSelector: '.video-list li',
+    columnWidth: '.video-list li',
     horizontalOrder: true,
-    columnWidth: $('.video-container .video-list li').width()
+    percentPosition: true,
   });
   $('.article-container .article-list').length && $('.article-container .article-list').masonry({
     // options...
-    itemSelector: 'li',
+    itemSelector: '.article-list li',
+    columnWidth: '.article-list li',
     horizontalOrder: true,
-    columnWidth: $('.article-container .article-list li').width()
+    percentPosition: true,
   });
   $('.album-list').length && $('.album-list').masonry({
     // options...
-    itemSelector: 'li',
+    itemSelector: '.album-list li',
+    columnWidth: '.album-list li',
     horizontalOrder: true,
-    columnWidth: $('.album-list li').width()
+    percentPosition: true,
   });
   //
 });
