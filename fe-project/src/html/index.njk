@@ -59,7 +59,7 @@
           {{ '
           {% for item in lunboinfo %}
           <li>
-            <img src="{{ item.lunbopic }}" alt="slider">
+            <img src="{{ item.lunbopic.url }}" alt="slider">
           </li>
           {% endfor %}
           ' | safe }}
