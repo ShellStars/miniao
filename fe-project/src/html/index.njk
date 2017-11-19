@@ -56,9 +56,13 @@
     <div class="carousel-out">
       <div class="carousel-wrap">
         <ul class="carousel-inner clearfix" data-jcarousel="true">
+          {{ '
+          {% for item in lunboinfo %}
           <li>
-            <img src="/static/images/slider_1.png" alt="slider">
+            <img src="{{ item.lunbopic }}" alt="slider">
           </li>
+          {% endfor %}
+          ' | safe }}
         </ul>
         <span class="carousel-control-prev" data-jcarouselcontrol="true">
           <i class="iconfont icon-left"></i>
