@@ -138,6 +138,10 @@ SUIT_CONFIG = {
               'app': 'news',
               'models': ('Article', 'Column',)
               },
+             {'label': '轮播图',
+              'app': 'other',
+              'models': ('Lunbopic',)
+              },
              {'label': '用户',
               'app': 'userdata',
               'models': ('Userinfo',)

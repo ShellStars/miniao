@@ -30,6 +30,8 @@ def index(request):
     video_list.append({u'name': u'专辑', u'slug': u'zhuanji'})
     cursor.execute("select * from expert_expertarticle where published=True limit 18")
     expertinfo = dictfetchall(cursor)
+    cursor.execute("select * from other_lunbopic where published=True limit 5")
+    lunboinfo = dictfetchall(cursor)
     cursor.execute(
         "select * from meeting_meetarticle where column_id='yugao' and published=True order by id desc limit 5")
     yugaoinfo = dictfetchall(cursor)
@@ -45,7 +47,7 @@ def index(request):
     cursor.execute("select * from video_videoarticle where published=True order by browser desc limit 5")
     shipininfo = dictfetchall(cursor)
     return render_to_response('index.html',
-                              {'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
+                              {'lunboinfo': lunboinfo, 'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
                               context_instance=RequestContext(request))
 
 
