@@ -122,4 +122,7 @@
     .register-form .group:after {
       right: -6px;
     }
+    .video-container .video-navbar, .article-container .article-navbar {
+      height: auto !important;
+    }
 }

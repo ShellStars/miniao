@@ -175,6 +175,23 @@ $(function () {
     $('.header-wrap .select-box ul').hide();
     $('.header-wrap .select-box .select-value').removeClass('active');
   });
+
+  $('.video-container .video-list').length && $('.video-container .video-list').masonry({
+    // options...
+    itemSelector: 'li',
+    columnWidth: $('.video-container .video-list li').width()
+  });
+  $('.article-container .article-list').length && $('.article-container .article-list').masonry({
+    // options...
+    itemSelector: 'li',
+    columnWidth: $('.article-container .article-list li').width()
+  });
+  $('.album-list').length && $('.album-list').masonry({
+    // options...
+    itemSelector: 'li',
+    columnWidth: $('.album-list li').width()
+  });
+  //
 });
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
