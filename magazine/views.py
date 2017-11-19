@@ -87,9 +87,10 @@ def index(request, magacolumn):
     article = Magearticle.objects.filter(magacolumn=magacolumn, published=True).order_by("-id")
     belong = {'name': '杂志', 'slug': 'magazine'}
     column1 = {'name':'动态', 'slug': 'dongtai'}
+    name = Magaclass.objects.filter(slug=assoccolumn)[0].name
     info = Mageinfo.objects.filter(magacolumn=magacolumn)[0:1]
     objects, page_range = my_pagination(request, article, 15)
-    return render_to_response('article_magazine.html', {'objects': objects, 'belong': belong, 'info': info, 'column': column1,  'page_range': page_range, 'tmpurl': tmpurl},
+    return render_to_response('article_magazine.html', {'name':name, 'objects': objects, 'belong': belong, 'info': info, 'column': column1,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 
 

@@ -100,12 +100,13 @@ def index(request, assoccolumn):
     tmpurl = str(request.path).strip('/')
     article = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, published=True).order_by("-id")[0:6]
     associntro = Assocarticle.objects.filter(assoccolumn=assoccolumn)[0:1]
+    name = Assocclass.objects.filter(slug=assoccolumn)[0].name
     # people = Peoplearticle.objects.all()
     zhuwei = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=0)
     fuzhuwei = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=1)
     huiyuan = Peoplearticle.objects.filter(assoccolumn=assoccolumn, level=2)
     # objects, page_range = my_pagination(request, article, 9)
-    return render_to_response('article_associntro.html', {'dynamic': article, 'tmpurl': tmpurl, 'associntro': associntro, 'zhuwei': zhuwei, 'fuzhuwei': fuzhuwei, 'huiyuan': huiyuan},
+    return render_to_response('article_associntro.html', {'name':name, 'dynamic': article, 'tmpurl': tmpurl, 'associntro': associntro, 'zhuwei': zhuwei, 'fuzhuwei': fuzhuwei, 'huiyuan': huiyuan},
                               context_instance=RequestContext(request))
 
 
