@@ -222,9 +222,11 @@
         <li class="clearfix">
           {% for item in expertinfo %}
           <div class="item">
-            <img src="/media/{{ item.smallpic }}" alt="p">
-            <h4>{{ item.name }} <span>  </span>  {{ item.ranks }}</h4>
-            <h5>{{ item.hospital }}{{ item.department }}</h5>
+            <a href="/expert/zhuanjia/{{ item.id }}">
+              <img src="/media/{{ item.smallpic }}" alt="p">
+              <h4>{{ item.name }} <span>  </span>  {{ item.ranks }}</h4>
+              <h5>{{ item.hospital }}{{ item.department }}</h5>
+            </a>
           </div>
           
           {% ifequal forloop.counter 6 %}

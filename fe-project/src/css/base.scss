@@ -239,3 +239,11 @@ body {
 #SOHUCS #SOHU_MAIN .changyan-login-dialog-wrapper .cy-logo{background:none !important;}
 #SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .action-issue-w .issue-btn-w a .btn-fw{background:none;background-image:url(/static/images/post-btn.png) !important;}
 #SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w, #SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w .service-wrap-w, #SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w .service-wrap-w a{height:0px !important;overflow:hidden !important;}
+
+
+.expert-detail-banner .inner .detail p {
+  display: none !important;
+}
+.expert-detail-banner .inner .detail h2 {
+  margin-top: 44px !important;
+}
