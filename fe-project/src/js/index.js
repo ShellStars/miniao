@@ -179,16 +179,19 @@ $(function () {
   $('.video-container .video-list').length && $('.video-container .video-list').masonry({
     // options...
     itemSelector: 'li',
+    horizontalOrder: true,
     columnWidth: $('.video-container .video-list li').width()
   });
   $('.article-container .article-list').length && $('.article-container .article-list').masonry({
     // options...
     itemSelector: 'li',
+    horizontalOrder: true,
     columnWidth: $('.article-container .article-list li').width()
   });
   $('.album-list').length && $('.album-list').masonry({
     // options...
     itemSelector: 'li',
+    horizontalOrder: true,
     columnWidth: $('.album-list li').width()
   });
   //
