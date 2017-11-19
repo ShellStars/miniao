@@ -64,13 +64,16 @@
     {% for i in objects %}
     <li>
       <a href="/{{ tmpurl }}/zhuanjia/{{ i.id }}" class="expert-inner">
-        <img src="{{ i.smallpic.url }}" alt="avatar">
+        <div
+          class="expert-list-item-img"
+          style="background-image: url("{{ i.smallpic.url }}");width: 100%;padding-bottom: 100%;background-position: center;background-size: cover;"
+        ></div>
         <h2>
           <span>{{ i.name }}</span>
           <span>{{ i.ranks }}</span>
         </h2>
         <p>{{ i.province }}</p>
-        <p>{{ i.hospital }}</p>
+        <p style="min-height: 40px;">{{ i.hospital }}</p>
       </a>
     </li>
     {% endfor %}
