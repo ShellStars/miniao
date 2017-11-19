@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Standardclass, Standardarticle, Resourcearticle, Resourcesclass
+from .models import Standardclass, Standardarticle, Resourcearticle, Resourcesclass, Lunbopic
 from django.utils.safestring import mark_safe
 
 
@@ -31,6 +31,11 @@ class ResourcearticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author')
 
 
+class LunbopicAdmin(admin.ModelAdmin):
+    list_display = ('lunbopic', 'pub_date', 'published')
+
+
+admin.site.register(Lunbopic, LunbopicAdmin)
 admin.site.register(Standardclass, StandardclassAdmin)
 admin.site.register(Resourcesclass, ResourcesclassAdmin)
 admin.site.register(Standardarticle, StandardarticleAdmin)

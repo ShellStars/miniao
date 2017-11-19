@@ -106,4 +106,20 @@ class Resourcearticle(models.Model):
         verbose_name = '资源下载'
         verbose_name_plural = '资源下载'
 
+@python_2_unicode_compatible
+class Lunbopic(models.Model):
+    lunbopic = models.ImageField('轮播图片', upload_to='uploads/images/lunbo/')
+    pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
+    published = models.BooleanField('正式发布', default=True)
+    #def get_absolute_url(self):
+    #    return reverse('information', args=(self.name, self.slug ))
+
+    def __str__(self):
+        return self.lunbopic.name
+
+    class Meta:
+        verbose_name = '轮播图片'
+        verbose_name_plural = '轮播图片'
+
 
