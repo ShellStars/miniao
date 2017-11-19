@@ -582,6 +582,7 @@ def changlogin(request):
                 "sign": '#'
             }
         }
+        result = json.dumps(result, ensure_ascii=False)
         result = '{0}({1})'.format(callback, result)
         return HttpResponse(result)
     else:
