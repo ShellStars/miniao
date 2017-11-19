@@ -34,7 +34,7 @@ class Mageinfo(models.Model):
     #    return reverse('infoarticle', args=(self.pk, self.slug))
 
     def __str__(self):
-        return self.info
+        return self.magacolumn.name
 
     class Meta:
         verbose_name = '杂志简介'
