@@ -1,0 +1,54 @@
+首页排序功能
+expert/models.py
+
+@python_2_unicode_compatible
+class Expertarticle(models.Model):
+    column = models.CharField('专家', default='zhuanjia', max_length=10, editable=False)
+    name = models.CharField('姓名', max_length=30)
+    ranks = models.CharField('职称', max_length=10)
+    province = models.CharField('省份', max_length=10)
+    city = models.CharField('城市', max_length=20)
+    zan = models.IntegerField('赞', default=0, editable=False)
+    hospital = models.CharField('医院', max_length=50)
+    department = models.CharField('所在科室', max_length=30)
+    midpic = models.ImageField('封面图', upload_to='uploads/images/doctor/')
+    smallpic = models.ImageField('专家头像', upload_to='uploads/images/doctor/')
+    introduce = models.TextField('文字介绍')
+    specialty = models.TextField('技术特长')
+    postscript = models.TextField('编后语')
+    weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/', blank=True)
+    weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/', blank=True)
+    shouye = models.BooleanField('首页显示', default=False)
+    weizhi = models.IntegerField('位次', unique=True, null=True, blank=True)
+    pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
+    published = models.BooleanField('正式发布', default=True)
+
+    #def get_absolute_url(self):
+    #    return reverse('infoarticle', args=(self.pk, self.slug))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '专家'
+        verbose_name_plural = '专家'
+
+
+expert/admin.py
+
+class ExpertarticleAdmin(admin.ModelAdmin):
+    fieldsets = [
+
+        (None, {'fields': ['name', 'ranks', 'province', 'city', 'hospital', 'department', 'midpic', 'smallpic', 'introduce', 'specialty', 'postscript', 'weixinpic', 'weibopic', 'published']}),
+
+        ('首页显示', {'fields': ['shouye', 'weizhi'], 'classes':['collapse']})
+
+    ]
+    list_display = ('name', 'province', 'zan', 'pub_date', 'published')
+    search_fields = ('name',)
+
+minicms/views.py
+
+cursor.execute("select * from expert_expertarticle where shouye=True and weizhi is not null and published=True order by weizhi asc limit 18")
+expertinfo = dictfetchall(cursor)
