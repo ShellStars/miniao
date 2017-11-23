@@ -167,6 +167,19 @@ def video(request, column):
         tmp_val1 = request.GET[tmp_key1]
         cursor.execute("select * from video_videoarticle where %s='%s' and published=True and column_id='%s' order by id desc" % (tmp_key1, tmp_val1, column))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 2:
@@ -177,6 +190,19 @@ def video(request, column):
         cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and published=True and column_id='%s' order by id desc" % (
         tmp_key1, tmp_val1, tmp_key2, tmp_val2, column))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 3:
@@ -189,6 +215,19 @@ def video(request, column):
         cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and published=True and column_id='%s' order by id desc" % (
             tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, column))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 4:
@@ -204,6 +243,19 @@ def video(request, column):
             "select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and %s='%s' and published=True and column_id='%s' order by id desc" % (
                 tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, tmp_key4, tmp_val4, column))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
             # article = Videoarticle.objects.filter(tmp_key1=tmp_val1, published=True)
@@ -300,6 +352,19 @@ def index(request):
         tmp_val2 = request.GET[tmp_key2]
         cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and published=True order by id desc" % (tmp_key1, tmp_val1, tmp_key2, tmp_val2))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 3:
@@ -312,6 +377,19 @@ def index(request):
         cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and published=True order by id desc" % (
         tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 4:
@@ -326,6 +404,19 @@ def index(request):
         cursor.execute("select * from video_videoarticle where %s='%s' and %s='%s' and %s='%s' and %s='%s' and published=True order by id desc" % (
                     tmp_key1, tmp_val1, tmp_key2, tmp_val2, tmp_key3, tmp_val3, tmp_key4, tmp_val4))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
         # article = Videoarticle.objects.filter(tmp_key1=tmp_val1, published=True)
