@@ -47,6 +47,19 @@ def index(request):
         i['picurl'] = picurl
     cursor.execute("select * from video_videoarticle where published=True order by browser desc limit 5")
     shipininfo = dictfetchall(cursor)
+    for i in shipininfo:
+        soup = BeautifulSoup(i['content'], "html.parser")
+        soup1 = BeautifulSoup(i['content1'], "html.parser")
+        try:
+            video = soup.video["src"]
+        except:
+            video = ""
+        try:
+            smallpic = soup1.img["src"]
+        except:
+            smallpic = ""
+        i['video'] = video
+        i['smallpic'] = smallpic
     return render_to_response('index.html',
                               {'lunboinfo': lunboinfo, 'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
                               context_instance=RequestContext(request))
