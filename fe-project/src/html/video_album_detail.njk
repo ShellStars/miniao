@@ -57,7 +57,7 @@
       <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
       {% endif %}
       ' | safe }}
-        <img src="/media/{{ '{{ i.smallpic }}' }}" />
+        <img src="{{ '{{ i.smallpic }}' }}" />
         <div class="content">
           <h2>{{ '{{ i.title|slice:"30" }}' | safe }}</h2>
           <div class="meta">

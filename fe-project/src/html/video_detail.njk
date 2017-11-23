@@ -33,9 +33,9 @@
   <video
     id="my-player"
     class="video-js"
-    poster="{{ '/media/{{ video.smallpic }}' }}"
+    poster="{{ '{{ video.smallpic }}' }}"
   >
-    <source src="{{ '/media/{{ video.video }}' }}" type='video/mp4'>
+    <source src="{{ '{{ video.video }}' }}" type='video/mp4'>
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a web browser that
       <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -116,7 +116,7 @@
         {% for i in relate %}
         <li>
           <div class="inner">
-            <img src="/media/{{ i.smallpic }}" alt="1">
+            <img src="{{ i.smallpic }}" alt="1">
             <h3>{{ i.title }}</h3>
             <time>{{ i.pub_date|date:"Y-m-d" }}</time>
             {% autoescape off %}

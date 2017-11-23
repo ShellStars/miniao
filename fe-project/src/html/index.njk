@@ -262,6 +262,7 @@ $(function () {
     navbarJcarousel.jcarousel('items').width(navbarJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
+    auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -318,6 +319,7 @@ $(function () {
     professorJcarousel.jcarousel('items').width(professorJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
+    auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -372,6 +374,11 @@ $(function () {
       window.location.search = ''
     });
   }
+
+
+  // setInterval(function () {
+  //
+  // }, 5000);
 });
 </script>
 

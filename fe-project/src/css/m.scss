@@ -2,8 +2,13 @@
     body {
         min-width: auto !important;
     }
+
     .header-wrap {
-      display: none !important;
+      height: 70px !important;
+      // display: none !important;
+      .search, .profile {
+        display: none !important;
+      }
     }
     .footer-wrap {
       display: none !important;
@@ -124,5 +129,9 @@
     }
     .video-container .video-navbar, .article-container .article-navbar {
       height: auto !important;
+    }
+
+    .expert-detail-banner .inner .detail h2 {
+      padding-top: 35px !important;
     }
 }

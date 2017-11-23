@@ -80,7 +80,7 @@
       
       <a href="/{{tmpurl}}/{{i.slug}}">
       
-        <img src="/media/{{ i.pic }}" />
+        <img src="{{ i.smallpic }}" />
         <div class="content">
           <h2>{{ i.name|slice:"20" }}</h2>
         </div>
@@ -124,7 +124,17 @@
     <div class="footer-header">
       CUG 大家泌尿
     </div>
-    <div class="box-wrap clearfix">
+    <div class="box-wrap clearfix" style="text-align: center;">
+      <h3>
+        投稿邮箱
+      </h3>
+      <div class="links clearfix">
+        <ul class="link-list">
+          <li style="line-height: 3; font-weight: normal;">邮箱地址：ztougao@cug.top</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-wrap clearfix" style="display: none;">
       <div class="box box-1">
         <h3>
           友情链接
