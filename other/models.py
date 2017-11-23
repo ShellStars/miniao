@@ -109,6 +109,7 @@ class Resourcearticle(models.Model):
 @python_2_unicode_compatible
 class Lunbopic(models.Model):
     lunbopic = models.ImageField('轮播图片', upload_to='uploads/images/lunbo/')
+    url = models.CharField('链接地址', max_length=100, default='')
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
     update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
     published = models.BooleanField('正式发布', default=True)

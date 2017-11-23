@@ -28,7 +28,8 @@ def index(request):
     for i in dic1:
         video_list.append(i)
     video_list.append({u'name': u'专辑', u'slug': u'zhuanji'})
-    cursor.execute("select * from expert_expertarticle where published=True limit 18")
+    cursor.execute(
+        "select * from expert_expertarticle where shouye=True and weizhi is not null and published=True order by weizhi asc limit 18")
     expertinfo = dictfetchall(cursor)
     cursor.execute("select * from other_lunbopic where published=True limit 5")
     lunboinfo = dictfetchall(cursor)

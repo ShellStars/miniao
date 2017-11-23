@@ -7,6 +7,7 @@ from .models import Videoarticle, Videoclass, Videoalbum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
+from bs4 import BeautifulSoup
 import pymysql
 # Create your views here.
 
@@ -148,6 +149,19 @@ def video(request, column):
     if len(tmp) == 0:
         cursor.execute("select * from video_videoarticle where column_id='%s' and published=True order by id desc" % column)
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -246,11 +260,37 @@ def index(request):
     if len(tmp) == 0:
         cursor.execute("select * from video_videoarticle where published=True order by id desc")
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
         cursor.execute("select * from video_videoarticle where %s='%s' and published=True order by id desc" % (tmp_key1, tmp_val1))
         dic = dictfetchall(cursor)
+        for i in dic:
+            soup = BeautifulSoup(i['content'], "html.parser")
+            soup1 = BeautifulSoup(i['content1'], "html.parser")
+            try:
+                video = soup.video["src"]
+            except:
+                video = ""
+            try:
+                smallpic = soup1.img["src"]
+            except:
+                smallpic = ""
+            i['video'] = video
+            i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
     elif len(tmp) == 2:

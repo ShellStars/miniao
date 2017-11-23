@@ -40,6 +40,7 @@ class Peoplearticle(models.Model):
     introduce = models.TextField('简介', default='', blank=True)
     specialty = models.TextField('技术特长', default='', blank=True)
     postscript = models.TextField('编后语', default='', blank=True)
+    url = models.CharField('链接地址', max_length=100, default='')
     weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/', blank=True)
     weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/', blank=True)
 
