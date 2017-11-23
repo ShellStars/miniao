@@ -38,11 +38,13 @@
         {% endif %}' | safe }}
         {{ '
           {% for d in disease %}
+            {% if d %}
             {% ifequal d small_classes.disease %}
             <li class="active">{{ d }}</li>
             {% else %}
             <li>{{ d }}</li>
             {% endifequal %}
+            {% endif %}
           {% endfor %}
         ' | safe }}
       </ul>
@@ -58,11 +60,13 @@
         {% endif %}' | safe }}
         {{ '
           {% for d in difficulty %}
+            {% if d %}
             {% ifequal d small_classes.difficulty %}
             <li class="active">{{ d }}</li>
             {% else %}
             <li>{{ d }}</li>
             {% endifequal %}
+            {% endif %}
           {% endfor %}
         ' | safe }}
       </ul>
@@ -78,11 +82,13 @@
         {% endif %}' | safe }}
         {{ '
           {% for d in expert %}
+            {% if d %}
             {% ifequal d small_classes.expert %}
             <li class="active">{{ d }}</li>
             {% else %}
             <li>{{ d }}</li>
             {% endifequal %}
+            {% endif %}
           {% endfor %}
         ' | safe }}
       </ul>
@@ -98,11 +104,13 @@
         {% endif %}' | safe }}
         {{ '
           {% for d in other %}
+            {% if d %}
             {% ifequal d small_classes.other %}
             <li class="active">{{ d }}</li>
             {% else %}
             <li>{{ d }}</li>
             {% endifequal %}
+            {% endif %}
           {% endfor %}
         ' | safe }}
       </ul>
