@@ -47,6 +47,15 @@ class DoctorarticleAdmin(admin.ModelAdmin):
 
 
 class ExpertarticleAdmin(admin.ModelAdmin):
+    fieldsets = [
+
+        (None, {
+            'fields': ['name', 'ranks', 'province', 'city', 'hospital', 'department', 'midpic', 'smallpic', 'introduce',
+                       'specialty', 'postscript', 'weixinpic', 'weibopic', 'published']}),
+
+        ('首页显示', {'fields': ['shouye', 'weizhi'], 'classes': ['collapse']})
+
+    ]
     list_display = ('name', 'province', 'zan', 'pub_date', 'published')
     search_fields = ('name',)
 

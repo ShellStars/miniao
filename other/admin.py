@@ -32,7 +32,7 @@ class ResourcearticleAdmin(admin.ModelAdmin):
 
 
 class LunbopicAdmin(admin.ModelAdmin):
-    list_display = ('lunbopic', 'pub_date', 'published')
+    list_display = ('id', 'pub_date', 'published')
 
 
 admin.site.register(Lunbopic, LunbopicAdmin)

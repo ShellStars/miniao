@@ -5,6 +5,8 @@ from django.conf import settings as gSettings   #全局设置
 TOOLBARS_SETTINGS={
     "besttome":[['source','undo', 'redo','bold', 'italic', 'underline','forecolor', 'backcolor','superscript','subscript',"justifyleft","justifycenter","justifyright","insertorderedlist","insertunorderedlist","blockquote",'formatmatch',"removeformat",'autotypeset','inserttable',"pasteplain","wordimage","searchreplace","map","preview","fullscreen"], ['insertcode','paragraph',"fontfamily","fontsize",'link', 'unlink','insertimage','insertvideo','attachment','emotion',"date","time"]],
     "mini":[['source','|','undo', 'redo', '|','bold', 'italic', 'underline','formatmatch','autotypeset', '|', 'forecolor', 'backcolor','|', 'link', 'unlink','|','simpleupload','attachment']],
+    "videoonly":[['insertvideo']],
+    "imageonly":[['simpleupload']],
     "normal":[['source','|','undo', 'redo', '|','bold', 'italic', 'underline','removeformat', 'formatmatch','autotypeset', '|', 'forecolor', 'backcolor','|', 'link', 'unlink','|','simpleupload', 'emotion','attachment', '|','inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols']]
 }
 
@@ -48,11 +50,9 @@ UEditorUploadSettings={
     "videoActionName": "uploadvideo", #执行上传视频的action名称 */
     "videoPathFormat":"",
     "videoFieldName": "upfile", # 提交的视频表单名称 */
-    "videoMaxSize": 204800000, #上传大小限制，单位B，默认100MB */
+    "videoMaxSize": 2097152000, #上传大小限制，单位B，默认100MB */
     "videoUrlPrefix":"",
-    "videoAllowFiles": [
-        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
-        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"], #上传视频格式显示 */
+    "videoAllowFiles": [".mp4"], #上传视频格式显示 */
 
     #上传文件配置 */
     "fileActionName": "uploadfile", #controller里,执行上传视频的action名称 */
