@@ -86,27 +86,29 @@
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
-            <h2>个人介绍</h2>
-            <div class="person">
-              <div class="avatar">
-                <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
+            {# <h2>个人介绍</h2> #}
+            <a href="{{ '{{ i.url }}' }}">
+              <div class="person">
+                <div class="avatar">
+                  <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
+                </div>
+                <div class="detail">
+                  <h3 class="name">{{ "{{ i.name }}" }}</h3>
+                  <div class="department">{{ "{{ i.department }}" }}</div>
+                </div>
               </div>
-              <div class="detail">
-                <h3 class="name">{{ "{{ i.name }}" }}</h3>
-                <div class="department">{{ "{{ i.department }}" }}</div>
-              </div>
-            </div>
-            <p>{{ "{{ i.introduce }}" }}</p>
+            </a>
+            {# <p>{{ "{{ i.introduce }}" }}</p> #}
           </div>
-          <div class="box">
+          {# <div class="box">
             <h2>技术特长</h2>
             <p>{{ "{{ i.specialty }}" }}</p>
           </div>
           <div class="box">
             <h2>编后语</h2>
             <p>{{ "{{ i.postscript }}" }}</p>
-          </div>
-          {{ '{% if i.weixinpic and i.weibopic %}' | safe }}
+          </div> #}
+          {# {{ '{% if i.weixinpic and i.weibopic %}' | safe }}
           <div class="box">
             <h2>联系方式</h2>
             <div class="contact">
@@ -128,7 +130,7 @@
               {{ '{% endif %}' | safe }}
             </div>
           </div>
-          {{ '{% endif %}' | safe }}
+          {{ '{% endif %}' | safe }} #}
         </div>
       </div>
       {{ "{% endfor %}" }}
@@ -139,19 +141,21 @@
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
-            <h2>个人介绍</h2>
-            <div class="person">
-              <div class="avatar">
-                <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
+            {# <h2>个人介绍</h2> #}
+            <a href="{{ '{{ i.url }}' }}">
+              <div class="person">
+                <div class="avatar">
+                  <img src="{{ "{{ i.pic.url }}" }}" alt="头像">
+                </div>
+                <div class="detail">
+                  <h3 class="name">{{ "{{ i.name }}" }}</h3>
+                  <div class="department">{{ "{{ i.department }}" }}</div>
+                </div>
               </div>
-              <div class="detail">
-                <h3 class="name">{{ "{{ i.name }}" }}</h3>
-                <div class="department">{{ "{{ i.department }}" }}</div>
-              </div>
-            </div>
-            <p>{{ "{{ i.introduce }}" }}</p>
+            </a>
+            {# <p>{{ "{{ i.introduce }}" }}</p> #}
           </div>
-          <div class="box">
+          {# <div class="box">
             <h2>技术特长</h2>
             <p>{{ "{{ i.specialty }}" }}</p>
           </div>
@@ -181,7 +185,7 @@
               {{ '{% endif %}' | safe }}
             </div>
           </div>
-          {{ '{% endif %}' | safe }}
+          {{ '{% endif %}' | safe }} #}
         </div>
       </div>
       {{ "{% endfor %}" }}

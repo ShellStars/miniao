@@ -59,7 +59,9 @@
           {{ '
           {% for item in lunboinfo %}
           <li>
-            <img src="/media/{{ item.lunbopic }}" alt="slider">
+            <a href="{{ item.url }}">
+              <img src="/media/{{ item.lunbopic }}" alt="slider">
+            </a>
           </li>
           {% endfor %}
           ' | safe }}
@@ -262,7 +264,7 @@ $(function () {
     navbarJcarousel.jcarousel('items').width(navbarJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
-    auto: 3,
+    // auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -319,7 +321,7 @@ $(function () {
     professorJcarousel.jcarousel('items').width(professorJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
-    auto: 3,
+    // auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -376,9 +378,12 @@ $(function () {
   }
 
 
-  // setInterval(function () {
-  //
-  // }, 5000);
+  setTimeout(function () {
+    setInterval(function () {
+      $('.navbar-wrap .carousel-out .carousel-control-next').click();
+      $('.section-professor .carousel-control-next').click();
+    }, 3000);
+  }, 1000);
 });
 </script>
 

@@ -113,6 +113,8 @@
       <a href="/magazine/xiandai">现代泌尿外科杂志</a>
       <a href="/magazine/dianzi">泌尿外科杂志电子版</a>
       <a href="/magazine/weichuang">微创泌尿外科杂志社</a>
+      <a href="/magazine/qiangjing">中华腔镜泌尿外科杂志（电子版）</a>
+      <a href="/magazine/guoji">国际泌尿系统杂志</a>
     </div>
   </li>
   <li>
@@ -138,7 +140,9 @@
           
           {% for item in lunboinfo %}
           <li>
-            <img src="/media/{{ item.lunbopic }}" alt="slider">
+            <a href="{{ item.url }}">
+              <img src="/media/{{ item.lunbopic }}" alt="slider">
+            </a>
           </li>
           {% endfor %}
           
@@ -490,7 +494,7 @@ $(function () {
     navbarJcarousel.jcarousel('items').width(navbarJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
-    auto: 3,
+    // auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -547,7 +551,7 @@ $(function () {
     professorJcarousel.jcarousel('items').width(professorJcarousel.innerWidth());
   }).jcarousel({
     wrap: 'circular',
-    auto: 3,
+    // auto: 3,
     transitions: Modernizr.csstransitions ? {
       transforms: Modernizr.csstransforms,
       transforms3d: Modernizr.csstransforms3d,
@@ -604,9 +608,12 @@ $(function () {
   }
 
 
-  // setInterval(function () {
-  //
-  // }, 5000);
+  setTimeout(function () {
+    setInterval(function () {
+      $('.navbar-wrap .carousel-out .carousel-control-next').click();
+      $('.section-professor .carousel-control-next').click();
+    }, 3000);
+  }, 1000);
 });
 </script>
 

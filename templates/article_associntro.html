@@ -128,49 +128,22 @@
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
-            <h2>个人介绍</h2>
-            <div class="person">
-              <div class="avatar">
-                <img src="{{ i.pic.url }}" alt="头像">
-              </div>
-              <div class="detail">
-                <h3 class="name">{{ i.name }}</h3>
-                <div class="department">{{ i.department }}</div>
-              </div>
-            </div>
-            <p>{{ i.introduce }}</p>
-          </div>
-          <div class="box">
-            <h2>技术特长</h2>
-            <p>{{ i.specialty }}</p>
-          </div>
-          <div class="box">
-            <h2>编后语</h2>
-            <p>{{ i.postscript }}</p>
-          </div>
-          {% if i.weixinpic and i.weibopic %}
-          <div class="box">
-            <h2>联系方式</h2>
-            <div class="contact">
-              {% if i.weixinpic %}
-              <div class="img">
-                <img src="{{ i.weixinpic.url }}" alt="微信二维码">
-                <div>
-                  微信二维码
+            
+            <a href="{{ i.url }}">
+              <div class="person">
+                <div class="avatar">
+                  <img src="{{ i.pic.url }}" alt="头像">
+                </div>
+                <div class="detail">
+                  <h3 class="name">{{ i.name }}</h3>
+                  <div class="department">{{ i.department }}</div>
                 </div>
               </div>
-              {% endif %}
-              {% if i.weibopic %}
-              <div class="img">
-                <img src="{{ i.weibopic.url }}" alt="微博二维码">
-                <div>
-                  微博二维码
-                </div>
-              </div>
-              {% endif %}
-            </div>
+            </a>
+            
           </div>
-          {% endif %}
+          
+          
         </div>
       </div>
       {% endfor %}
@@ -181,49 +154,21 @@
       <div class="expert-detail-content">
         <div class="inner">
           <div class="box">
-            <h2>个人介绍</h2>
-            <div class="person">
-              <div class="avatar">
-                <img src="{{ i.pic.url }}" alt="头像">
-              </div>
-              <div class="detail">
-                <h3 class="name">{{ i.name }}</h3>
-                <div class="department">{{ i.department }}</div>
-              </div>
-            </div>
-            <p>{{ i.introduce }}</p>
-          </div>
-          <div class="box">
-            <h2>技术特长</h2>
-            <p>{{ i.specialty }}</p>
-          </div>
-          <div class="box">
-            <h2>编后语</h2>
-            <p>{{ i.postscript }}</p>
-          </div>
-          {% if i.weixinpic and i.weibopic %}
-          <div class="box">
-            <h2>联系方式</h2>
-            <div class="contact">
-              {% if i.weixinpic %}
-              <div class="img">
-                <img src="{{ i.weixinpic.url }}" alt="微信二维码">
-                <div>
-                  微信二维码
+            
+            <a href="{{ i.url }}">
+              <div class="person">
+                <div class="avatar">
+                  <img src="{{ i.pic.url }}" alt="头像">
+                </div>
+                <div class="detail">
+                  <h3 class="name">{{ i.name }}</h3>
+                  <div class="department">{{ i.department }}</div>
                 </div>
               </div>
-              {% endif %}
-              {% if i.weibopic %}
-              <div class="img">
-                <img src="{{ i.weibopic.url }}" alt="微博二维码">
-                <div>
-                  微博二维码
-                </div>
-              </div>
-              {% endif %}
-            </div>
+            </a>
+            
           </div>
-          {% endif %}
+          
         </div>
       </div>
       {% endfor %}
