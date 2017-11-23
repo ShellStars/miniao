@@ -51,11 +51,7 @@
     ' | safe }}
     <li>
       {{ '
-      <a href="/{{tmpurl}}/{{i.id}}">
-      {% if column %}
-      {% else %}
-      <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
-      {% endif %}
+      <a href="/video/{{i.column_id}}/{{i.id}}">
       ' | safe }}
         <img src="{{ '{{ i.smallpic }}' }}" />
         <div class="content">
