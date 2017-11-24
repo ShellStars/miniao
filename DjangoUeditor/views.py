@@ -278,7 +278,10 @@ def catcher_remote_image(request):
 
 def get_output_path(request,path_format,path_format_var):
     #取得输出文件的路径
-    OutputPathFormat=(request.GET.get(path_format,USettings.UEditorSettings["defaultPathFormat"]) % path_format_var).replace("\\","/")
+    if path_format != 'videoPathFormat':
+        OutputPathFormat=(request.GET.get(path_format,USettings.UEditorSettings["defaultPathFormat"]) % path_format_var).replace("\\","/")
+    else:
+        OutputPathFormat = 'uploads/files/video/'
     #分解OutputPathFormat
     OutputPath,OutputFile=os.path.split(OutputPathFormat)
     OutputPath=os.path.join(USettings.gSettings.MEDIA_ROOT,OutputPath)
