@@ -32,6 +32,8 @@ class Videoalbum(models.Model):
     slug = models.CharField('专辑网址', max_length=30, db_index=True, primary_key=True)
     intro = models.TextField('专辑简介', default='')
     pic = models.ImageField('封面', upload_to="uploads/images/video/")
+    weici = models.BooleanField('固定位次', default=False)
+    weizhi = models.IntegerField('位次', unique=True, null=True, blank=True)
     browser = models.IntegerField('访问量', default=0, editable=False)
 
     #def get_absolute_url(self):
