@@ -117,7 +117,7 @@ def video_album(request):
     belong = {'name': '视频', 'slug': 'video'}
     column_tmp = '专辑'
     column1 = {'name': column_tmp, 'slug': 'zhuanji'}
-    album = Videoalbum.objects.all()
+    album = Videoalbum.objects.all().order_by('-weici', 'weizhi')
     albumclass = [i.slug for i in album]
     dic = {}
     for j in albumclass:

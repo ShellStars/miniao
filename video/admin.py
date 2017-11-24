@@ -11,13 +11,14 @@ class VideoclassAdmin(admin.ModelAdmin):
 
 class VideoalbumAdmin(admin.ModelAdmin):
     fieldsets = [
+
         (None, {
             'fields': ['name', 'slug', 'intro', 'pic']}),
 
         ('固定位次', {'fields': ['weici', 'weizhi'], 'classes': ['collapse']})
 
     ]
-    list_display = ('name', 'slug')
+    list_display = ('name', 'slug', 'weizhi')
 
 
 class VideoarticleAdmin(admin.ModelAdmin):
