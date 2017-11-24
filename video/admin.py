@@ -1,3 +1,4 @@
+# coding:utf8
 from django.contrib import admin
 
 from .models import Videoclass, Videoarticle, Videoalbum
@@ -9,6 +10,13 @@ class VideoclassAdmin(admin.ModelAdmin):
 
 
 class VideoalbumAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {
+            'fields': ['name', 'slug', 'intro', 'pic']}),
+
+        ('固定位次', {'fields': ['weici', 'weizhi'], 'classes': ['collapse']})
+
+    ]
     list_display = ('name', 'slug')
 
 
