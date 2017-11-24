@@ -32,8 +32,17 @@
   }
 
   .right-content {
+    .r-box-fzw, .r-box-hy {
+      overflow: hidden;
+    }
     .expert-detail-content {
       border-top: 0;
+      width: auto;
+      float: left;
+      .box {
+        padding-bottom: 12px;
+        padding-right: 50px;
+      }
     }
     float: left;
     margin-left: 52px;
