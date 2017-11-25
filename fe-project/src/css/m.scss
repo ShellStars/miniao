@@ -135,3 +135,18 @@
       padding-top: 35px !important;
     }
 }
+
+@media screen and (min-width: 600px) {
+  .navbar-list {
+    li {
+      a {
+        cursor: pointer;
+      }
+      &:hover {
+        .nav-children {
+          display: block;
+        }
+      }
+    }
+  }
+}

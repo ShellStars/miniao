@@ -197,7 +197,11 @@ $(function () {
     horizontalOrder: true,
     percentPosition: true,
   });
-  //
+
+  $('.nav-has-children').click(function () {
+    var a = $(this).parent().find('.nav-children');
+    a.toggle();
+  });
 });
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

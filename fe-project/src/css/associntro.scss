@@ -39,6 +39,7 @@
       border-top: 0;
       width: auto;
       float: left;
+      width: 33.333%;
       .box {
         padding-bottom: 12px;
         padding-right: 50px;
@@ -88,6 +89,11 @@
           margin: 20px 0;
           text-align: center;
         }
+      }
+      a {
+        display: block;
+        line-height: 3;
+        cursor: #377bef;
       }
     }
   }

@@ -30,7 +30,7 @@
       <li data-u="hh" class="hh">会徽 <span>>></span></li>
       <li data-u="zw" class="zw">主委 <span>>></span></li>
       <li data-u="fzw" class="fzw">副主委 <span>>></span></li>
-      <li data-u="hy" class="hy">会员 <span>>></span></li>
+      <li data-u="hy" class="hy">委员 <span>>></span></li>
       <li data-u="lxfs" class="lxfs">联系方式 <span>>></span></li>
     </ul>
   </div>
@@ -190,6 +190,7 @@
             微博二维码
           </div>
         </div>
+        {{ '<a href="{{ associntro0.url }}">{{ associntro0.url }}</a>' | safe }}
       </div>
       {{ '{% endfor %}' }}
     </div>
