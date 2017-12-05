@@ -88,19 +88,19 @@
 
   <div class="pages clearfix">
     <div class="page-left">
-      <a href="{{ '/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}'}}">
+      <a href="{{ '/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}' }}">
         <i class="iconfont icon-l"></i>
         <div>
           <span>上一篇</span>
-          <h6>{{ '{{ pre_article.title }}' }}</h6>
+          <h6>{{ '{{ next_article.title }}' }}</h6>
         </div>
       </a>
     </div>
     <div class="page-right">
-      <a href="{{ '/{{ belong.slug }}/{{ next_article.column_id }}/{{ next_article.id }}' }}">
+      <a href="{{ '/{{ belong.slug }}/{{ pre_article.column_id }}/{{ pre_article.id }}'}}">
         <div>
           <span>下一篇</span>
-          <h6>{{ '{{ next_article.title }}' }}</h6>
+          <h6>{{ '{{ pre_article.title }}' }}</h6>
         </div>
         <i class="iconfont icon-r"></i>
       </a>

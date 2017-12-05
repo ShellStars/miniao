@@ -121,7 +121,7 @@
     {{ '\
     {% for i in objects %}\
     ' | safe }}
-    <li style="background-image: url({{ ' {{ i.smallpic }} ' }})">
+    <li style="background-image: url('{{ ' {{ i.smallpic }} ' }}')">
       {{ '
       <a href="/{{tmpurl}}/{{i.id}}">
       {% if column %}

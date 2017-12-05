@@ -163,7 +163,7 @@
     
     {% for i in objects %}
     
-    <li style="background-image: url( {{ i.smallpic }} )">
+    <li style="background-image: url(' {{ i.smallpic }} ')">
       
       {% if column %}
       <a href="/{{tmpurl}}/{{i.id}}">
