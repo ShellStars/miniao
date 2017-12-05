@@ -59,12 +59,15 @@ class Peoplearticle(models.Model):
 class Assocarticle(models.Model):
     assoccolumn = models.ForeignKey(Assocclass, verbose_name='所属学会')
     associntro = models.TextField('学会简介', default='')
-    constitution = models.TextField('章程', default='')
+    constitution = models.TextField('组织结构', default='')
+    constitution = UEditorField('组织结构', height=300, width=700,
+                                default=u'', blank=True, imagePath="uploads/images/article/",
+                                toolbars='besttome', filePath='uploads/files/article/')
     pic = models.ImageField('会徽', upload_to='uploads/images/doctor/')
     picintro = models.TextField('会徽简介', default='')
-    url = models.CharField('网址链接', max_length=100, default='')
-    weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/')
-    weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/')
+    url = models.CharField('网址链接', max_length=100, default='', blank=True)
+    weixinpic = models.ImageField('微信二维码', upload_to='uploads/images/doctor/', blank=True)
+    weibopic = models.ImageField('微博二维码', upload_to='uploads/images/doctor/', blank=True)
 
     #def get_absolute_url(self):
     #    return reverse('infoarticle', args=(self.pk, self.slug))
