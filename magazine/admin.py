@@ -1,3 +1,4 @@
+# coding:utf-8
 from django.contrib import admin
 
 from .models import Magearticle, Mageinfo, Magaclass
@@ -13,7 +14,16 @@ class MageinfoAdmin(admin.ModelAdmin):
 
 
 class MagearticleAdmin(admin.ModelAdmin):
-    list_display = ('magacolumn', 'title', 'column', 'author', 'browser', 'pub_date', 'published')
+    fieldsets = [
+
+        (None, {
+            'fields': ['magacolumn', 'title', 'source', 'author', 'keyword', 'tag', 'picurl', 'content', 'published']}),
+
+        ('固定位次', {'fields': ['weici', 'weizhi'], 'classes': ['collapse']})
+
+    ]
+
+    list_display = ('magacolumn', 'title', 'column', 'author', 'browser', 'pub_date', 'weizhi', 'published')
     search_fields = ('title',)
 
 

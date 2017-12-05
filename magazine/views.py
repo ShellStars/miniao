@@ -84,7 +84,7 @@ def article(request, magacolumn, column):
 
 def index(request, magacolumn):
     tmpurl = str(request.path).strip('/')
-    article = Magearticle.objects.filter(magacolumn=magacolumn, published=True).order_by("-id")
+    article = Magearticle.objects.filter(magacolumn=magacolumn, published=True).order_by("-weici","weizhi","-id")
     belong = {'name': '杂志', 'slug': 'magazine'}
     column1 = {'name':'动态', 'slug': 'dongtai'}
     name = Magaclass.objects.filter(slug=magacolumn)[0].name
