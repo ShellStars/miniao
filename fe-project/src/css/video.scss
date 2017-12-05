@@ -91,10 +91,25 @@
       width: 33.333%;
       padding: 0 15px;
       margin-bottom: 100px;
+      position: relative;
+      padding-bottom: 19%;
+      background-size: 100% 100%;
+      margin-bottom: 120px;
       img {
         width: 100%;
+        display: none;
+      }
+      a {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
       }
       .content {
+        position: absolute;
+        top: 100%;
         h2 {
           font-size: 24px;
           color: #333333;
@@ -177,6 +192,26 @@
     padding: 0 15px;
     float: left;
     margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 19%;
+    background-size: 100% 100%;
+    margin-bottom: 120px;
+    img {
+      width: 100%;
+      display: none;
+    }
+    a {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .content {
+      position: absolute;
+      top: 100%;
+    }
     h2 {
       font-size: 24px;
       color: #333333;
