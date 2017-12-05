@@ -55,6 +55,8 @@ class Magearticle(models.Model):
     content = UEditorField('内容', height=300, width=700,
         default=u'', blank=True, imagePath="uploads/images/article/",
         toolbars='besttome', filePath='uploads/files/article/')
+    weici = models.BooleanField('固定位次', default=False)
+    weizhi = models.IntegerField('位次', unique=True, null=True, blank=True)
     pub_date = models.DateTimeField('发表时间', auto_now_add=True, editable=True)
     update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
     published = models.BooleanField('正式发布', default=True)
