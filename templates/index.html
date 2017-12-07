@@ -297,7 +297,8 @@
     <ul>
       {% for i in zixuninfo %}
       <li class="clearfix">
-        <img src="{{ i.picurl }}" alt="consult">
+        <div class="img" style='background-image: url("{{ i.picurl }}")'></div>
+        <img style="display: none;" src="{{ i.picurl }}" alt="article">
         <div class="detail">
           <h3>{{ i.title }}</h3>
           <div class="meta clearfix">
@@ -325,7 +326,8 @@
     <ul>
       {% for i in shipininfo %}
       <li class="clearfix">
-        <img src="{{ i.smallpic }}" alt="article">
+        <div class="img" style='background-image: url("{{ i.smallpic }}")'></div>
+        <img style="display: none;" src="{{ i.smallpic }}" alt="article">
         <a class="detail" href="/video/{{ i.column_id }}/{{ i.id }}">
           <h3>{{ i.title }}</h3>
           <time>{{ i.pub_date|date:"Y-m-d" }}</time>

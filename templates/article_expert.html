@@ -11,6 +11,20 @@
   
 <link rel="stylesheet" href="/static/css/expert.css">
 <link rel="stylesheet" href="/static/css/m.css">
+<style>
+  .filter-box .filter-item ul li.none {
+    display: none;
+  }
+  .show-all {
+    text-align: center;
+    line-height: 22px;
+    font-size: 14px;
+    margin: 10px 0;
+    color: #377bef;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+</style>
 
 </head>
 <body>
@@ -47,7 +61,6 @@
     </button>
   </div>
 </header>
-
 
 
 <div class="expert-navbar clearfix">
@@ -123,14 +136,25 @@
       {% endif %}
       
         {% for d in department %}
-          {% ifequal d sel_department %}
-          <li class="active">{{ d }}</li>
+          {% if forloop.counter > 9 %}
+            {% ifequal d sel_department %}
+            <li class="active none">{{ d }}</li>
+            {% else %}
+            <li class="none">{{ d }}</li>
+            {% endifequal %}
           {% else %}
-          <li>{{ d }}</li>
-          {% endifequal %}
+            {% ifequal d sel_department %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endif %}
         {% endfor %}
       
     </ul>
+    <div class="show-all" style="display: none;">
+      <span>查看全部</span>
+    </div>
   </div>
   <div class="filter-item clearfix" data-search="province">
     <label>地区：</label>
@@ -143,14 +167,25 @@
       {% endif %}
       
         {% for d in province %}
-          {% ifequal d sel_province %}
-          <li class="active">{{ d }}</li>
+          {% if forloop.counter > 9 %}
+            {% ifequal d sel_province %}
+            <li class="activ none">{{ d }}</li>
+            {% else %}
+            <li class="none">{{ d }}</li>
+            {% endifequal %}
           {% else %}
-          <li>{{ d }}</li>
-          {% endifequal %}
+            {% ifequal d sel_province %}
+            <li class="active">{{ d }}</li>
+            {% else %}
+            <li>{{ d }}</li>
+            {% endifequal %}
+          {% endif %}
         {% endfor %}
       
     </ul>
+    <div class="show-all" style="display: none;">
+      <span>查看全部</span>
+    </div>
   </div>
 </div>
 
@@ -395,6 +430,25 @@
         }
       }
       window.location.href = (window.location.origin + window.location.pathname + '?' + param(p));
+    });
+
+    var filterItems = $('.filter-item');
+    for (var i = 0; i < filterItems.length; i++) {
+      var f = $(filterItems[i]);
+      if (f.find('ul li').length > 10) {
+        f.find('.show-all').show();
+      }
+    }
+    $('.filter-item .show-all span').click(function () {
+      if ($(this).attr('data-toggle') == 1) {
+        $(this).text('查看全部');
+        $(this).attr('data-toggle', 0);
+        $(this).parent().parent().find('ul li.none').css('display', 'none');
+      } else {
+        $(this).text('收起');
+        $(this).attr('data-toggle', 1);
+        $(this).parent().parent().find('ul li.none').css('display', 'inline-block');
+      }
     });
   });
 </script>

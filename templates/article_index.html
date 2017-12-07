@@ -92,7 +92,8 @@
       {% endif %}
       
       
-        <img src="{{ i.picurl }}" />
+        <img style="display: none;" src="{{ i.picurl }}" />
+        <div class="img" style="background-image: url('{{ i.picurl }}')"></div>
         <div class="content">
           <h2>{{ i.title|slice:"20" }}</h2>
           <div class="meta">
