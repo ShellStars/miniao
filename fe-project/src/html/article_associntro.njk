@@ -25,13 +25,13 @@
 <div class="associntro-container clearfix">
   <div class="left-bar">
     <ul>
-      <li data-u="dt" class="dt active">动态 <span>>></span></li>
-      <li data-u="zc" class="zc">章程 <span>>></span></li>
-      <li data-u="hh" class="hh">会徽 <span>>></span></li>
-      <li data-u="zw" class="zw">主委 <span>>></span></li>
+      <li data-u="dt" class="dt active">学会动态 <span>>></span></li>
+      <li data-u="zc" class="zc">学会介绍 <span>>></span></li>
+      <li data-u="hh" class="hh">学会会徽 <span>>></span></li>
+      {# <li data-u="zw" class="zw">主委 <span>>></span></li>
       <li data-u="fzw" class="fzw">副主委 <span>>></span></li>
       <li data-u="hy" class="hy">委员 <span>>></span></li>
-      <li data-u="lxfs" class="lxfs">联系方式 <span>>></span></li>
+      <li data-u="lxfs" class="lxfs">联系方式 <span>>></span></li> #}
     </ul>
   </div>
   <div class="right-content">
@@ -66,22 +66,24 @@
     </div>
 
     <div class="r-box r-box-zc">
-      <h5>章程</h5>
+      <h5>学会介绍</h5>
       <p>
         {{ '{% for associntro0 in associntro %}' }}
+        {{ '{% autoescape off %}' }}
         {{ '{{ associntro0.constitution }}' }}
+        {{ '{% endautoescape %}' }}
         {{ '{% endfor %}' }}
       </p>
     </div>
 
     <div class="r-box r-box-hh">
-      <h5>会徽</h5>
+      <h5>学会会徽</h5>
       {{ '{% for associntro0 in associntro %}' }}
       <img class="huihui" src="/media/{{ '{{ associntro0.pic }}' }}" alt="huizhang">
       {{ '{% endfor %}' }}
     </div>
 
-    <div class="r-box r-box-zw">
+    {# <div class="r-box r-box-zw">
       {{ "{% for i in zhuwei %}" }}
       <div class="expert-detail-content">
         <div class="inner">
@@ -193,7 +195,7 @@
         {{ '<a href="{{ associntro0.url }}">{{ associntro0.url }}</a>' | safe }}
       </div>
       {{ '{% endfor %}' }}
-    </div>
+    </div> #}
 
   </div>
 </div>

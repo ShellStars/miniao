@@ -67,13 +67,10 @@
 <div class="associntro-container clearfix">
   <div class="left-bar">
     <ul>
-      <li data-u="dt" class="dt active">动态 <span>>></span></li>
-      <li data-u="zc" class="zc">章程 <span>>></span></li>
-      <li data-u="hh" class="hh">会徽 <span>>></span></li>
-      <li data-u="zw" class="zw">主委 <span>>></span></li>
-      <li data-u="fzw" class="fzw">副主委 <span>>></span></li>
-      <li data-u="hy" class="hy">委员 <span>>></span></li>
-      <li data-u="lxfs" class="lxfs">联系方式 <span>>></span></li>
+      <li data-u="dt" class="dt active">学会动态 <span>>></span></li>
+      <li data-u="zc" class="zc">学会介绍 <span>>></span></li>
+      <li data-u="hh" class="hh">学会会徽 <span>>></span></li>
+      
     </ul>
   </div>
   <div class="right-content">
@@ -108,134 +105,24 @@
     </div>
 
     <div class="r-box r-box-zc">
-      <h5>章程</h5>
+      <h5>学会介绍</h5>
       <p>
         {% for associntro0 in associntro %}
+        {% autoescape off %}
         {{ associntro0.constitution }}
+        {% endautoescape %}
         {% endfor %}
       </p>
     </div>
 
     <div class="r-box r-box-hh">
-      <h5>会徽</h5>
+      <h5>学会会徽</h5>
       {% for associntro0 in associntro %}
       <img class="huihui" src="/media/{{ associntro0.pic }}" alt="huizhang">
       {% endfor %}
     </div>
 
-    <div class="r-box r-box-zw">
-      {% for i in zhuwei %}
-      <div class="expert-detail-content">
-        <div class="inner">
-          <div class="box">
-            <h2>个人介绍</h2>
-            <div class="person">
-              <div class="avatar">
-                <img src="{{ i.pic.url }}" alt="头像">
-              </div>
-              <div class="detail">
-                <h3 class="name">{{ i.name }}</h3>
-                <div class="department">{{ i.department }}</div>
-              </div>
-            </div>
-            <p>{{ i.introduce }}</p>
-          </div>
-          <div class="box">
-            <h2>技术特长</h2>
-            <p>{{ i.specialty }}</p>
-          </div>
-          {% if i.weixinpic and i.weibopic %}
-          <div class="box">
-            <h2>联系方式</h2>
-            <div class="contact">
-              {% if i.weixinpic %}
-              <div class="img">
-                <img src="{{ i.weixinpic.url }}" alt="微信二维码">
-                <div>
-                  微信二维码
-                </div>
-              </div>
-              {% endif %}
-              {% if i.weibopic %}
-              <div class="img">
-                <img src="{{ i.weibopic.url }}" alt="微博二维码">
-                <div>
-                  微博二维码
-                </div>
-              </div>
-              {% endif %}
-            </div>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div class="r-box r-box-fzw">
-      {% for i in fuzhuwei %}
-      <div class="expert-detail-content">
-        <div class="inner">
-          <div class="box">
-            <a href="{{ i.url }}">
-              <div class="person">
-                <div class="avatar">
-                  <img src="{{ i.pic.url }}" alt="头像">
-                </div>
-                <div class="detail">
-                  <h3 class="name">{{ i.name }}</h3>
-                  <div class="department">{{ i.department }}</div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div class="r-box r-box-hy">
-      {% for i in huiyuan %}
-      <div class="expert-detail-content">
-        <div class="inner">
-          <div class="box">
-            <a href="{{ i.url }}">
-              <div class="person">
-                <div class="avatar">
-                  <img src="{{ i.pic.url }}" alt="头像">
-                </div>
-                <div class="detail">
-                  <h3 class="name">{{ i.name }}</h3>
-                  <div class="department">{{ i.department }}</div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div class="r-box r-box-lxfs">
-      <h5>联系方式</h5>
-      {% for associntro0 in associntro %}
-      <div class="contact">
-        <div class="img">
-          <img src="{{ associntro0.weixinpic.url }}" alt="微信二维码">
-          <div>
-            微信二维码
-          </div>
-        </div>
-        <div class="img">
-          <img src="{{ associntro0.weibopic.url }}" alt="微博二维码">
-          <div>
-            微博二维码
-          </div>
-        </div>
-        <a href="{{ associntro0.url }}">{{ associntro0.url }}</a>
-      </div>
-      {% endfor %}
-    </div>
+    
 
   </div>
 </div>
