@@ -40,7 +40,8 @@ def article_detail(request, assoccolumn, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Dynamicarticle.objects.filter(id=pk, assoccolumn=assoccolumn, published=True)[0]
+        next_article = Dynamicarticle.objects.filter(assoccolumn=assoccolumn, published=True)[0]
+        # next_article = Dynamicarticle.objects.filter(id=pk, assoccolumn=assoccolumn, published=True)[0]
     belong = {'name': '学会', 'slug': 'association'}
     column_tmp = '动态'
     column1 = {'name': column_tmp, 'slug': column}

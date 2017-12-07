@@ -178,11 +178,11 @@ SUIT_CONFIG = {
               },
              {'label': '科普园地',
               'app': 'universal',
-              'models': ('Universalarticle',)
+              'models': ('Universalarticle', 'Universalclass',)
               },
              {'label': '护理园地',
               'app': 'nursing',
-              'models': ('Nursingarticle',)
+              'models': ('Nursingarticle', 'Nursingclass',)
               },
              {'label': 'SRUCO',
               'app': 'sruco',

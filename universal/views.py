@@ -7,6 +7,7 @@ from .models import Universalarticle, Universalclass
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
+import pymysql
 # Create your views here.
 
 
@@ -26,7 +27,8 @@ def article_detail(request, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Universalarticle.objects.filter(id=pk, published=True)[0]
+        next_article = Universalarticle.objects.filter(published=True)[0]
+        # next_article = Universalarticle.objects.filter(id=pk, published=True)[0]
     belong = {'name': '科普园地', 'slug': 'universal'}
     column_tmp = Universalclass.objects.filter(slug=column)[0].name
     column1 = {'name': column_tmp, 'slug': column}

@@ -27,7 +27,8 @@ def article_detail(request, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Artiarticle.objects.filter(id=pk, published=True)[0]
+        next_article = Artiarticle.objects.filter(published=True)[0]
+        # next_article = Artiarticle.objects.filter(id=pk, published=True)[0]
     belong = {'name': '文章', 'slug': 'article'}
     column_tmp = Articleclass.objects.filter(slug=column)[0].name
     column1 = {'name': column_tmp, 'slug': column}

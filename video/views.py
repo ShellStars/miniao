@@ -38,7 +38,8 @@ def video_detail(request, column, pk):
             if next_article:
                 next_article = next_article[0]
             else:
-                next_article = Videoarticle.objects.filter(id=pk, published=True)[0]
+                next_article = Videoarticle.objects.filter(published=True)[0]
+                # next_article = Videoarticle.objects.filter(id=pk, published=True)[0]
             belong = {'name': '视频', 'slug': 'video'}
             column_tmp = Videoclass.objects.filter(slug=column)[0].name
             column1 = {'name': column_tmp, 'slug': column}
