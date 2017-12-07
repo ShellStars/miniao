@@ -28,7 +28,8 @@ def article_detail(request, magacolumn, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Magearticle.objects.filter(id=pk, magacolumn=magacolumn, published=True)[0]
+        next_article = Magearticle.objects.filter(magacolumn=magacolumn, published=True)[0]
+        # next_article = Magearticle.objects.filter(id=pk, magacolumn=magacolumn, published=True)[0]
     belong = {'name': '杂志', 'slug': 'magazine'}
     column_tmp = '动态'
     name1 = Magaclass.objects.filter(slug=magacolumn)[0].name

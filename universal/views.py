@@ -27,7 +27,8 @@ def article_detail(request, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Universalarticle.objects.filter(id=pk, published=True)[0]
+        next_article = Universalarticle.objects.filter(published=True)[0]
+        # next_article = Universalarticle.objects.filter(id=pk, published=True)[0]
     belong = {'name': '科普园地', 'slug': 'universal'}
     column_tmp = Universalclass.objects.filter(slug=column)[0].name
     column1 = {'name': column_tmp, 'slug': column}

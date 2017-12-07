@@ -27,7 +27,8 @@ def article_detail(request, column, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Guidearticle.objects.filter(id=pk, published=True)[0]
+        next_article = Guidearticle.objects.filter(published=True)[0]
+        # next_article = Guidearticle.objects.filter(id=pk, published=True)[0]
     belong = {'name': '指南速递', 'slug': 'guide'}
     column_tmp = Guideclass.objects.filter(slug=column)[0].name
     column1 = {'name': column_tmp, 'slug': column}

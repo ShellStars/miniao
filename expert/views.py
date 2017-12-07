@@ -30,7 +30,8 @@ def interviewarticle_detail(request, pk):
     if next_article:
         next_article = next_article[0]
     else:
-        next_article = Interviewarticle.objects.filter(id=pk, published=True)[0]
+        next_article = Interviewarticle.objects.filter(published=True)[0]
+        # next_article = Interviewarticle.objects.filter(id=pk, published=True)[0]
     belong = {'name': '专家', 'slug': 'expert'}
     column_tmp = '专访'
     column1 = {'name': column_tmp, 'slug': column}
