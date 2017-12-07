@@ -7,6 +7,7 @@ from .models import Universalarticle, Universalclass
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext, loader, Context
+import pymysql
 # Create your views here.
 
 
