@@ -14,16 +14,20 @@ class Userinfo(models.Model):
         (1, u'护士'),
         (2, u'学生'),
     )
+    Level1 = (
+        (0, u'女'),
+        (1, u'男'),
+    )
     username = models.CharField('真实姓名', max_length=30)
-    sex = models.IntegerField('性别')
-    headimg = models.FileField('头像', upload_to='/uploads/images/userdata/', default='/media/uploads/images/userdata/defaultuser.png')
+    sex = models.IntegerField(choices=Level1, verbose_name='性别')
+    headimg = models.FileField('头像', upload_to='/uploads/images/userdata/', editable=False, default='/media/uploads/images/userdata/defaultuser.png')
     telnum = models.CharField('手机号', null=False, db_index=True, max_length=15)
     hospital = models.CharField('所在医院', max_length=70, blank=True)
     department = models.CharField('所在科室', max_length=30, blank=True)
     title = models.CharField('医师职称', max_length=30, blank=True)
     password = models.CharField('密码', max_length=30, editable=False)
     identity = models.IntegerField(choices=Level, verbose_name='身份')
-    certificate = models.FileField('证书', upload_to='/uploads/images/certificate/', blank=True)
+    certificate = models.FileField('证书', upload_to='uploads/images/certificate/', blank=True)
     integralnum = models.IntegerField('积分', default=0, editable=False)
     ispass = models.BooleanField('审核通过', default=False)
     addtime = models.DateTimeField('创建时间', auto_now_add=True, editable=True)
