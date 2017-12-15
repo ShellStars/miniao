@@ -3,6 +3,17 @@
 @import "./components/footer.scss";
 @import "./components/login.scss";
 
+.article-pagination {
+  span {
+    color: #396ef2;
+    display: inline-block;
+    margin: 0 5px;
+  }
+  a {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
 body {
   min-width: 1000px;
 }

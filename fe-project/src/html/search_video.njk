@@ -15,15 +15,11 @@
     {{ '\
     {% for i in objects %}\
     ' | safe }}
-    <li>
+    <li style="background-image: url('{{ '{{ i.smallpic }}' }}')">
       {{ '
-      <a href="/{{tmpurl}}/{{i.id}}">
-      {% if column %}
-      {% else %}
-      <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
-      {% endif %}
+      <a href="/video/{{ i.column_id }}/{{i.id}}">
       ' | safe }}
-        <img src="/media/{{ '{{ i.smallpic }}' }}" />
+        <img src="{{ '{{ i.smallpic }}' }}" />
         <div class="content">
           <h2>{{ '{{ i.title|slice:"30" }}' | safe }}</h2>
           <div class="meta">

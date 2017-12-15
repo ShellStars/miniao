@@ -28,14 +28,16 @@
   <div class="search">
     <form action="/search/" method="get">
       <input type="text" name="value" value="">
-      <input class="hidden-ipt"  type="text" name="type" value="article">
+      
+      <input class="hidden-ipt"  type="text" name="type" value="video">
       <div class="select-box">
         <div class="select-value">
-          <span>文章</span>
+          
+          <span>视频</span>
           <i class="iconfont icon-down"></i>
         </div>
         <ul>
-          <li data-value="article">文章</li>
+          
           <li data-value="video">视频</li>
           <li data-value="expert">专家</li>
         </ul>
@@ -118,7 +120,7 @@
 
       <li class="pagination-list">
       {% for i in page_range %}
-        {% ifequal i page_range.number %}
+        {% ifequal i objects.number %}
         <span>{{ i }}</span>
         {% else %}
         <a href="?page={{ i }}" title="第{{ i }}页">{{ i }}</a>

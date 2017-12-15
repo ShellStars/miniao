@@ -125,7 +125,7 @@
 
     <li class="pagination-list">
     {% for i in page_range %}
-      {% ifequal i page_range.number %}
+      {% ifequal i objects.number %}
       <span>{{ i }}</span>
       {% else %}
       <a data-href="{{ i }}" title="第{{ i }}页">{{ i }}</a>

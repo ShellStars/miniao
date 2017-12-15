@@ -22,14 +22,16 @@
   <div class="search">
     <form action="/search/" method="get">
       <input type="text" name="value" value="">
-      <input class="hidden-ipt"  type="text" name="type" value="article">
+      
+      <input class="hidden-ipt"  type="text" name="type" value="video">
       <div class="select-box">
         <div class="select-value">
-          <span>文章</span>
+          
+          <span>视频</span>
           <i class="iconfont icon-down"></i>
         </div>
         <ul>
-          <li data-value="article">文章</li>
+          
           <li data-value="video">视频</li>
           <li data-value="expert">专家</li>
         </ul>
@@ -57,15 +59,11 @@
     
     {% for i in objects %}
     
-    <li>
+    <li style="background-image: url('{{ i.smallpic }}')">
       
-      <a href="/{{tmpurl}}/{{i.id}}">
-      {% if column %}
-      {% else %}
-      <a href="/{{tmpurl}}/{{ i.column_id }}/{{i.id}}">
-      {% endif %}
+      <a href="/video/{{ i.column_id }}/{{i.id}}">
       
-        <img src="/media/{{ i.smallpic }}" />
+        <img src="{{ i.smallpic }}" />
         <div class="content">
           <h2>{{ i.title|slice:"30" }}</h2>
           <div class="meta">
