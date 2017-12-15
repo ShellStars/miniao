@@ -19,6 +19,7 @@ class VideoalbumAdmin(admin.ModelAdmin):
 
     ]
     list_display = ('name', 'slug', 'weizhi')
+    search_fields = ('name',)
 
 
 class VideoarticleAdmin(admin.ModelAdmin):

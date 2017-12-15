@@ -147,7 +147,7 @@ def register(request):
                         user.department = department
                         user.title = title
                         user.identity = identity
-                        url1 = '/media/uploads/images/certificate/' + certificate.name
+                        url1 = 'uploads/images/certificate/' + certificate.name
                         #Userinfo.objects.create(username=username, password=password, telnum=telnum, email=email, identity=identity, certificate=url)
                         Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                                 hospital=hospital, department=department, title=title,
@@ -186,7 +186,7 @@ def register(request):
                     img = Image.open(certificate)
                     url = BASE_DIR + '/media/uploads/images/certificate/' + certificate.name
                     img.save(url, "jpeg")
-                    url1 = '/media/uploads/images/certificate/' + certificate.name
+                    url1 = 'uploads/images/certificate/' + certificate.name
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                             identity=identity, certificate=url1)
                     Checknum.objects.filter(telnum=telnum).delete()
