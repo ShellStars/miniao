@@ -108,6 +108,8 @@ def sendnum(telnum):
     res[u'num'] = numtmp
     return res
 """
+
+
 def sendnum(phone_number):
     business_id = uuid.uuid1()
     sign_name = "大家泌尿"
@@ -126,6 +128,21 @@ def sendnum(phone_number):
     res[u'num'] = num
     return res
 
+
+def sendpass(phone_number, username):
+    business_id = uuid.uuid1()
+    sign_name = "大家泌尿"
+    template_code = "SMS_117521651"
+    template_param = {"uname": username}
+    smsRequest = SendSmsRequest.SendSmsRequest()
+    smsRequest.set_TemplateCode(template_code)
+    if template_param is not None:
+        smsRequest.set_TemplateParam(template_param)
+    smsRequest.set_OutId(business_id)
+    smsRequest.set_SignName(sign_name)
+    smsRequest.set_PhoneNumbers(phone_number)
+    res = acs_client.do_action_with_exception(smsRequest)
+    return res
 
 
 # 注册
