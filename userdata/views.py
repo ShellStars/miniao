@@ -132,8 +132,9 @@ def sendnum(phone_number):
 def sendpass(phone_number, username):
     business_id = uuid.uuid1()
     sign_name = "大家泌尿"
-    template_code = "SMS_117521651"
-    template_param = {"uname": username}
+    template_code = "SMS_117526871"
+    template_param = {"customer": username}
+    template_param = json.dumps(template_param, ensure_ascii=False)
     smsRequest = SendSmsRequest.SendSmsRequest()
     smsRequest.set_TemplateCode(template_code)
     if template_param is not None:
