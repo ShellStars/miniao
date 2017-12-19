@@ -107,28 +107,7 @@
         
       </ul>
     </div>
-    <div class="filter-item clearfix" data-search="difficulty">
-      <label>难度分级：</label>
-      <ul class="clearfix">
-        
-        {% if small_classes.difficulty %}
-        <li class="all">全部</li>
-        {% else %}
-        <li class="all active">全部</li>
-        {% endif %}
-        
-          {% for d in difficulty %}
-            {% if d %}
-            {% ifequal d small_classes.difficulty %}
-            <li class="active">{{ d }}</li>
-            {% else %}
-            <li>{{ d }}</li>
-            {% endifequal %}
-            {% endif %}
-          {% endfor %}
-        
-      </ul>
-    </div>
+    
     <div class="filter-item clearfix" data-search="expert">
       <label>专家专栏：</label>
       <ul class="clearfix">
@@ -164,28 +143,7 @@
         <span>查看全部</span>
       </div>
     </div>
-    <div class="filter-item clearfix" data-search="other">
-      <label>其他：</label>
-      <ul class="clearfix">
-        
-        {% if small_classes.other %}
-        <li class="all">全部</li>
-        {% else %}
-        <li class="all active">全部</li>
-        {% endif %}
-        
-          {% for d in other %}
-            {% if d %}
-            {% ifequal d small_classes.other %}
-            <li class="active">{{ d }}</li>
-            {% else %}
-            <li>{{ d }}</li>
-            {% endifequal %}
-            {% endif %}
-          {% endfor %}
-        
-      </ul>
-    </div>
+    
   </div>
 
   <ul class="video-list clearfix">

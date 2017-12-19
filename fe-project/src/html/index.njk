@@ -48,6 +48,21 @@
           ' | safe }}
         </ul>
       </li>
+      <li class="section-item video-hide">
+        <h3 class="section-title">
+          <i class="iconfont icon-video-camera"></i>
+          <span>疾病分类</span>
+        </h3>
+        <ul class="clearfix">
+          {{ '
+          {% for i in disease %}
+          <li>
+            <a href="//www.cug.top/video/?disease={{ i }}">{{ i }}</a>
+          </li>
+          {% endfor %}
+          ' | safe }}
+        </ul>
+      </li>
     </ul>
   </div>
 
@@ -377,6 +392,10 @@ $(function () {
     $('.modal-login .login-close').click(function () {
       window.location.search = ''
     });
+  }
+
+  if (getUrlParam('alert')) {
+    alert('提交成功！我们将在1-2个工作日内完成审核，审核通过将以短信形式告知您，请耐心等待。');
   }
 
 
