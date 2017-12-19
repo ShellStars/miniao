@@ -17,8 +17,17 @@ import time
 import random
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
+from aliyunsdkdysmsapi.request.v20170525 import SendSmsRequest
+from aliyunsdkdysmsapi.request.v20170525 import QuerySendDetailsRequest
+from aliyunsdkcore.client import AcsClient
+import uuid
 import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+REGION = "cn-hangzhou"
+ACCESS_KEY_ID = "LTAI58jFAxnkyavL"
+ACCESS_KEY_SECRET = "VgGWOVmoHpM5sGISMmHcoy7EKPojhg"
+acs_client = AcsClient(ACCESS_KEY_ID, ACCESS_KEY_SECRET, REGION)
 
 
 # 用户
@@ -80,13 +89,13 @@ def cremd5(src):
     return m2.hexdigest()
 
 
-def num():
+def createnum():
     numtmp = ''
     for i in range(6):
         numtmp += str(random.randint(0, 9))
     return numtmp
 
-
+"""
 def sendnum(telnum):
     url = 'http://capi.yuntongzhi.vip/Api/Sms/sendSms'
     password = cremd5(cremd5('12345678')+str(int(time.time())))
@@ -98,7 +107,24 @@ def sendnum(telnum):
     res = r.json()
     res[u'num'] = numtmp
     return res
-
+"""
+def sendnum(phone_number):
+    business_id = uuid.uuid1()
+    sign_name = "大家泌尿"
+    template_code = "SMS_117521651"
+    num = createnum()
+    template_param = {"code":num}
+    smsRequest = SendSmsRequest.SendSmsRequest()
+    smsRequest.set_TemplateCode(template_code)
+    if template_param is not None:
+        smsRequest.set_TemplateParam(template_param)
+    smsRequest.set_OutId(business_id)
+    smsRequest.set_SignName(sign_name)
+    smsRequest.set_PhoneNumbers(phone_number)
+    res = acs_client.do_action_with_exception(smsRequest)
+    res = json.loads(res)
+    res[u'num'] = num
+    return res
 
 
 
@@ -549,7 +575,7 @@ def send_num(request):
     if request.method == 'GET':
         telnum = request.GET['telnum']
         res = sendnum(telnum)
-        if res['code'] == 0:
+        if res['Code'] == 'OK':
             if Checknum.objects.filter(telnum=telnum):
                 Checknum.objects.filter(telnum=telnum).update(checknum=res['num'])
             else:

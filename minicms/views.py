@@ -28,6 +28,13 @@ def index(request):
     for i in dic1:
         video_list.append(i)
     video_list.append({u'name': u'专辑', u'slug': u'zhuanji'})
+    cursor.execute("select distinct disease from video_videoarticle")
+    dic2 = dictfetchall(cursor)
+    disease = []
+    for i in dic2:
+        tmpdis = i['disease']
+        if tmpdis != '':
+            disease.append(tmpdis)
     cursor.execute(
         "select * from expert_expertarticle where shouye=True and weizhi is not null and published=True order by weizhi asc limit 18")
     expertinfo = dictfetchall(cursor)
