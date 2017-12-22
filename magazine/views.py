@@ -62,9 +62,11 @@ def article_detail(request, magacolumn, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
+            conn.close()
             return render(request, 'magazine_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum, 'second':second})
         else:
+            conn.close()
             return render(request, 'magazine_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': classes, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum, 'second': second})
     else:
         return HttpResponseRedirect('/')

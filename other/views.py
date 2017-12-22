@@ -39,6 +39,7 @@ def article_detail(request, column, pk):
     belong = {'name': '其他', 'slug': 'other'}
     column_tmp = Standardclass.objects.filter(slug=column)[0].name
     column1 = {'name': column_tmp, 'slug': column}
+    conn.close()
     if article:
         num = article[0].browser + 1
         article.update(browser=num)
@@ -66,9 +67,11 @@ def article_detail(request, column, pk):
                 scorenum = '%.1f' % float(row2[0])
             else:
                 scorenum = False
+            conn.close()
             return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': final_list, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'collect': collect, 'avgnum': avgnum,
                                                     'scorenum': scorenum})
         else:
+            conn.close()
             return render(request, 'article_detail.html', {'pre_article': pre_article, 'next_article': next_article, 'belong': belong, 'classes': final_list, 'column':column1, 'article': article[0], 'tmpurl': tmpurl, 'relate': relate, 'avgnum': avgnum})
     else:
         return HttpResponseRedirect('/')
@@ -86,6 +89,7 @@ def article(request, column):
     belong = 'other'
     column1 = Standardclass.objects.filter(slug=column)[0].name
     objects, page_range = my_pagination(request, article, 15)
+    conn.close()
     return render_to_response('article_column.html', {'objects':objects, 'belong': belong, 'classes': final_list, 'column':column1, 'page_range':page_range, 'tmpurl':tmpurl},context_instance=RequestContext(request))
 """
 def download_cal(request, pk):
@@ -168,6 +172,7 @@ def index(request):
     # final_list.append({u'name': u'下载', u'slug': u'download'})
     belong = 'other'
     objects, page_range = my_pagination(request, article, 15)
+    conn.close()
     return render_to_response('article_index.html', {'objects': objects, 'belong': belong, 'classes': final_list,  'page_range': page_range, 'tmpurl': tmpurl},
                               context_instance=RequestContext(request))
 

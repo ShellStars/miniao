@@ -67,6 +67,7 @@ def index(request):
             smallpic = ""
         i['video'] = video
         i['smallpic'] = smallpic
+    conn.close()
     return render_to_response('index.html',
                               {'lunboinfo': lunboinfo, 'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
                               context_instance=RequestContext(request))
