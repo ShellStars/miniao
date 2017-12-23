@@ -132,8 +132,9 @@ def sendnum(phone_number):
 def sendpass(phone_number, username):
     business_id = uuid.uuid1()
     sign_name = "大家泌尿"
-    template_code = "SMS_117521651"
-    template_param = {"uname": username}
+    template_code = "SMS_117526871"
+    template_param = {"customer": username}
+    template_param = json.dumps(template_param, ensure_ascii=False)
     smsRequest = SendSmsRequest.SendSmsRequest()
     smsRequest.set_TemplateCode(template_code)
     if template_param is not None:
@@ -214,13 +215,13 @@ def register(request):
                 except:
                     checknum1 = ''
                 if len(telnum1) > 0:
-                    # dic = {'info': '用户已存在'}
-                    # return render_to_response('register.html', dic)
-                    return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
+                    dic = {'info': '用户已存在'}
+                    return render_to_response('register.html', dic)
+                    # return HttpResponse(json.dumps({'info': '用户已存在'}), content_type="application/json")
                 elif checknum1 == '' or str(checknum) != checknum1:
-                    # dic = {'info': '验证码错误'}
-                    # return render_to_response('register.html', dic)
-                    return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
+                    dic = {'info': '验证码错误'}
+                    return render_to_response('register.html', dic)
+                    # return HttpResponse(json.dumps({'info': '验证码错误'}), content_type="application/json")
                 else:
                     username = request.POST['username']
                     password = request.POST['password']

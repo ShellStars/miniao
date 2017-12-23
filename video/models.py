@@ -54,12 +54,22 @@ class Videoarticle(models.Model):
         ('中级', u'中级'),
         ('高级', u'高级'),
     )
+    Level1 = (
+        ('泌尿系肿瘤', u'泌尿系肿瘤'),
+        ('其他', u'其他'),
+        ('泌尿系结石', u'泌尿系结石'),
+        ('前列腺疾病', u'前列腺疾病'),
+        ('儿童泌尿系疾病', u'儿童泌尿系疾病'),
+        ('儿童泌尿系疾病', u'儿童泌尿系疾病'),
+        ('男科学', u'男科学'),
+    )
     column = models.ForeignKey(Videoclass, verbose_name='归属栏目')
     title = models.CharField('标题', max_length=40)
     source = models.CharField('来源', max_length=20)
     author = models.CharField('作者', max_length=20)
     browser = models.IntegerField('浏览量', default=0, editable=False)
-    disease = models.CharField('疾病分类', max_length=20, blank=True)
+    disease = models.CharField(choices=Level1, verbose_name='疾病分类', max_length=20, blank=True)
+    # disease = models.CharField('疾病分类', max_length=20, blank=True)
     difficulty = models.CharField(choices=Level, verbose_name='难度等级', max_length=10)
     album = models.ForeignKey(Videoalbum, verbose_name='归属专辑')
     expert = models.CharField('专家名称', max_length=20)

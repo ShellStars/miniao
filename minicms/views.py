@@ -41,7 +41,7 @@ def index(request):
     cursor.execute("select * from other_lunbopic where published=True limit 5")
     lunboinfo = dictfetchall(cursor)
     cursor.execute(
-        "select * from meeting_meetarticle where column_id='yugao' and published=True order by id desc limit 5")
+        "select * from meeting_meetarticle where column_id='无无无' and published=True order by id desc limit 5")
     yugaoinfo = dictfetchall(cursor)
     cursor.execute("select * from column_infoarticle where published=True order by id desc limit 5")
     zixuninfo = dictfetchall(cursor)
@@ -67,6 +67,7 @@ def index(request):
             smallpic = ""
         i['video'] = video
         i['smallpic'] = smallpic
+    conn.close()
     return render_to_response('index.html',
                               {'lunboinfo': lunboinfo, 'video_list': video_list, 'expertinfo': expertinfo, 'yugaoinfo': yugaoinfo, 'zixuninfo': zixuninfo, 'shipininfo': shipininfo},
                               context_instance=RequestContext(request))
