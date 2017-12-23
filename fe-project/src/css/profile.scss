@@ -207,6 +207,7 @@
         font-size: 14px;
         color: #377bef;
         cursor: pointer;
+        margin-right: 30px;
       }
     }
     .detail-address {
@@ -308,4 +309,83 @@
 
 .form-change-avatar {
   visibility: hidden;
+}
+
+
+.modal-change-psw {
+  display: none;
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 99;
+  }
+  .inner {
+    position: fixed;
+    width: 520px;
+    height: 320px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    margin-top: -230px;
+    margin-left: -260px;
+    padding: 0 81px;
+    border-radius: 8px;
+    z-index: 100;
+    text-align: center;
+    overflow: hidden;
+    background-position: bottom center;
+    background-size: contain;
+    padding-top: 60px;
+  }
+  input,
+  button {
+    display: block;
+    width: 100%;
+    height: 52px;
+    margin-bottom: 20px;
+    border-radius: 52px;
+    border: 0;
+    font-size: 16px;
+    box-shadow: none;
+    outline: none;
+  }
+  input {
+    border: 1px solid #c4c4c4;
+    line-height: 20px;
+    padding: 15px 30px;
+    background: #f7f7f7;
+  }
+  button {
+    line-height: 52px;
+    background: #3d72ee;
+    color: #fff;
+  }
+  .btn-close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    color: #999;
+    cursor: pointer;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    padding: 0 10px;
+    margin-bottom: 12px;
+  }
+  .send-yzm {
+    position: absolute;
+    top: 150px;
+    right: 95px;
+    color: #3d72ee;
+    cursor: pointer;
+  }
+  .ipt-newnum {
+    padding-right: 100px;
+  }
 }

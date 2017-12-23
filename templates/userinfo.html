@@ -104,6 +104,9 @@
         <div class="option btn-change-phone">
           修改手机号
         </div>
+        <div class="option btn-change-psw">
+          修改密码
+        </div>
       </li>
       <li class="clearfix detail-address item-should-hide">
         <label>所在医院：</label>
@@ -137,6 +140,21 @@
         发送验证码
       </div>
       <input class="ipt-checknum" type="text" name="checknum" placeholder="输入验证码" required>
+      <div class="error"></div>
+      <button type="submit">提交</button>
+    </form>
+    <div class="btn-close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+</div>
+
+<div class="modal-change-psw">
+  <div class="mask"></div>
+  <div class="inner">
+    <form action="/userdata/modifytelnum/" method="post">
+      <input class="ipt-oldpsw" type="password" name="oldpwd" placeholder="输入原密码" required>
+      <input class="ipt-newpsw" type="password" name="newpwd" placeholder="输入新密码" required>
       <div class="error"></div>
       <button type="submit">提交</button>
     </form>
@@ -268,6 +286,48 @@
         },
         error: function () {
           $('.modal-change-phone .error').text('系统错误');
+        }
+      });
+    });
+
+
+
+    $('.btn-change-psw').click(function () {
+      $('.modal-change-psw').show();
+    });
+    $('.btn-close').click(function () {
+      $('.modal-change-psw').hide();
+    });
+    $('.modal-change-psw button').click(function (e) {
+      e.preventDefault();
+      $('.modal-change-psw .error').text('');
+
+      var oldnum = $('.ipt-oldpsw').val();
+      var newnum = $('.ipt-newpsw').val();
+
+      if (!oldnum) {
+        $('.modal-change-psw .error').text('请输入原密码');
+        return false;
+      }
+      if (!newnum) {
+        $('.modal-change-psw .error').text('请输入新密码');
+        return false;
+      }
+
+      $.ajax({
+        url: '/userdata/modifypassword/',
+        type : "POST",
+        data: $('.modal-change-psw form').serialize(),
+        success: function (res) {
+          if (res.info == 'success') {
+            alert('修改成功');
+            window.location.href = '//www.cug.top/?from=register'
+            return false;
+          }
+          $('.modal-change-psw .error').text(res.info);
+        },
+        error: function () {
+          $('.modal-change-psw .error').text('系统错误');
         }
       });
     });
