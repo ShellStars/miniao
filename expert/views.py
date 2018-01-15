@@ -199,23 +199,53 @@ def expertarticle(request):
     column = 'zhuanjia'
     classes = [{'name': '专家', 'slug': 'zhuanjia'}, {'name': '大家风范', 'slug': 'fengfan'}, {'name': '专访', 'slug': 'zhuanfang'}]
     column1 = '专家'
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
+    cursor = conn.cursor()
     if "province" in request.GET and "department" in request.GET:
         sel_province = request.GET["province"]
         sel_department = request.GET["department"]
         article = Expertarticle.objects.filter(column=column, province=sel_province, department=sel_department, published=True).order_by("-id")
+        department = [sel_department]
+        province = [sel_province]
+        conn.close()
     elif "province" in request.GET:
         sel_province = request.GET["province"]
         article = Expertarticle.objects.filter(column=column, province=sel_province, published=True).order_by("-id")
+        res = cursor.execute("select distinct department from expert_expertarticle where province='%s'" % sel_province)
+        row = cursor.fetchmany(res)
+        department = []
+        for i in row:
+            department.append(str(i[0]))
+        province = [sel_province]
+        conn.close()
     elif "department" in request.GET:
         sel_department = request.GET["department"]
         article = Expertarticle.objects.filter(column=column, department=sel_department, published=True).order_by("-id")
+        department = [sel_department]
+        res1 = cursor.execute(
+            "select distinct province from expert_expertarticle where department= '%s'" % sel_department)
+        row1 = cursor.fetchmany(res1)
+        province = []
+        for i in row1:
+            province.append(str(i[0]))
+        conn.close()
     else:
         article = Expertarticle.objects.filter(column=column, published=True).order_by("-id")
+        res = cursor.execute("select distinct department from expert_expertarticle")
+        row = cursor.fetchmany(res)
+        department = []
+        for i in row:
+            department.append(str(i[0]))
+        res1 = cursor.execute("select distinct province from expert_expertarticle")
+        row1 = cursor.fetchmany(res1)
+        province = []
+        for i in row1:
+            province.append(str(i[0]))
+        conn.close()
     tmpurl = str(request.path).strip('/')
     # article = Expertarticle.objects.filter(column=column, published=True)
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='miniao', charset='utf8')
-    cursor = conn.cursor()
-    res = cursor.execute("select distinct department from expert_expertarticle")
+
+    """res = cursor.execute("select distinct department from expert_expertarticle")
     row = cursor.fetchmany(res)
     department = []
     for i in row:
@@ -225,8 +255,9 @@ def expertarticle(request):
     province = []
     for i in row1:
         province.append(str(i[0]))
+    conn.close()"""
     objects, page_range = my_pagination(request, article, 12)
-    conn.close()
+
     return render_to_response('article_expert.html', {'classes': classes, 'column': column1, 'sel_province': sel_province, 'sel_department': sel_department, 'objects':objects,'page_range':page_range, 'tmpurl':tmpurl, 'department': department, 'province': province},context_instance=RequestContext(request))
 
 # 评论

@@ -39,7 +39,7 @@ def video_detail(request, column, pk):
                 next_article = next_article[0]
             else:
                 next_article = Videoarticle.objects.filter(published=True)[0]
-                # next_article = Videoarticle.objects.filter(id=pk, published=True)[0]
+                #next_article = Videoarticle.objects.filter(id=pk, published=True)[0]
             belong = {'name': '视频', 'slug': 'video'}
             column_tmp = Videoclass.objects.filter(slug=column)[0].name
             column1 = {'name': column_tmp, 'slug': column}
@@ -168,16 +168,6 @@ def video(request, column):
                 smallpic = ""
             i['video'] = video
             i['smallpic'] = smallpic
-        res = cursor.execute("select distinct disease from video_videoarticle where column_id='%s'" % column)
-        row = cursor.fetchmany(res)
-        disease = []
-        for i in row:
-            disease.append(str(i[0]))
-        res3 = cursor.execute("select distinct expert from video_videoarticle where column_id='%s'" % column)
-        row3 = cursor.fetchmany(res3)
-        expert = []
-        for i in row3:
-            expert.append(str(i[0]))
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -198,21 +188,6 @@ def video(request, column):
             i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
-        if tmp_key1 =='disease':
-            disease = [tmp_val1]
-            res3 = cursor.execute("select distinct expert from video_videoarticle where column_id='%s' and disease='%s'" % (column, tmp_val1))
-            row3 = cursor.fetchmany(res3)
-            expert = []
-            for i in row3:
-                expert.append(str(i[0]))
-        else:
-            res = cursor.execute("select distinct disease from video_videoarticle where column_id='%s' and expert='%s'" % (column, tmp_val1))
-            row = cursor.fetchmany(res)
-            disease = []
-            for i in row:
-                disease.append(str(i[0]))
-            expert = [tmp_val1]
-
     elif len(tmp) == 2:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -236,12 +211,6 @@ def video(request, column):
             i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
-        if tmp_key1 == 'disease':
-            disease = [tmp_val1]
-            expert = [tmp_val2]
-        else:
-            disease = [tmp_val2]
-            expert = [tmp_val1]
     elif len(tmp) == 3:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -296,11 +265,11 @@ def video(request, column):
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
             # article = Videoarticle.objects.filter(tmp_key1=tmp_val1, published=True)
-    #res = cursor.execute("select distinct disease from video_videoarticle where column_id='%s'" % column)
-    #row = cursor.fetchmany(res)
-    #disease = []
-    #for i in row:
-    #    disease.append(str(i[0]))
+    res = cursor.execute("select distinct disease from video_videoarticle where column_id='%s'" % column)
+    row = cursor.fetchmany(res)
+    disease = []
+    for i in row:
+        disease.append(str(i[0]))
     res1 = cursor.execute("select distinct difficulty from video_videoarticle where column_id='%s'" % column)
     row1 = cursor.fetchmany(res1)
     difficulty = []
@@ -311,11 +280,11 @@ def video(request, column):
     other = []
     for i in row2:
         other.append(str(i[0]))
-    #res3 = cursor.execute("select distinct expert from video_videoarticle where column_id='%s'" % column)
-    #row3 = cursor.fetchmany(res3)
-    #expert = []
-    #for i in row3:
-    #    expert.append(str(i[0]))
+    res3 = cursor.execute("select distinct expert from video_videoarticle where column_id='%s'" % column)
+    row3 = cursor.fetchmany(res3)
+    expert = []
+    for i in row3:
+        expert.append(str(i[0]))
     cursor.execute("select * from video_videoclass")
     dic1 = dictfetchall(cursor)
     final_list = []
@@ -363,16 +332,6 @@ def index(request):
                 smallpic = ""
             i['video'] = video
             i['smallpic'] = smallpic
-        res = cursor.execute("select distinct disease from video_videoarticle")
-        row = cursor.fetchmany(res)
-        disease = []
-        for i in row:
-            disease.append(str(i[0]))
-        res3 = cursor.execute("select distinct expert from video_videoarticle")
-        row3 = cursor.fetchmany(res3)
-        expert = []
-        for i in row3:
-            expert.append(str(i[0]))
     elif len(tmp) == 1:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -393,21 +352,6 @@ def index(request):
             i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
-        if tmp_key1 == 'disease':
-            disease = [tmp_val1]
-            res3 = cursor.execute("select distinct expert from video_videoarticle where disease='%s'" % tmp_val1)
-            row3 = cursor.fetchmany(res3)
-            expert = []
-            for i in row3:
-                expert.append(str(i[0]))
-        else:
-            res = cursor.execute("select distinct disease from video_videoarticle where expert='%s'" % tmp_val1)
-            row = cursor.fetchmany(res)
-            disease = []
-            for i in row:
-                disease.append(str(i[0]))
-            expert = [tmp_val1]
-
     elif len(tmp) == 2:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -430,12 +374,6 @@ def index(request):
             i['smallpic'] = smallpic
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
-        if tmp_key1 == 'disease':
-            disease = [tmp_val1]
-            expert = [tmp_val2]
-        else:
-            disease = [tmp_val2]
-            expert = [tmp_val1]
     elif len(tmp) == 3:
         tmp_key1 = str(tmp[0])
         tmp_val1 = request.GET[tmp_key1]
@@ -489,11 +427,11 @@ def index(request):
         for i in request.GET.items():
             small_classes[i[0]] = i[1]
         # article = Videoarticle.objects.filter(tmp_key1=tmp_val1, published=True)
-    #res = cursor.execute("select distinct disease from video_videoarticle")
-    #row = cursor.fetchmany(res)
-    #disease = []
-    #for i in row:
-    #    disease.append(str(i[0]))
+    res = cursor.execute("select distinct disease from video_videoarticle")
+    row = cursor.fetchmany(res)
+    disease = []
+    for i in row:
+        disease.append(str(i[0]))
     res1 = cursor.execute("select distinct difficulty from video_videoarticle")
     row1 = cursor.fetchmany(res1)
     difficulty = []
@@ -504,11 +442,11 @@ def index(request):
     other = []
     for i in row2:
         other.append(str(i[0]))
-    #res3 = cursor.execute("select distinct expert from video_videoarticle")
-    #row3 = cursor.fetchmany(res3)
-    #expert = []
-    #for i in row3:
-    #    expert.append(str(i[0]))
+    res3 = cursor.execute("select distinct expert from video_videoarticle")
+    row3 = cursor.fetchmany(res3)
+    expert = []
+    for i in row3:
+        expert.append(str(i[0]))
     cursor.execute("select * from video_videoclass")
     dic1 = dictfetchall(cursor)
     final_list = []

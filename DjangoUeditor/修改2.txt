@@ -1,0 +1,12 @@
+DjangoUeditor\static\ueditor\ueditor.all.min.js
+359行注销
+/*case "embed":n='<embed type="application/x-shockwave-flash" class="'+k+'" pluginspage="http://www.macromedia.com/go/getflashplayer" src="'+p.html(a)+'" width="'+
+c+'" height="'+d+'"'+(f?' style="float:'+f+'"':"")+' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';break;*/
+
+随后增加：
+case "embed":m=a.substr(a.lastIndexOf(".")+1),"ogv"==m&&(m="ogg"),n="<video"+(g?' id="'+g+'"':"")+' class="'+k+' video-js" '+(f?' style="float:'+f+'"':"")+' controls preload="none" width="'+c+'" height="'+d+'" src="'+a+'" poster="http://ww4.sinaimg.cn/large/0060lm7Tly1fkiul1adrkj31hc0xc7ei.jpg'+'" data-setup="{}"><source src="'+a+'" type="video/'+m+'" /></video>';break;
+
+361行修改：
+g.push(d(k.url,k.width||420,k.height||280,"tmpVedio"+a,null,l,"image"))
+为
+g.push(d(k.url,k.width||600,k.height||400,"tmpVedio"+a,null,l,"image"))
