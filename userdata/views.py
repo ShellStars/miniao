@@ -180,7 +180,8 @@ def register(request):
                         identity = identity
                         certificate = request.FILES["certificate"]
                         img = Image.open(certificate)
-                        url = BASE_DIR + '/media/uploads/images/certificate/' + certificate.name
+                        newname = str(int(time.time()))+certificate.name
+                        url = BASE_DIR + '/media/uploads/images/certificate/' + newname
                         img.save(url, "jpeg")
                         user = Userinfo()
                         user.username = username
@@ -191,7 +192,7 @@ def register(request):
                         user.department = department
                         user.title = title
                         user.identity = identity
-                        url1 = 'uploads/images/certificate/' + certificate.name
+                        url1 = 'uploads/images/certificate/' + newname
                         #Userinfo.objects.create(username=username, password=password, telnum=telnum, email=email, identity=identity, certificate=url)
                         Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                                 hospital=hospital, department=department, title=title,
@@ -228,9 +229,10 @@ def register(request):
                     sex = request.POST['sex']
                     certificate = request.FILES["certificate"]
                     img = Image.open(certificate)
-                    url = BASE_DIR + '/media/uploads/images/certificate/' + certificate.name
+                    newname = str(int(time.time()))+ certificate.name
+                    url = BASE_DIR + '/media/uploads/images/certificate/' + newname
                     img.save(url, "jpeg")
-                    url1 = 'uploads/images/certificate/' + certificate.name
+                    url1 = 'uploads/images/certificate/' + newname
                     Userinfo.objects.create(username=username, password=password, sex=sex, telnum=telnum,
                                             identity=identity, certificate=url1)
                     Checknum.objects.filter(telnum=telnum).delete()
@@ -389,9 +391,10 @@ def modify(request):
             if bf.is_valid():
                 headimg = request.FILES["headimg"]
                 img = Image.open(headimg)
-                url = BASE_DIR + '/media/uploads/images/userdata/' + headimg.name
+                newname = str(int(time.time()))+headimg.name
+                url = BASE_DIR + '/media/uploads/images/userdata/' + newname
                 img.save(url, "jpeg")
-                url1 = '/media/uploads/images/userdata/' + headimg.name
+                url1 = '/media/uploads/images/userdata/' + newname
                 #hospital = bf.cleaned_data['hospital']
                 #department = bf.cleaned_data['department']
                 #title = bf.cleaned_data['title']
